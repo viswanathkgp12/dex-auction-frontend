@@ -4,7 +4,7 @@ const path = require("path");
 module.exports = {
   mode: "development",
 
-  entry: { index: "./src/app.js" },
+  entry: ["@babel/polyfill", "./src/app.js"],
 
   output: {
     path: path.resolve(__dirname, "./dist"),
