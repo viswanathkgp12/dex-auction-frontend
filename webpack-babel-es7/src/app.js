@@ -1,6 +1,6 @@
 async function hello() {
   return new Promise((res, rej) => {
-    res("You made it!");
+    res("You made it! This message is from Async/Await.");
   });
 };
 

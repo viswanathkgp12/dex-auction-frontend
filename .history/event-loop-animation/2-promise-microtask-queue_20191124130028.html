@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Replace these file with absolute URLs when embedding this html file to Google Slides -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="custom.js" async></script>
+    <link rel="stylesheet" href="custom.css">
+  </head>
+  <body>
+<div class="container">
+  <div class="content-n-side">
+    <div class="content">
+
+<div class="article-content">
+<br/>
+
+<div class="event-loop-walkthrough event-loop-walkthrough-2">
+  <div class="js-source">
+    <div class="line-highlight"></div>
+<div class="codehilite"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'script start'</span><span class="p">);</span>
+
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'setTimeout'</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(<span class="s1">'hi, promise'</span>)
+.</span><span class="nx">then(<span class="nb">result</span><span class="p"> => </span><span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log(</span><span class="nb">result</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'script end'</span><span class="p">);</span>
+</pre></div>
+
+<p></div>
+  <table>
+    <tr class="task-queue">
+      <th>Tasks</th>
+      <td>
+        <div class="event-loop-items">
+          <div class="event-loop-rail">
+            <div class="event-loop-item">other task</div>
+            <div class="event-loop-item">setTimeout callback</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr class="microtask-queue">
+      <th>Microtasks</th>
+      <td>
+        <div class="event-loop-items">
+          <div class="event-loop-rail">
+            <div class="event-loop-item">Promise then</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr class="js-stack">
+      <th>Stack</th>
+      <td>
+        <div class="event-loop-items"></div>
+      </td>
+    </tr>
+    <tr class="event-loop-log">
+      <th>Log</th>
+      <td>
+        <div class="event-loop-items">
+          <div class="event-loop-item">script start</div>
+          <div class="event-loop-item">script end</div>
+          <div class="event-loop-item">hi, promise</div>
+          <div class="event-loop-item">setTimeout</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div class="event-loop-controls">
+    <svg viewBox="0 0 5 2">
+      <path d="M2,0 L2,2 L0,1 z" />
+      <path d="M3,0 L5,1 L3,2 z" />
+      <path class="prev-btn" d="M0,0 H2.5V2H0z" />
+      <path class="next-btn" d="M2.5,0 H5V2H2.5z" />
+    </svg>
+  </div>
+  <div class="event-loop-commentary">
+    <div class="event-loop-commentary-item"></div>
+  </div>
+</div></p>
+  </div>
+
+    </div>
+  </body>
+</html>
