@@ -1,385 +1,388 @@
 <!DOCTYPE html>
+<html>
+  <head>
+    <%= require('html-loader!../partials/header.html') %>
+  </head>
 
-<%= require('html-loader!../partials/header.html') %>
-
-<body class="inside">
-
-   <!-- wrp -->
-   <div class="wrp">
-
+  <body class="inside">
+    <!-- wrp -->
+    <div class="wrp">
       <!-- right panel -->
       <div class="slidePanel">
-         <span class="closePanel"><img src="<%= require('../images/close-icon.png') %>"></span>
-         <div class="tabHead">
-            <h2>Three Simple Steps to upload your auction</h2>
+        <span class="closePanel"
+          ><img src="<%= require('../images/close-icon.png') %>"
+        /></span>
+        <div class="tabHead">
+          <h2>Three Simple Steps to upload your auction</h2>
 
-            <div class="tabMenu">
-               <ul>
-                  <li class="active one bold"><a data-tab="one" href="javascript:void(0)">Product Details</a></li>
-                  <li class="two"><a data-tab="two" href="javascript:void(0)">Type of Auction</a></li>
-                  <li class="three"><a data-tab="three" href="javascript:void(0)">Auction details</a></li>
-               </ul>
-            </div>
+          <div class="tabMenu">
+            <ul>
+              <li class="active one bold">
+                <a data-tab="one" href="javascript:void(0)">Product Details</a>
+              </li>
+              <li class="two">
+                <a data-tab="two" href="javascript:void(0)">Type of Auction</a>
+              </li>
+              <li class="three">
+                <a data-tab="three" href="javascript:void(0)"
+                  >Auction details</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
 
-         </div>
-
-         <div class="tabContnt">
-
-            <!-- tab 1 -->
-            <div class="comnTab active" id="one">
-
-               <div class="aucPro">
-
-
-                  <form action="" class="inptForm">
-                     <div id="testDiv">
-                        <div class="input-group">
-                           <label for="name">Name of the Auction Product</label>
-                           <input type="text" class="focus" name="name" id="name" />
-                        </div>
-
-
-                        <div class="input-group">
-                           <label for="name">Description of the Product</label>
-                           <textarea class="focus" rows='1'></textarea>
-                        </div>
-
-                        <div class="fileUpld">
-                           <h4>Drag & Drop Image</h4>
-                           <span>or</span>
-                           <cite>Browse Image</cite>
-                           <input type="file" id="myFile">
-                        </div>
-
-                     </div>
-
-                     <input type="button" class="sbmt first" value="Next">
-
-                  </form>
-
-               </div>
-
-            </div>
-            <!-- tab 1 -->
-
-
-            <!-- tab 2 -->
-            <div class="comnTab" id="two">
-
-
-               <div class="acc">
-
-                  <div class="acc__card">
-                     <div class="acc__title active"><span>English Auction</span><cite class="slctd">Selected</cite>
-                     </div>
-                     <div class="acc__panel" style="display: block;">
-                        <p>An auction is usually a process of buying and selling goods or services by offering them up
-                           for bid,</p>
-                        <label class="checkCntr">
-                           <input type="checkbox">
-                           <span class="checkmark">Choose English Auction</span>
-                        </label>
-                     </div>
+        <div class="tabContnt">
+          <!-- tab 1 -->
+          <div class="comnTab active" id="one">
+            <div class="aucPro">
+              <form action="" class="inptForm">
+                <div id="testDiv">
+                  <div class="input-group">
+                    <label for="name">Name of the Auction Product</label>
+                    <input type="text" class="focus" name="name" id="name" />
                   </div>
 
-                  <div class="acc__card">
-                     <div class="acc__title"><span>Dutch Auction</span> <cite class="slctd">Selected</cite></div>
-                     <div class="acc__panel">
-                        <p>An auction is usually a process of buying and selling goods or services by offering them up
-                           for bid,</p>
-                        <label class="checkCntr">
-                           <input type="checkbox">
-                           <span class="checkmark">Choose Dutch Auction</span>
-                        </label>
-                     </div>
+                  <div class="input-group">
+                    <label for="name">Description of the Product</label>
+                    <textarea class="focus" rows="1"></textarea>
                   </div>
 
-
-                  <div class="acc__card">
-                     <div class="acc__title"><span>Sealed Bid</span> <cite class="slctd">Selected</cite></div>
-                     <div class="acc__panel">
-                        <p>An auction is usually a process of buying and selling goods or services by offering them up
-                           for bid,</p>
-                        <label class="checkCntr">
-                           <input type="checkbox">
-                           <span class="checkmark">Choose Sealed Bid Auction</span>
-                        </label>
-                     </div>
+                  <div class="fileUpld">
+                    <h4>Drag & Drop Image</h4>
+                    <span>or</span>
+                    <cite>Browse Image</cite>
+                    <input type="file" id="myFile" />
                   </div>
+                </div>
 
-
-                  <div class="acc__card">
-                     <div class="acc__title"><span>Vickery</span> <cite class="slctd">Selected</cite></div>
-                     <div class="acc__panel">
-                        <p>An auction is usually a process of buying and selling goods or services by offering them up
-                           for bid,</p>
-                        <label class="checkCntr">
-                           <input type="checkbox">
-                           <span class="checkmark">Choose Vickery Auction</span>
-                        </label>
-                     </div>
-                  </div>
-
-                  <input type="button" class="sbmt scnd" value="Next">
-
-               </div>
-
-
-
+                <input type="button" class="sbmt first" value="Next" />
+              </form>
             </div>
-            <!-- tab 2 -->
+          </div>
+          <!-- tab 1 -->
 
+          <!-- tab 2 -->
+          <div class="comnTab" id="two">
+            <div class="acc">
+              <div class="acc__card">
+                <div class="acc__title active">
+                  <span>English Auction</span
+                  ><cite class="slctd">Selected</cite>
+                </div>
+                <div class="acc__panel" style="display: block;">
+                  <p>
+                    An auction is usually a process of buying and selling goods
+                    or services by offering them up for bid,
+                  </p>
+                  <label class="checkCntr">
+                    <input type="checkbox" />
+                    <span class="checkmark">Choose English Auction</span>
+                  </label>
+                </div>
+              </div>
 
-            <!-- tab 3 -->
-            <div class="comnTab" id="three">
-               <div class="aucPro">
-                  <form action="" class="inptForm">
+              <div class="acc__card">
+                <div class="acc__title">
+                  <span>Dutch Auction</span> <cite class="slctd">Selected</cite>
+                </div>
+                <div class="acc__panel">
+                  <p>
+                    An auction is usually a process of buying and selling goods
+                    or services by offering them up for bid,
+                  </p>
+                  <label class="checkCntr">
+                    <input type="checkbox" />
+                    <span class="checkmark">Choose Dutch Auction</span>
+                  </label>
+                </div>
+              </div>
 
-                     <h3>English Auction</h3>
+              <div class="acc__card">
+                <div class="acc__title">
+                  <span>Sealed Bid</span> <cite class="slctd">Selected</cite>
+                </div>
+                <div class="acc__panel">
+                  <p>
+                    An auction is usually a process of buying and selling goods
+                    or services by offering them up for bid,
+                  </p>
+                  <label class="checkCntr">
+                    <input type="checkbox" />
+                    <span class="checkmark">Choose Sealed Bid Auction</span>
+                  </label>
+                </div>
+              </div>
 
-                     <div class="input-group">
-                        <label for="name">Reserve Price</label>
-                        <input type="text" class="focus" name="name" id="name" />
-                     </div>
+              <div class="acc__card">
+                <div class="acc__title">
+                  <span>Vickery</span> <cite class="slctd">Selected</cite>
+                </div>
+                <div class="acc__panel">
+                  <p>
+                    An auction is usually a process of buying and selling goods
+                    or services by offering them up for bid,
+                  </p>
+                  <label class="checkCntr">
+                    <input type="checkbox" />
+                    <span class="checkmark">Choose Vickery Auction</span>
+                  </label>
+                </div>
+              </div>
 
-                     <div class="input-group">
-                        <label for="name">Minimum Increment</label>
-                        <input type="text" class="focus" name="name" id="name" />
-                     </div>
-
-                     <div class="input-group date">
-                        <label for="name">Start Date</label>
-                        <input type="text" class="focus" name="name" id="datepicker" />
-                     </div>
-
-                     <div class="input-group time">
-                        <label for="name">Start Time</label>
-                        <input type="text" class="focus" name="name" id="timepicker" />
-                     </div>
-
-
-                     <div class="input-group round">
-                        <label for="name">Round Duration</label>
-                        <input type="text" class="focus" name="name" placeholder="H" /> <span>:</span>
-                        <input type="text" class="focus" name="name" placeholder="M" />
-                     </div>
-
-
-
-                     <input type="button" class="sbmt first" value="Next">
-
-                  </form>
-
-               </div>
-
-
+              <input type="button" class="sbmt scnd" value="Next" />
             </div>
-            <!-- tab 3 -->
+          </div>
+          <!-- tab 2 -->
 
-         </div>
+          <!-- tab 3 -->
+          <div class="comnTab" id="three">
+            <div class="aucPro">
+              <form action="" class="inptForm">
+                <h3>English Auction</h3>
 
+                <div class="input-group">
+                  <label for="name">Reserve Price</label>
+                  <input type="text" class="focus" name="name" id="name" />
+                </div>
 
+                <div class="input-group">
+                  <label for="name">Minimum Increment</label>
+                  <input type="text" class="focus" name="name" id="name" />
+                </div>
+
+                <div class="input-group date">
+                  <label for="name">Start Date</label>
+                  <input
+                    type="text"
+                    class="focus"
+                    name="name"
+                    id="datepicker"
+                  />
+                </div>
+
+                <div class="input-group time">
+                  <label for="name">Start Time</label>
+                  <input
+                    type="text"
+                    class="focus"
+                    name="name"
+                    id="timepicker"
+                  />
+                </div>
+
+                <div class="input-group round">
+                  <label for="name">Round Duration</label>
+                  <input
+                    type="text"
+                    class="focus"
+                    name="name"
+                    placeholder="H"
+                  />
+                  <span>:</span>
+                  <input
+                    type="text"
+                    class="focus"
+                    name="name"
+                    placeholder="M"
+                  />
+                </div>
+
+                <input type="button" class="sbmt first" value="Next" />
+              </form>
+            </div>
+          </div>
+          <!-- tab 3 -->
+        </div>
       </div>
       <!-- right panel -->
 
-
-
-
-
       <!-- header start -->
       <header>
-         <div class="container">
-            <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="logo">
+                <a href="/">
+                  <img
+                    src="<%= require('../images/auction-logo.png') %>"
+                    alt="logo"
+                  />
+                </a>
+              </div>
 
-               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-                  <div class="logo">
-                     <a href="/">
-                        <img src="<%= require('../images/auction-logo.png') %>" alt="logo" />
-                     </a>
-                  </div>
-
-                  <div class="menuBox">
-                     <ul>
-                        <li><a href="index.html">Auction your product</a></li>
-                        <li class="active"><a href="viewauctions.html">View Auctions</a></li>
-                        <li><a href="viewauctions.html">My Auction</a></li>
-                     </ul>
-                  </div>
-
-               </div>
-
+              <div class="menuBox">
+                <ul>
+                  <li class="">
+                    <a href="index.html">Auction your product</a>
+                  </li>
+                  <li class="active"><a href="#">View Auctions</a></li>
+                  <li><a href="#">My Auction</a></li>
+                </ul>
+              </div>
             </div>
-         </div>
+          </div>
+        </div>
       </header>
       <!-- header end -->
 
-
       <!-- cardBox -->
       <section class="cardBox">
-         <div class="container">
+        <div class="container">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a data-toggle="tab" href="#home"
+                ><span> Upcoming </span><i>12</i></a
+              >
+            </li>
+            <li>
+              <a data-toggle="tab" href="#menu1"
+                ><span> Ongoing </span><i>8</i></a
+              >
+            </li>
+            <li>
+              <a data-toggle="tab" href="#menu2"
+                ><span> Completed </span><i>3</i></a
+              >
+            </li>
+          </ul>
 
-            <ul class="nav nav-tabs">
-               <li class="active"><a data-toggle="tab" href="#home"><span> Upcoming </span><i>12</i></a></li>
-               <li><a data-toggle="tab" href="#menu1"><span> Ongoing </span><i>8</i></a></li>
-               <li><a data-toggle="tab" href="#menu2"><span> Completed </span><i>3</i></a></li>
-            </ul>
+          <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+              <!-- prod-card -->
+              <div class="prod-card">
+                <div class="lt">
+                  <img src="<%= require('../images/Image-8.jpg') %>" />
+                </div>
 
-            <div class="tab-content">
-
-               <div id="home" class="tab-pane fade in active">
-
-                  <!-- prod-card -->
-                  <div class="prod-card">
-                     <div class="lt">
-                        <img src="<%= require('../images/Image-8.jpg') %>">
-                     </div>
-
-                     <div class="rt">
-                        <div class="left">
-                           <h1>Russian Slave Sculpture</h1>
-                           <h2>English Auction</h2>
-                           <h3>Owner: <span>123456789101234567890123456789</span></h3>
-                           <div class="paragrph">
-                              <p>Head of King Sargon of Akkadwas, the
-                                 first ruler of the Akkadian Empire,
-                                 known for his conquests of</p>
-                           </div>
-                        </div>
-
-                        <div class="right">
-                           <h3>Reserve Price
-                              <span>$1,00,000</span></h3>
-                           <h4>Min. Increment : $5,000</h4>
-
-                           <ul>
-                              <li>
-                                 <span>Start Date <cite>2 days left</cite></span>
-                                 <span>12th August, 8:00pm</span>
-                              </li>
-
-                              <li>
-                                 <span>Round Duration</span>
-                                 <span>1 hr 10 mins</span>
-                              </li>
-                           </ul>
-
-                           <input type="button" class="btn" value="Shortlist">
-                        </div>
-                     </div>
+                <div class="rt">
+                  <div class="left">
+                    <h1>Russian Slave Sculpture</h1>
+                    <h2>English Auction</h2>
+                    <h3>Owner: <span>123456789101234567890123456789</span></h3>
+                    <div class="paragrph">
+                      <p>
+                        Head of King Sargon of Akkadwas, the first ruler of the
+                        Akkadian Empire, known for his conquests of
+                      </p>
+                    </div>
                   </div>
-                  <!-- prod-card -->
 
+                  <div class="right">
+                    <h3>Reserve Price <span>$1,00,000</span></h3>
+                    <h4>Min. Increment : $5,000</h4>
 
-                   <!-- prod-card -->
-                   <div class="prod-card">
-                     <div class="lt">
-                        <img src="<%= require('../images/Image-8.jpg') %>">
-                     </div>
+                    <ul>
+                      <li>
+                        <span>Start Date <cite>2 days left</cite></span>
+                        <span>12th August, 8:00pm</span>
+                      </li>
 
-                     <div class="rt">
-                        <div class="left">
-                           <h1>Russian Slave Sculpture</h1>
-                           <h2>English Auction</h2>
-                           <h3>Owner: <span>123456789101234567890123456789</span></h3>
-                           <div class="paragrph">
-                              <p>Head of King Sargon of Akkadwas, the
-                                 first ruler of the Akkadian Empire,
-                                 known for his conquests of</p>
-                           </div>
-                        </div>
+                      <li>
+                        <span>Round Duration</span>
+                        <span>1 hr 10 mins</span>
+                      </li>
+                    </ul>
 
-                        <div class="right">
-                           <h3>Reserve Price
-                              <span>$1,00,000</span></h3>
-                           <h4>Min. Increment : $5,000</h4>
-
-                           <ul>
-                              <li>
-                                 <span>Start Date <cite>2 days left</cite></span>
-                                 <span>12th August, 8:00pm</span>
-                              </li>
-
-                              <li>
-                                 <span>Round Duration</span>
-                                 <span>1 hr 10 mins</span>
-                              </li>
-                           </ul>
-
-                           <input type="button" class="btn" value="Shortlist">
-                        </div>
-                     </div>
+                    <input type="button" class="btn" value="Shortlist" />
                   </div>
-                  <!-- prod-card -->
+                </div>
+              </div>
+              <!-- prod-card -->
 
+              <!-- prod-card -->
+              <div class="prod-card">
+                <div class="lt">
+                  <img src="<%= require('../images/Image-8.jpg') %>" />
+                </div>
 
-                   <!-- prod-card -->
-                   <div class="prod-card">
-                     <div class="lt">
-                        <img src="<%= require('../images/Image-8.jpg') %>">
-                     </div>
-
-                     <div class="rt">
-                        <div class="left">
-                           <h1>Russian Slave Sculpture</h1>
-                           <h2>English Auction</h2>
-                           <h3>Owner: <span>123456789101234567890123456789</span></h3>
-                           <div class="paragrph">
-                              <p>Head of King Sargon of Akkadwas, the
-                                 first ruler of the Akkadian Empire,
-                                 known for his conquests of</p>
-                           </div>
-                        </div>
-
-                        <div class="right">
-                           <h3>Reserve Price
-                              <span>$1,00,000</span></h3>
-                           <h4>Min. Increment : $5,000</h4>
-
-                           <ul>
-                              <li>
-                                 <span>Start Date <cite>2 days left</cite></span>
-                                 <span>12th August, 8:00pm</span>
-                              </li>
-
-                              <li>
-                                 <span>Round Duration</span>
-                                 <span>1 hr 10 mins</span>
-                              </li>
-                           </ul>
-
-                           <input type="button" class="btn" value="Shortlist">
-                        </div>
-                     </div>
+                <div class="rt">
+                  <div class="left">
+                    <h1>Russian Slave Sculpture</h1>
+                    <h2>English Auction</h2>
+                    <h3>Owner: <span>123456789101234567890123456789</span></h3>
+                    <div class="paragrph">
+                      <p>
+                        Head of King Sargon of Akkadwas, the first ruler of the
+                        Akkadian Empire, known for his conquests of
+                      </p>
+                    </div>
                   </div>
-                  <!-- prod-card -->
 
+                  <div class="right">
+                    <h3>Reserve Price <span>$1,00,000</span></h3>
+                    <h4>Min. Increment : $5,000</h4>
 
-               </div>
+                    <ul>
+                      <li>
+                        <span>Start Date <cite>2 days left</cite></span>
+                        <span>12th August, 8:00pm</span>
+                      </li>
 
+                      <li>
+                        <span>Round Duration</span>
+                        <span>1 hr 10 mins</span>
+                      </li>
+                    </ul>
 
-               <div id="menu1" class="tab-pane fade">
+                    <input type="button" class="btn" value="Shortlist" />
+                  </div>
+                </div>
+              </div>
+              <!-- prod-card -->
 
-               </div>
+              <!-- prod-card -->
+              <div class="prod-card">
+                <div class="lt">
+                  <img src="<%= require('../images/Image-8.jpg') %>" />
+                </div>
 
+                <div class="rt">
+                  <div class="left">
+                    <h1>Russian Slave Sculpture</h1>
+                    <h2>English Auction</h2>
+                    <h3>Owner: <span>123456789101234567890123456789</span></h3>
+                    <div class="paragrph">
+                      <p>
+                        Head of King Sargon of Akkadwas, the first ruler of the
+                        Akkadian Empire, known for his conquests of
+                      </p>
+                    </div>
+                  </div>
 
-               <div id="menu2" class="tab-pane fade">
+                  <div class="right">
+                    <h3>Reserve Price <span>$1,00,000</span></h3>
+                    <h4>Min. Increment : $5,000</h4>
 
-               </div>
+                    <ul>
+                      <li>
+                        <span>Start Date <cite>2 days left</cite></span>
+                        <span>12th August, 8:00pm</span>
+                      </li>
+
+                      <li>
+                        <span>Round Duration</span>
+                        <span>1 hr 10 mins</span>
+                      </li>
+                    </ul>
+
+                    <input type="button" class="btn" value="Shortlist" />
+                  </div>
+                </div>
+              </div>
+              <!-- prod-card -->
             </div>
 
-         </div>
+            <div id="menu1" class="tab-pane fade"></div>
+
+            <div id="menu2" class="tab-pane fade"></div>
+          </div>
+        </div>
       </section>
       <!-- cardBox -->
+    </div>
+    <!-- wrp -->
+  </body>
 
-
-
-
-
-
-   </div>
-   <!-- wrp -->
-
-   <%= require('html-loader!../partials/footer.html') %>
-</body>
+  <%= require('html-loader!../partials/footer.html') %>
 </html>

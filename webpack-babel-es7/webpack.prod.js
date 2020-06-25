@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ["style-loader", "css-loader", MiniCssExtractPlugin.loader],
       },
       {
         // Load all images as base64 encoding if they are smaller than 8192 bytes
@@ -58,7 +58,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: true,
-      chunks: ["babel", "auction"],
+      chunks: ["babel", "viewauctions"],
       filename: "viewauctions.html",
       template: path.resolve(
         __dirname,

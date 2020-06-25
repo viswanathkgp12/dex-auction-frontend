@@ -54,7 +54,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: true,
-      chunks: ["babel", "auction"],
+      chunks: ["babel", "viewauctions"],
       filename: "viewauctions.html",
       template: path.resolve(
         __dirname,

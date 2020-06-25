@@ -56,7 +56,7 @@ header {min-height: 75px;}
 .banner .lt span.pwd {font-size: 16px; color: #606060; display: block; padding: 0 0 47px; transition: all 1.2s ease; transform: translate(0, 20px); opacity: 0;}
 .banner .lt span.pwd.active { transform: translate(0, 0); opacity: 1;}
 .banner .lt span.pwd a {color: #0082d3; display: inline-block; position: relative; text-decoration: underline;}
-.banner .lt span.pwd a:after {position: absolute; right: -39px; top: -6px; content: ""; background: url("<%= require('../images/TezosLogo.png') %>") no-repeat; width: 28px; height: 38px;}
+.banner .lt span.pwd a:after {position: absolute; right: -39px; top: -6px; content: ""; background: url("../images/TezosLogo.png") no-repeat; width: 28px; height: 38px;}
 .banner .lt ul li {float: left; padding: 0 18px 0 0;}
 .banner .lt ul {overflow: hidden; transition: all 1.2s ease; transform: translate(0, 20px); opacity: 0;}
 .banner .lt ul.active {transform: translate(0, 0); opacity: 1;}
@@ -236,13 +236,13 @@ transform: rotate(45deg);
 .acc .acc__panel p {margin: 0 0 14px; line-height: 1.14; color: #aaaaaa;}
 .checkCntr .checkmark:after {display: none;}
 .checkCntr input:checked ~ .checkmark:after {display: none;}
-.acc  .acc__title:before{position: absolute; right: 17px; top: 30px; background: url("<%= require('../images/accordAro.svg') %>") no-repeat; width: 12px; height: 8px; content: "";     transform: rotate(180deg); transition: all 0.4s ease;}
+.acc  .acc__title:before{position: absolute; right: 17px; top: 30px; background: url("../images/accordAro.svg") no-repeat; width: 12px; height: 8px; content: "";     transform: rotate(180deg); transition: all 0.4s ease;}
 .acc  .acc__title.active:before {transform: rotate(0deg);}
 .acc  .acc__title.active { border-bottom: 1px solid #fff;}
 .acc .slctd {display: inline-block;   width: 94px; height: 26px; border-radius: 4px; background-color: #e5e5e5; font-size: 14px; color: #aaaaaa; text-align: center; line-height: 26px; font-style: normal; font-weight: 500; vertical-align: middle; margin: 0 0 0 6px; display: none;}
 .inptForm h3  {  font-size: 18px; font-weight: normal;  color: #aaaaaa; padding: 0 0 36px;}
-.tabContnt .aucPro .input-group.date:before {position: absolute; right: 0; bottom: 6px; content: ""; background: url("<%= require('../images/date.svg') %>") no-repeat; width: 15px; height: 17px;}
-.tabContnt .aucPro .input-group.time:before {position: absolute; right: 0; bottom: 6px; content: ""; background: url("<%= require('../images/time.svg') %>") no-repeat; width: 15px; height: 15px;}
+.tabContnt .aucPro .input-group.date:before {position: absolute; right: 0; bottom: 6px; content: ""; background: url("../images/date.svg") no-repeat; width: 15px; height: 17px;}
+.tabContnt .aucPro .input-group.time:before {position: absolute; right: 0; bottom: 6px; content: ""; background: url("../images/time.svg") no-repeat; width: 15px; height: 15px;}
 .ui-timepicker-wrapper {    width: 250px;}
 
 .tabContnt .aucPro .input-group.round .focus {float: left; width: 50px; margin: 0 8px 0 0; text-align: center;}
@@ -270,7 +270,7 @@ padding: 0 8px 0 0;}
 .cardBox .prod-card .rt .left  {float: left; width: 52%; position: relative; padding:7px 22px 33px 0; border-right: 1px dashed #d5d5d5;}
 .cardBox .prod-card .rt:after {display: block; content: ""; clear: both;}
 .cardBox .prod-card .rt .left h1 {  font-size: 24px; font-weight: 700; color: #606060; padding: 0 0 13px;}
-.cardBox .prod-card .rt .left h2 {font-size: 16px; font-weight: normal; color: #606060; background: url("<%= require('../images/map.svg') %>") no-repeat left 0; padding: 0 0 19px 22px; border-bottom: 1px dashed #d5d5d5;}
+.cardBox .prod-card .rt .left h2 {font-size: 16px; font-weight: normal; color: #606060; background: url("../images/map.svg") no-repeat left 0; padding: 0 0 19px 22px; border-bottom: 1px dashed #d5d5d5;}
 .cardBox .prod-card .rt .left h3 {font-size: 16px; color: #606060; padding: 21px 0; border-bottom: 1px dashed #d5d5d5;}
 .cardBox .prod-card .rt .right {width: 48%; float: left; padding: 5px 0 0 20px;}
 .cardBox .prod-card .rt .left p {font-size: 16px; line-height: 1.19; color: #606060; margin: 21px 0 0 0;}

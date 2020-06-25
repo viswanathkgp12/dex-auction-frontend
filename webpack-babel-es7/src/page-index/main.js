@@ -1,3 +1,7 @@
+import "../style/style.css";
+import "../style/bootstrap.min.css";
+import "../style/jquery.timepicker.css";
+
 import {
   isAvailable,
   connect,
@@ -30,7 +34,6 @@ async function checkAvailability() {
 
   console.log("Address of wallet: ", address);
   walletState = CONNECTED;
-
 
   // Test
   createInstance(0, "name", "english");
