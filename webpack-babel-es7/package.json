@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "webpack --config webpack.config.js --mode production",
+    "build": "webpack --config webpack.prod.js --mode production",
     "start": "http-server dist --port ${PORT:-8080}"
   },
   "author": "",
