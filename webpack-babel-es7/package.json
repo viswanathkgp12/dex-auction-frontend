@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "start": "http-server dist --port ${PORT:-8080}"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +33,7 @@
   },
   "dependencies": {
     "@taquito/taquito": "^6.3.2-beta.0",
-    "@thanos-wallet/dapp": "^0.4.4"
+    "@thanos-wallet/dapp": "^0.4.4",
+    "http-server": "^0.12.3"
   }
 }
