@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader", MiniCssExtractPlugin.loader],
+        use: ["style-loader", "css-loader"],
       },
       {
         // Load all images as base64 encoding if they are smaller than 8192 bytes
@@ -67,10 +67,10 @@ module.exports = {
         "view-auction.html"
       ),
     }),
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-      chunkFilename: "[id].[contenthash].css",
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: "[name].[contenthash].css",
+    //   chunkFilename: "[id].[contenthash].css",
+    // }),
   ],
 
   watch: false,

@@ -10,7 +10,7 @@ export async function isAvailable() {
   return ThanosWallet.isAvailable;
 }
 
-export async function connect(appName = APP_NAME, network=NETWORK) {
+export async function connect(appName = APP_NAME, network = NETWORK) {
   wallet = new ThanosWallet(appName);
   await wallet.connect(network);
 }
@@ -29,7 +29,102 @@ export async function getWalletInfo() {
 const fetchContract = (tezos, address) => tezos.wallet.at(address);
 
 export async function createInstance(assetID, assetName, auctionType) {
-  const auction = await fetchContract(tzs, AUCTION_ADDRESS);
-  console.log(auction);
-  await auction.methods.createInstance(assetID, assetName, auctionType);
+  try {
+    const auction = await fetchContract(tzs, AUCTION_ADDRESS);
+    console.log(auction);
+    const { opHash } = await auction.methods
+      .createInstance(assetID, assetName, auctionType)
+      .send();
+    console.log("operation hash for create instance: ", opHash);
+    return {
+      err: null,
+      opHash,
+    };
+  } catch (error) {
+    console.log("Error message: ", error.message);
+    return { err: error.message, opHash: null };
+  }
+}
+
+export async function configureAuction(
+  address,
+  minIncrease,
+  reservePrice,
+  startTime,
+  waitTime
+) {
+  try {
+    const auction = await fetchContract(tzs, address);
+    const { opHash } = await auction.methods
+      .configureAuction(minIncrease, reservePrice, startTime, waitTime)
+      .send();
+    console.log("operation hash for configure auction: ", opHash);
+    return {
+      err: null,
+      opHash,
+    };
+  } catch (error) {
+    console.log("Error message: ", error.message);
+    return { err: error.message, opHash: null };
+  }
+}
+
+export async function startAuction(address) {
+  try {
+    const auction = await fetchContract(tzs, address);
+    const { opHash } = await auction.methods.startAuction().send();
+    console.log("operation hash for start auction: ", opHash);
+    return {
+      err: null,
+      opHash,
+    };
+  } catch (error) {
+    console.log("Error message: ", error.message);
+    return { err: error.message, opHash: null };
+  }
+}
+
+export async function cancelAuction(address) {
+  try {
+    const auction = await fetchContract(tzs, address);
+    const { opHash } = await auction.methods.cancelAuction().send();
+    console.log("operation hash for cancel auction: ", opHash);
+    return {
+      err: null,
+      opHash,
+    };
+  } catch (error) {
+    console.log("Error message: ", error.message);
+    return { err: error.message, opHash: null };
+  }
+}
+
+export async function resolveAuction(address) {
+  try {
+    const auction = await fetchContract(tzs, address);
+    const { opHash } = await auction.methods.resolveAuction().send();
+    console.log("operation hash for resolve auction: ", opHash);
+    return {
+      err: null,
+      opHash,
+    };
+  } catch (error) {
+    console.log("Error message: ", error.message);
+    return { err: error.message, opHash: null };
+  }
+}
+
+export async function bid(address) {
+  try {
+    const auction = await fetchContract(tzs, address);
+    const { opHash } = await auction.methods.bid().send();
+    console.log("operation hash for bid: ", opHash);
+    return {
+      err: null,
+      opHash,
+    };
+  } catch (error) {
+    console.log("Error message: ", error.message);
+    return { err: error.message, opHash: null };
+  }
 }
