@@ -9,7 +9,7 @@ module.exports = {
   entry: {
     babel: "@babel/polyfill",
     index: "./src/page-index/main.js",
-    auction: "./src/page-auction/main.js",
+    viewauctions: "./src/page-auction/main.js",
   },
 
   output: {
@@ -55,7 +55,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       chunks: ["babel", "auction"],
-      filename: "view-auction.html",
+      filename: "viewauctions.html",
       template: path.resolve(
         __dirname,
         "src",

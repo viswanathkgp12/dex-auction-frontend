@@ -2,7 +2,7 @@ import {
   isAvailable,
   connect,
   getWalletInfo,
-  chooseAuction,
+  createInstance,
 } from "../utils/thanos";
 
 const NOT_CONNECTED = "not-connected";
@@ -30,6 +30,10 @@ async function checkAvailability() {
 
   console.log("Address of wallet: ", address);
   walletState = CONNECTED;
+
+
+  // Test
+  createInstance(0, "name", "english");
 }
 
 window.onload = function () {
@@ -37,5 +41,5 @@ window.onload = function () {
 };
 
 window.chooseAuction = function () {
-  chooseAuction(0, "name", "english");
+  createInstance(0, "name", "english");
 };

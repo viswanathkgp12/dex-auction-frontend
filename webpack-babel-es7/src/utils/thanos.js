@@ -29,6 +29,7 @@ export async function getWalletInfo() {
 const fetchContract = (tezos, address) => tezos.wallet.at(address);
 
 export async function createInstance(assetID, assetName, auctionType) {
-  const auction = fetchContract(tezos, AUCTION_ADDRESS);
+  const auction = await fetchContract(tzs, AUCTION_ADDRESS);
+  console.log(auction);
   await auction.methods.createInstance(assetID, assetName, auctionType);
 }

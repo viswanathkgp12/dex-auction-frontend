@@ -151,7 +151,6 @@ $(document).ready(function () {
 
         $('#three').addClass('active');
         $('#two').removeClass('active');
-
     })
 
 
