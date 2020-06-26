@@ -2,6 +2,9 @@ import "../style/style.css";
 import "../style/bootstrap.min.css";
 import "../style/jquery.timepicker.css";
 
+import $ from "jquery";
+import { getOpByHashBcd, getOpByHashTzkt } from "../utils/api";
+import { sleep } from "../utils/sleep";
 import {
   isAvailable,
   connect,
@@ -9,9 +12,14 @@ import {
   createInstance,
   configureAuction,
 } from "../utils/thanos";
-import { getOpByHashBcd, getOpByHashTzkt } from "../utils/api";
-import { sleep } from "../utils/sleep";
 
+/**
+ * --------------------------------
+ * Wallet
+ * --------------------------------
+ */
+
+// Wallet State
 const NOT_CONNECTED = "not-connected";
 const CONNECTING = "connecting";
 const CONNECTED = "connected";
@@ -24,22 +32,29 @@ async function checkAvailability() {
   if (!available) {
     alert("Thanos Wallet is not available");
   }
+}
 
+async function connectWallet() {
   console.log("Connecting to RPC ...");
   walletState = CONNECTING;
   await connect();
 
   console.log("Fetch wallet info ...");
   const { tezos, address } = await getWalletInfo();
-
-  // Uncomment if you want to display in UI
-  // document.getElementById("address").innerHTML = address;
-
   console.log("Address of wallet: ", address);
   walletState = CONNECTED;
+}
 
-  // Test
-  const { err, opHash } = await createInstance(0, "name", "english");
+/**
+ * ---------------------------
+ * Contract
+ * ---------------------------
+ */
+
+let contractAddress;
+
+async function createAuctionInstance(assetName, auctionType) {
+  const { err, opHash } = await createInstance(0, assetName, "english");
   if (err) {
     console.log("Error occured");
     return;
@@ -50,12 +65,70 @@ async function checkAvailability() {
   const { contractInstance } = await pollForAuctionAddress(opHash);
   console.log("Contract created at: ", contractInstance);
 
+  return contractInstance;
+}
+
+async function pollForAuctionAddress(opHash, retries = 10) {
+  try {
+    if (!retries) {
+      return {
+        err: "Timeout exceeded",
+        contractInstance: null,
+      };
+    }
+
+    // const opData = await getOpByHashBcd(opHash);
+    // console.log("BCD Operation data received: ", opData);
+
+    // if (opData !== null && opData.length > 0 && opData.length == 2) {
+    //   const status = opData[1].status;
+    //   if (status === "applied") {
+    //     return {
+    //       err: null,
+    //       contractInstance: opData[1].destination,
+    //     };
+    //   }
+    // }
+
+    const tzktOpdata = await getOpByHashTzkt(opHash);
+    console.log("TZKT Operation data received: ", tzktOpdata);
+
+    if (
+      tzktOpdata !== null &&
+      tzktOpdata.length > 0 &&
+      tzktOpdata.length == 2
+    ) {
+      const status = tzktOpdata[1].status;
+      if (status === "applied") {
+        return {
+          err: null,
+          contractInstance: tzktOpdata[1].originatedContract.address,
+        };
+      }
+    }
+
+    retries--;
+
+    await sleep(5000);
+    return pollForAuctionAddress(opHash, retries);
+  } catch (error) {
+    return pollForAuctionAddress(opHash, retries);
+  }
+}
+
+async function configureAuctionInstance(
+  contractInstance,
+  increment,
+  reservePrice,
+  starttime,
+  waittime
+) {
   const configureAuctionResult = await configureAuction(
     contractInstance,
-    1,
-    1,
-    "2020-06-27T02:10:00+05:30",
-    1
+    increment,
+    reservePrice,
+    starttime,
+    waittime
   );
 
   if (configureAuctionResult.err) {
@@ -63,53 +136,93 @@ async function checkAvailability() {
     return;
   }
 
-  console.log("Create Instance succeeded with: ", configureAuctionResult.opHash);
+  console.log(
+    "Create Instance succeeded with: ",
+    configureAuctionResult.opHash
+  );
 }
 
-async function pollForAuctionAddress(opHash, retries = 10) {
-  if (!retries) {
-    return {
-      err: "Timeout exceeded",
-      contractInstance: null,
-    };
-  }
+/**
+ * ---------------------
+ * UI Bindings
+ * ----------------------
+ */
 
-  // const opData = await getOpByHashBcd(opHash);
-  // console.log("BCD Operation data received: ", opData);
+$(".prodct").on("click", async function () {
+  // Check Thanos Availability
+  await checkAvailability();
+  await connectWallet();
 
-  // if (opData !== null && opData.length > 0 && opData.length == 2) {
-  //   const status = opData[1].status;
-  //   if (status === "applied") {
-  //     return {
-  //       err: null,
-  //       contractInstance: opData[1].destination,
-  //     };
-  //   }
-  // }
+  // Open slider
+  $("body").addClass("openSlide");
+  $(".menuBox ul li.prodct").addClass("active");
+});
 
-  const tzktOpdata = await getOpByHashTzkt(opHash);
-  console.log("TZKT Operation data received: ", tzktOpdata);
+window.chooseAuction = async function () {
+  // const auctionType = ;
+  const assetName = $("#assetName").val();
+  contractAddress = await createAuctionInstance(assetName, "english");
 
-  if (tzktOpdata !== null && tzktOpdata.length > 0 && tzktOpdata.length == 2) {
-    const status = tzktOpdata[1].status;
-    if (status === "applied") {
-      return {
-        err: null,
-        contractInstance: tzktOpdata[1].originatedContract.address,
-      };
-    }
-  }
+  // UI
+  $(".tabHead ul li.two").removeClass("bold");
 
-  retries--;
+  $(".tabHead ul li.three").addClass("active");
+  $(".tabHead ul li.three").addClass("bold");
 
-  await sleep(5000);
-  return pollForAuctionAddress(opHash, retries);
-}
-
-window.onload = function () {
-  checkAvailability();
+  $("#three").addClass("active");
+  $("#two").removeClass("active");
 };
 
-window.chooseAuction = function () {
-  createInstance(0, "name", "english");
+window.configureAuction = async function () {
+  const reservePrice = $("#reservePrice").val();
+  const increment = $("#increment").val();
+  const datepicker = $("#datepicker").val();
+  const timepicker = $("#timepicker").val();
+  const waithour = $("#waithour").val();
+  const waitmin = $("#waitmin").val();
+
+  const month = datepicker.split("/")[0];
+  const date = datepicker.split("/")[1];
+  const year = datepicker.split("/")[2];
+
+  let starttime;
+  const tzOffset = new Date().getTimezoneOffset();
+
+  const symbol = tzOffset < 0 ? "+" : "-";
+  let tzOffsetHours = Math.floor(Number(Math.abs(tzOffset) / 60));
+  const tzOffsetMins = Math.abs(tzOffset) - tzOffsetHours * 60;
+
+  tzOffsetHours = tzOffsetHours < 10 ? "0" + tzOffsetHours : tzOffsetHours;
+
+  const isAM = timepicker.includes("am");
+  if (isAM) {
+    let hour = timepicker.split(":")[0];
+    const min = timepicker.slice(0, -2).split(":")[1];
+
+    hour = Number(hour) < 10 ? "0" + hour : hour;
+
+    starttime = `${year}-${month}-${date}T${hour}:${min}:00${symbol}${tzOffsetHours}:${tzOffsetMins}`;
+  } else {
+    let hour = timepicker.split(":")[0];
+    const min = timepicker.slice(0, -2).split(":")[1];
+
+    hour = hour + 12;
+    starttime = `${year}-${month}-${date}T${hour}:${min}:00${symbol}${tzOffsetHours}:${tzOffsetMins}`;
+  }
+
+  const waittime = Number(waithour) * 60 * 60 + Number(waitmin) * 60;
+
+  console.log(contractAddress, increment, reservePrice, starttime, waittime);
+
+  await configureAuctionInstance(
+    contractAddress,
+    increment,
+    reservePrice,
+    starttime,
+    waittime
+  );
+
+  // UI
+  $("body").removeClass("openSlide");
+  $(".menuBox ul li.prodct").removeClass("active");
 };

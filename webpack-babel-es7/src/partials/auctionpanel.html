@@ -1,0 +1,201 @@
+<!-- right panel -->
+<div class="slidePanel">
+  <span class="closePanel"><img src="../images/close-icon.png" /></span>
+  <div class="tabHead">
+    <h2>Three Simple Steps to upload your auction</h2>
+
+    <div class="tabMenu">
+      <ul>
+        <li class="active one bold">
+          <a data-tab="one" href="javascript:void(0)">Product Details</a>
+        </li>
+        <li class="two">
+          <a data-tab="two" href="javascript:void(0)">Type of Auction</a>
+        </li>
+        <li class="three">
+          <a data-tab="three" href="javascript:void(0)">Auction details</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tabContnt">
+    <!-- tab 1 -->
+    <div class="comnTab active" id="one">
+      <div class="aucPro">
+        <form action="" class="inptForm">
+          <div id="testDiv">
+            <div class="input-group">
+              <label for="name">Name of the Auction Product</label>
+              <input
+                type="text"
+                class="focus"
+                name="assetName"
+                id="assetName"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="name">Description of the Product</label>
+              <textarea class="focus" rows="1"></textarea>
+            </div>
+
+            <div class="fileUpld">
+              <h4>Drag & Drop Image</h4>
+              <span>or</span>
+              <cite>Browse Image</cite>
+              <input type="file" name="assetImage" id="myFile" />
+            </div>
+          </div>
+
+          <input type="button" class="sbmt first" value="Next" />
+        </form>
+      </div>
+    </div>
+    <!-- tab 1 -->
+
+    <!-- tab 2 -->
+    <div class="comnTab" id="two">
+      <div class="acc">
+        <!---Auction Type---->
+
+        <div class="acc__card">
+          <div class="acc__title active">
+            <span>English Auction</span><cite class="slctd">Selected</cite>
+          </div>
+          <div class="acc__panel" style="display: block;">
+            <p>
+              An auction is usually a process of buying and selling goods or
+              services by offering them up for bid,
+            </p>
+            <label class="checkCntr">
+              <input type="checkbox" />
+              <span class="checkmark">Choose English Auction</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="acc__card">
+          <div class="acc__title">
+            <span>Dutch Auction</span>
+            <cite class="slctd">Selected</cite>
+          </div>
+          <div class="acc__panel">
+            <p>
+              An auction is usually a process of buying and selling goods or
+              services by offering them up for bid,
+            </p>
+            <label class="checkCntr">
+              <input type="checkbox" />
+              <span class="checkmark">Choose Dutch Auction</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="acc__card">
+          <div class="acc__title">
+            <span>Sealed Bid</span>
+            <cite class="slctd">Selected</cite>
+          </div>
+          <div class="acc__panel">
+            <p>
+              An auction is usually a process of buying and selling goods or
+              services by offering them up for bid,
+            </p>
+            <label class="checkCntr">
+              <input type="checkbox" />
+              <span class="checkmark">Choose Sealed Bid Auction</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="acc__card">
+          <div class="acc__title">
+            <span>Vickery Auction</span>
+            <cite class="slctd">Selected</cite>
+          </div>
+          <div class="acc__panel">
+            <p>
+              An auction is usually a process of buying and selling goods or
+              services by offering them up for bid,
+            </p>
+            <label class="checkCntr">
+              <input type="checkbox" />
+              <span class="checkmark">Choose Vickery Auction</span>
+            </label>
+          </div>
+        </div>
+
+        <input
+          type="button"
+          class="sbmt scnd"
+          value="Next"
+          onclick="chooseAuction()"
+        />
+      </div>
+    </div>
+    <!-- tab 2 -->
+
+    <!-- tab 3 -->
+    <div class="comnTab" id="three">
+      <div class="aucPro">
+        <form action="" class="inptForm">
+          <h3>English Auction</h3>
+
+          <div class="input-group">
+            <label for="name">Reserve Price</label>
+            <input
+              type="text"
+              class="focus"
+              name="reservePrice"
+              id="reservePrice"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="name">Minimum Increment</label>
+            <input type="text" class="focus" name="increment" id="increment" />
+          </div>
+
+          <div class="input-group date">
+            <label for="name">Start Date</label>
+            <input type="text" class="focus" name="date" id="datepicker" />
+          </div>
+
+          <div class="input-group time">
+            <label for="name">Start Time</label>
+            <input type="text" class="focus" name="time" id="timepicker" />
+          </div>
+
+          <div class="input-group round">
+            <label for="name">Round Duration</label>
+            <input
+              type="text"
+              class="focus"
+              name="waithour"
+              id="waithour"
+              placeholder="H"
+            />
+            <span>:</span>
+            <input
+              type="text"
+              class="focus"
+              name="waitmin"
+              id="waitmin"
+              placeholder="M"
+            />
+          </div>
+
+          <input
+            type="button"
+            class="sbmt third"
+            value="Finish"
+            onclick="configureAuction()"
+          />
+        </form>
+      </div>
+    </div>
+    <!-- tab 3 -->
+  </div>
+</div>
+<!-- right panel -->
