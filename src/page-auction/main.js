@@ -105,6 +105,22 @@ async function poll(opHash, retries = 10) {
  * ----------------------
  */
 
+/**
+ * ---------------------
+ * UI Bindings
+ * ----------------------
+ */
+
+$("#prodct").on("click", async function () {
+  // Check Thanos Availability
+  await checkAvailability();
+  await connectWallet();
+
+  // Open slider
+  $("body").addClass("openSlide");
+  $(".menuBox ul li.prodct").addClass("active");
+});
+
 $(".shortlistbtn").on("click", async function () {
   // Check Thanos Availability
   await checkAvailability();
