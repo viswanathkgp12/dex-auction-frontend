@@ -2,9 +2,9 @@ import { ThanosWallet } from "@thanos-wallet/dapp";
 
 let wallet, tzs, pkh;
 
-export const APP_NAME = "Auction dApp";
+export const APP_NAME = "DEX Auction dApp";
 export const NETWORK = "carthagenet";
-export const AUCTION_ADDRESS = "KT1L8DPX3bbdpZGFURDRzk9FLNqv9qK9khAe";
+export const AUCTION_ADDRESS = "KT1NG33RboNuw4KSQmFBZtY5ast5334o5zfh";
 
 export async function isAvailable() {
   return ThanosWallet.isAvailable;

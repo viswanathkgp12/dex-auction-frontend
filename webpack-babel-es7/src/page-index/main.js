@@ -96,13 +96,13 @@ async function pollForAuctionAddress(opHash, retries = 10) {
     if (
       tzktOpdata !== null &&
       tzktOpdata.length > 0 &&
-      tzktOpdata.length == 2
+      tzktOpdata.length == 4
     ) {
-      const status = tzktOpdata[1].status;
+      const status = tzktOpdata[2].status;
       if (status === "applied") {
         return {
           err: null,
-          contractInstance: tzktOpdata[1].originatedContract.address,
+          contractInstance: tzktOpdata[2].originatedContract.address,
         };
       }
     }
