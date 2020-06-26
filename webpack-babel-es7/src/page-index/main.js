@@ -62,13 +62,10 @@ async function createAuctionInstance(assetName, auctionType) {
 
   console.log("Create Instance succeeded with: ", opHash);
 
-  const { err, contractInstance } = await pollForAuctionAddress(opHash);
-  console.log("Contract created at: ", contractInstance);
+  const pollResult = await pollForAuctionAddress(opHash);
+  console.log("Contract created at: ", pollResult.contractInstance);
 
-  return {
-    err,
-    contractInstance,
-  };
+  return pollResult;
 }
 
 async function pollForAuctionAddress(opHash, retries = 10) {
