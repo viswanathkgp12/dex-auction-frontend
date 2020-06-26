@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const webpack = require("webpack");
 require("@babel/register");
 
 module.exports = {
@@ -71,6 +72,10 @@ module.exports = {
     //   filename: "[name].[contenthash].css",
     //   chunkFilename: "[id].[contenthash].css",
     // }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+    }),
   ],
 
   watch: false,

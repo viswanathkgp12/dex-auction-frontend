@@ -2,7 +2,6 @@ import "../style/style.css";
 import "../style/bootstrap.min.css";
 import "../style/jquery.timepicker.css";
 
-import $ from "jquery";
 import { getOpByHashTzkt } from "../utils/api";
 import { sleep } from "../utils/sleep";
 import {

@@ -1,8 +1,3 @@
-import "../style/style.css";
-import "../style/bootstrap.min.css";
-import "../style/jquery.timepicker.css";
-
-import $ from "jquery";
 import { connectWallet, checkAvailability, checkAndSetKeys } from "../common";
 
 /**

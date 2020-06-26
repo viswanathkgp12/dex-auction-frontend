@@ -63,6 +63,10 @@ module.exports = {
         "view-auction.html"
       ),
     }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+    }),
   ],
 
   watch: true,

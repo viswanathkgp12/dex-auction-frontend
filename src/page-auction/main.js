@@ -1,4 +1,3 @@
-import $ from "jquery";
 import { getOpByHashTzkt } from "../utils/api";
 import { sleep } from "../utils/sleep";
 import { startAuction, bid } from "../utils/thanos";
