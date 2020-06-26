@@ -62,10 +62,13 @@ async function createAuctionInstance(assetName, auctionType) {
 
   console.log("Create Instance succeeded with: ", opHash);
 
-  const { contractInstance } = await pollForAuctionAddress(opHash);
+  const { err, contractInstance } = await pollForAuctionAddress(opHash);
   console.log("Contract created at: ", contractInstance);
 
-  return contractInstance;
+  return {
+    err,
+    contractInstance,
+  };
 }
 
 async function pollForAuctionAddress(opHash, retries = 10) {
@@ -161,7 +164,16 @@ $(".prodct").on("click", async function () {
 window.chooseAuction = async function () {
   // const auctionType = ;
   const assetName = $("#assetName").val();
-  contractAddress = await createAuctionInstance(assetName, "english");
+  const result = await createAuctionInstance(assetName, "english");
+
+  if (result.err) {
+    return;
+  }
+
+  contractAddress = result.contractInstance;
+  if (!contractAddress) {
+    return;
+  }
 
   // UI
   $(".tabHead ul li.two").removeClass("bold");
