@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack --config webpack.prod.js --mode production",
-    "start": "http-server dist --port ${PORT:-8080}"
+    "start": "http-server dist --port ${PORT:-80}"
   },
   "author": "",
   "license": "ISC",
