@@ -37,7 +37,7 @@
 
             <div class="input-group">
               <label for="name">Description of the Product</label>
-              <textarea class="focus" rows="1"></textarea>
+              <textarea class="focus" rows="1" id="assetDescription"></textarea>
             </div>
 
             <div class="fileUpld">
@@ -47,6 +47,8 @@
               <input type="file" name="assetImage" id="myFile" />
             </div>
           </div>
+
+          <p class="assetDetailsError"></p>
 
           <input type="button" class="sbmt first" value="Next" />
         </form>
@@ -126,8 +128,11 @@
           </div>
         </div>
 
+        <p id="chooseAuctionResult"></p>
+
         <input
           type="button"
+          id="chooseAuctionBtn"
           class="sbmt scnd"
           value="Next"
           onclick="chooseAuction()"
@@ -145,7 +150,7 @@
           <div class="input-group">
             <label for="name">Reserve Price</label>
             <input
-              type="text"
+              type="number"
               class="focus"
               name="reservePrice"
               id="reservePrice"
@@ -154,7 +159,12 @@
 
           <div class="input-group">
             <label for="name">Minimum Increment</label>
-            <input type="text" class="focus" name="increment" id="increment" />
+            <input
+              type="number"
+              class="focus"
+              name="increment"
+              id="increment"
+            />
           </div>
 
           <div class="input-group date">
@@ -185,6 +195,8 @@
               placeholder="M"
             />
           </div>
+
+          <p class="configureAuctionError"></p>
 
           <input
             type="button"

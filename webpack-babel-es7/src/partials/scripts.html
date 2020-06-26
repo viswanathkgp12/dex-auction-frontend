@@ -147,15 +147,6 @@ $("#testDiv").slimscroll({
   height: ttl,
 });
 
-$(".sbmt.first").on("click", function () {
-  $(".tabHead ul li.two").addClass("active");
-  $(".tabHead ul li.two").addClass("bold");
-
-  $("#two").addClass("active");
-  $("#one").removeClass("active");
-  $(".one").removeClass("bold");
-});
-
 $(function () {
   $(".acc__title").click(function (j) {
     var dropDown = $(this).closest(".acc__card").find(".acc__panel");
@@ -196,7 +187,7 @@ $(".checkmark").on("click", function () {
 });
 
 $(function () {
-  $("#datepicker").datepicker();
+  $("#datepicker").datepicker({ minDate: 0 });
 });
 
 $("#timepicker").timepicker();

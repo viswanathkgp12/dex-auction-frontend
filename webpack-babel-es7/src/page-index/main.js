@@ -55,6 +55,7 @@ let contractAddress;
 
 async function createAuctionInstance(assetName, auctionType) {
   const { err, opHash } = await createInstance(0, assetName, "english");
+  $("#chooseAuctionResult").html(`OpHash: ${opHash}`);
   if (err) {
     console.log("Error occured");
     return;
@@ -158,12 +159,41 @@ $(".prodct").on("click", async function () {
   $(".menuBox ul li.prodct").addClass("active");
 });
 
-window.chooseAuction = async function () {
-  // const auctionType = ;
+// Fill asset name and click
+$(".sbmt.first").on("click", function () {
   const assetName = $("#assetName").val();
+  const assetNameRegex = /^([A-Za-z0-9])+$/;
+
+  if (assetName.length < 1 || !assetNameRegex.test(assetName)) {
+    $(".assetDetailsError").html("Please enter valid asset name");
+    return;
+  }
+
+  $(".tabHead ul li.two").addClass("active");
+  $(".tabHead ul li.two").addClass("bold");
+
+  $("#two").addClass("active");
+  $("#one").removeClass("active");
+  $(".one").removeClass("bold");
+});
+
+/**
+ * -------------------------
+ * Choose Auction
+ * -------------------------
+ */
+
+window.chooseAuction = async function () {
+  const assetName = $("#assetName").val();
+
+  // const auctionType = ;
+
+  $("#chooseAuctionBtn").prop("disabled", true);
   const result = await createAuctionInstance(assetName, "english");
 
   if (result.err) {
+    $("#chooseAuctionResult").html(result.err);
+    $("#chooseAuctionBtn").prop("disabled", false);
     return;
   }
 
@@ -172,7 +202,10 @@ window.chooseAuction = async function () {
     return;
   }
 
+  $("#chooseAuctionResult").html(`Contract Address: ${contractAddress}`);
+
   // UI
+  $("#chooseAuctionBtn").prop("disabled", false);
   $(".tabHead ul li.two").removeClass("bold");
 
   $(".tabHead ul li.three").addClass("active");
@@ -182,6 +215,12 @@ window.chooseAuction = async function () {
   $("#two").removeClass("active");
 };
 
+/**
+ * ------------------------------
+ * Configure Auction
+ * ------------------------------
+ */
+
 window.configureAuction = async function () {
   const reservePrice = $("#reservePrice").val();
   const increment = $("#increment").val();
@@ -189,6 +228,31 @@ window.configureAuction = async function () {
   const timepicker = $("#timepicker").val();
   const waithour = $("#waithour").val();
   const waitmin = $("#waitmin").val();
+
+  if (isNaN(reservePrice)) {
+    $(".configureAuctionError").html("Reserve price should be integer");
+    return;
+  }
+
+  if (isNaN(increment)) {
+    $(".configureAuctionError").html("Min. increment should be integer");
+    return;
+  }
+
+  if (!timepicker) {
+    $(".configureAuctionError").html("Please select time");
+    return;
+  }
+
+  if (!datepicker) {
+    $(".configureAuctionError").html("Please select date");
+    return;
+  }
+
+  if (!waithour || !waitmin) {
+    $(".configureAuctionError").html("Please enter vlid wait time");
+    return;
+  }
 
   const month = datepicker.split("/")[0];
   const date = datepicker.split("/")[1];
