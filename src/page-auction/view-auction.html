@@ -2,6 +2,12 @@
 <html>
   <head>
     <%= require('html-loader!../partials/header.html') %>
+    <style>
+      .carthagelink:hover,
+      .carthagelink:visited {
+        color: #0082d3;
+      }
+    </style>
   </head>
 
   <body class="inside">
@@ -46,17 +52,17 @@
           <ul class="nav nav-tabs">
             <li class="active">
               <a data-toggle="tab" href="#home"
-                ><span> Upcoming </span><i>12</i></a
+                ><span> Upcoming </span><i>1</i></a
               >
             </li>
             <li>
               <a data-toggle="tab" href="#menu1"
-                ><span> Ongoing </span><i>8</i></a
+                ><span> Ongoing </span><i>0</i></a
               >
             </li>
             <li>
               <a data-toggle="tab" href="#menu2"
-                ><span> Completed </span><i>3</i></a
+                ><span> Completed </span><i>0</i></a
               >
             </li>
           </ul>
@@ -73,7 +79,17 @@
                   <div class="left">
                     <h1>Russian Slave Sculpture</h1>
                     <h2>English Auction</h2>
-                    <h3>Owner: <span>123456789101234567890123456789</span></h3>
+                    <h3>
+                      Owner:
+                      <span
+                        ><a
+                          class="carthagelink"
+                          href="https://carthage.tzkt.io/tz1hz9bEYyYYLjeqhLeCKB2rr1fcL49rEZ3o"
+                          target="blank"
+                          >tz1hz9bEYyYYLjeqhLeCKB2rr1fcL49rEZ3o</a
+                        ></span
+                      >
+                    </h3>
                     <div class="paragrph">
                       <p>
                         Head of King Sargon of Akkadwas, the first ruler of the
@@ -83,13 +99,13 @@
                   </div>
 
                   <div class="right">
-                    <h3>Reserve Price <span>$1,00,000</span></h3>
-                    <h4>Min. Increment : $5,000</h4>
+                    <h3>Reserve Price <span>1,00,000 XTZ</span></h3>
+                    <h4>Min. Increment : 5,000 XTZ</h4>
 
                     <ul>
                       <li>
                         <span>Start Date <cite>2 days left</cite></span>
-                        <span>12th August, 8:00pm</span>
+                        <span>29th June, 8:00pm</span>
                       </li>
 
                       <li>
@@ -98,14 +114,18 @@
                       </li>
                     </ul>
 
-                    <input type="button" class="btn shortlistbtn" value="Shortlist" />
+                    <input
+                      type="button"
+                      class="btn shortlistbtn"
+                      value="Shortlist"
+                    />
                   </div>
                 </div>
               </div>
               <!-- prod-card -->
 
               <!-- prod-card -->
-              <div class="prod-card">
+              <!-- <div class="prod-card">
                 <div class="lt">
                   <img src="<%= require('../images/Image-8.jpg') %>" />
                 </div>
@@ -114,7 +134,7 @@
                   <div class="left">
                     <h1>Russian Slave Sculpture</h1>
                     <h2>English Auction</h2>
-                    <h3>Owner: <span>123456789101234567890123456789</span></h3>
+                    <h3>Owner: <span><a class="carthagelink" href="https://carthage.tzkt.io/tz1hz9bEYyYYLjeqhLeCKB2rr1fcL49rEZ3o" target="blank">tz1hz9bEYyYYLjeqhLeCKB2rr1fcL49rEZ3o</a></span></h3>
                     <div class="paragrph">
                       <p>
                         Head of King Sargon of Akkadwas, the first ruler of the
@@ -124,13 +144,13 @@
                   </div>
 
                   <div class="right">
-                    <h3>Reserve Price <span>$1,00,000</span></h3>
-                    <h4>Min. Increment : $5,000</h4>
+                    <h3>Reserve Price <span>1,00,000 XTZ</span></h3>
+                    <h4>Min. Increment : 5,000 XTZ</h4>
 
                     <ul>
                       <li>
                         <span>Start Date <cite>2 days left</cite></span>
-                        <span>12th August, 8:00pm</span>
+                        <span>29th June, 8:00pm</span>
                       </li>
 
                       <li>
@@ -142,11 +162,11 @@
                     <input type="button" class="btn shortlistbtn" value="Shortlist" />
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- prod-card -->
 
               <!-- prod-card -->
-              <div class="prod-card">
+              <!-- <div class="prod-card">
                 <div class="lt">
                   <img src="<%= require('../images/Image-8.jpg') %>" />
                 </div>
@@ -155,7 +175,7 @@
                   <div class="left">
                     <h1>Russian Slave Sculpture</h1>
                     <h2>English Auction</h2>
-                    <h3>Owner: <span>123456789101234567890123456789</span></h3>
+                    <h3>Owner: <span><a class="carthagelink" href="https://carthage.tzkt.io/tz1hz9bEYyYYLjeqhLeCKB2rr1fcL49rEZ3o" target="blank">tz1hz9bEYyYYLjeqhLeCKB2rr1fcL49rEZ3o</a></span></h3>
                     <div class="paragrph">
                       <p>
                         Head of King Sargon of Akkadwas, the first ruler of the
@@ -165,13 +185,13 @@
                   </div>
 
                   <div class="right">
-                    <h3>Reserve Price <span>$1,00,000</span></h3>
-                    <h4>Min. Increment : $5,000</h4>
+                    <h3>Reserve Price <span>1,00,000 XTZ</span></h3>
+                    <h4>Min. Increment : 5,000 XTZ</h4>
 
                     <ul>
                       <li>
                         <span>Start Date <cite>2 days left</cite></span>
-                        <span>12th August, 8:00pm</span>
+                        <span>29th June, 8:00pm</span>
                       </li>
 
                       <li>
@@ -183,7 +203,7 @@
                     <input type="button" class="btn shortlistbtn" value="Shortlist" />
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- prod-card -->
             </div>
 
