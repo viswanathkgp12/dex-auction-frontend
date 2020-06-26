@@ -72,7 +72,7 @@ export async function configureAuction(
 export async function startAuction(address) {
   try {
     const auction = await fetchContract(tzs, address);
-    const { opHash } = await auction.methods.startAuction().send();
+    const { opHash } = await auction.methods.startAuction({}).send();
     console.log("operation hash for start auction: ", opHash);
     return {
       err: null,
@@ -87,7 +87,7 @@ export async function startAuction(address) {
 export async function cancelAuction(address) {
   try {
     const auction = await fetchContract(tzs, address);
-    const { opHash } = await auction.methods.cancelAuction().send();
+    const { opHash } = await auction.methods.cancelAuction({}).send();
     console.log("operation hash for cancel auction: ", opHash);
     return {
       err: null,
@@ -102,7 +102,7 @@ export async function cancelAuction(address) {
 export async function resolveAuction(address) {
   try {
     const auction = await fetchContract(tzs, address);
-    const { opHash } = await auction.methods.resolveAuction().send();
+    const { opHash } = await auction.methods.resolveAuction({}).send();
     console.log("operation hash for resolve auction: ", opHash);
     return {
       err: null,
@@ -114,10 +114,10 @@ export async function resolveAuction(address) {
   }
 }
 
-export async function bid(address) {
+export async function bid(address, amount) {
   try {
     const auction = await fetchContract(tzs, address);
-    const { opHash } = await auction.methods.bid().send();
+    const { opHash } = await auction.methods.bid({}).send({amount});
     console.log("operation hash for bid: ", opHash);
     return {
       err: null,
