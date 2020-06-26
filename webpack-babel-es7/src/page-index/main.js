@@ -176,12 +176,12 @@ window.chooseAuction = async function () {
 
   // const auctionType = ;
 
-  $("#chooseAuctionBtn").prop("disabled", true);
+  $("#chooseAuctionBtn").prop("disabled", true).css("opacity", 0.5);
   const result = await createAuctionInstance(assetName, "english");
 
   if (result.err) {
     $("#chooseAuctionResult").html(result.err);
-    $("#chooseAuctionBtn").prop("disabled", false);
+    $("#chooseAuctionBtn").prop("disabled", false).css("opacity", 1);
     return;
   }
 
@@ -193,7 +193,7 @@ window.chooseAuction = async function () {
   $("#chooseAuctionResult").html(`Contract Address: ${contractAddress}`);
 
   // UI
-  $("#chooseAuctionBtn").prop("disabled", false);
+  $("#chooseAuctionBtn").prop("disabled", false).css("opacity", 1);
   $(".tabHead ul li.two").removeClass("bold");
 
   $(".tabHead ul li.three").addClass("active");
