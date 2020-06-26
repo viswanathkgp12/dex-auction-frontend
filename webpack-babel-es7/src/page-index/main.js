@@ -3,7 +3,7 @@ import "../style/bootstrap.min.css";
 import "../style/jquery.timepicker.css";
 
 import $ from "jquery";
-import { getOpByHashBcd, getOpByHashTzkt } from "../utils/api";
+import { getOpByHashTzkt } from "../utils/api";
 import { sleep } from "../utils/sleep";
 import {
   isAvailable,
@@ -47,14 +47,14 @@ async function connectWallet() {
 
 /**
  * ---------------------------
- * Contract
+ * Auction Contract
  * ---------------------------
  */
 
 let contractAddress;
 
 async function createAuctionInstance(assetName, auctionType) {
-  const { err, opHash } = await createInstance(0, assetName, "english");
+  const { err, opHash } = await createInstance(0, assetName, auctionType);
   $("#chooseAuctionResult").html(`OpHash: ${opHash}`);
   if (err) {
     console.log("Error occured");
@@ -77,19 +77,6 @@ async function pollForAuctionAddress(opHash, retries = 10) {
         contractInstance: null,
       };
     }
-
-    // const opData = await getOpByHashBcd(opHash);
-    // console.log("BCD Operation data received: ", opData);
-
-    // if (opData !== null && opData.length > 0 && opData.length == 2) {
-    //   const status = opData[1].status;
-    //   if (status === "applied") {
-    //     return {
-    //       err: null,
-    //       contractInstance: opData[1].destination,
-    //     };
-    //   }
-    // }
 
     const tzktOpdata = await getOpByHashTzkt(opHash);
     console.log("TZKT Operation data received: ", tzktOpdata);
@@ -117,6 +104,7 @@ async function pollForAuctionAddress(opHash, retries = 10) {
   }
 }
 
+// Configure auction
 async function configureAuctionInstance(
   contractInstance,
   increment,
