@@ -1,49 +1,8 @@
-import "../style/style.css";
-import "../style/bootstrap.min.css";
-import "../style/jquery.timepicker.css";
-
 import $ from "jquery";
 import { getOpByHashTzkt } from "../utils/api";
 import { sleep } from "../utils/sleep";
-import {
-  isAvailable,
-  connect,
-  getWalletInfo,
-  startAuction,
-  bid,
-} from "../utils/thanos";
-
-/**
- * --------------------------------
- * Wallet
- * --------------------------------
- */
-
-// Wallet State
-const NOT_CONNECTED = "not-connected";
-const CONNECTING = "connecting";
-const CONNECTED = "connected";
-
-let walletState = NOT_CONNECTED;
-
-async function checkAvailability() {
-  console.log("Checking thanos wallet availability ...");
-  const available = await isAvailable();
-  if (!available) {
-    alert("Thanos Wallet is not available");
-  }
-}
-
-async function connectWallet() {
-  console.log("Connecting to RPC ...");
-  walletState = CONNECTING;
-  await connect();
-
-  console.log("Fetch wallet info ...");
-  const { tezos, address } = await getWalletInfo();
-  console.log("Address of wallet: ", address);
-  walletState = CONNECTED;
-}
+import { startAuction, bid } from "../utils/thanos";
+import { connectWallet, checkAvailability, checkAndSetKeys } from "../common";
 
 /**
  * ---------------------------
@@ -93,17 +52,11 @@ async function poll(opHash, retries = 10) {
     retries--;
 
     await sleep(5000);
-    return pollForAuctionAddress(opHash, retries);
+    return poll(opHash, retries);
   } catch (error) {
-    return pollForAuctionAddress(opHash, retries);
+    return poll(opHash, retries);
   }
 }
-
-/**
- * ---------------------
- * UI Bindings
- * ----------------------
- */
 
 /**
  * ---------------------
@@ -115,6 +68,8 @@ $("#prodct").on("click", async function () {
   // Check Thanos Availability
   await checkAvailability();
   await connectWallet();
+
+  checkAndSetKeys();
 
   // Open slider
   $("body").addClass("openSlide");
