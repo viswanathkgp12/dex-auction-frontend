@@ -201,9 +201,8 @@ export function checkAndSetKeys() {
 // Fill asset name and click
 $(".sbmt.first").on("click", function () {
   const assetName = $("#assetName").val();
-  const assetNameRegex = /^([A-Za-z0-9])+$/;
 
-  if (assetName.length < 1 || !assetNameRegex.test(assetName)) {
+  if (assetName.length < 1) {
     $(".assetDetailsError").html("Please enter valid asset name");
     return;
   }

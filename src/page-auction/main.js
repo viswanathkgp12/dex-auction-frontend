@@ -86,6 +86,12 @@ $(".shortlistbtn").on("click", async function () {
   await createBid(contractAddress, amount);
 });
 
+// Auctions populate
+
+let upcomingAuctionsCount = 0,
+  ongoingAuctionsCount = 0,
+  completedAuctionsCount = 0;
+
 function getAuctionType(auctionType) {
   const auctionTypeMapping = {
     english: "English Auction",
@@ -104,9 +110,19 @@ function populateAuctions(auctionJson) {
   const auctionDescription = auctionJson.assetDescription;
   const auctionReservePrice = auctionJson.auctionParams.currentBid;
   const auctionIncrement = auctionJson.auctionParams.minIncrease;
-  const auctionStartDate = "29th June, 8:00pm";
-  const timeLeft = "2 days"; // from start date
-  const auctionDuration = "1 hr 10 mins";
+  const auctionStartDate = new Date(auctionJson.startTime);
+
+  const diffTime = Math.abs(auctionStartDate - Date.now());
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const rem = diffTime - diffDays * (1000 * 60 * 60 * 24);
+  const diffHours = Math.ceil(rem / (1000 * 60 * 60));
+  const timeLeft = `${diffDays} day ${diffHours} hrs`;
+
+  const waitTime = auctionJson.waitTime;
+  const waitHours = Math.floor(waitTime / (60 * 60));
+  const waitMins = Math.ceil((waitTime - waitHours * (60 * 60)) / 60);
+
+  const auctionDuration = `${waitHours} hr ${waitMins} mins`;
   const owner = auctionJson.auctionParams.highestBidder;
 
   const auctionItemCard = `
@@ -153,10 +169,25 @@ function populateAuctions(auctionJson) {
     </div>
     `;
 
+  if (auctionStatus === "upcoming") {
+    upcomingAuctionsCount++;
+    $("#upcoming-count").html(upcomingAuctionsCount);
+  } else if (auctionStatus === "ongoing") {
+    ongoingAuctionsCount++;
+    $("#ongoing-count").html(upcomingAuctionsCount);
+  } else if (auctionStatus === "completed") {
+    completedAuctionsCount++;
+    $("#completed-count").html(upcomingAuctionsCount);
+  }
+
   $("#upcoming-list").append(auctionItemCard);
 }
 
 async function updateAuctionData() {
+  upcomingAuctionsCount = 0;
+  ongoingAuctionsCount = 0;
+  completedAuctionsCount = 0;
+
   const auctions = await getAuctions();
 
   auctions.forEach((auction) => {
