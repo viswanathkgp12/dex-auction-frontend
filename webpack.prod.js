@@ -68,10 +68,10 @@ module.exports = {
         "view-auction.html"
       ),
     }),
-    // new MiniCssExtractPlugin({
-    //   filename: "[name].[contenthash].css",
-    //   chunkFilename: "[id].[contenthash].css",
-    // }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].[contenthash].css",
+    }),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
