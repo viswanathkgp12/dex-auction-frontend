@@ -1001,6 +1001,11 @@ textarea {
   pointer-events: none;
 }
 
+.carthagelink:hover,
+.carthagelink:visited {
+  color: #0082d3;
+}
+
 /*media query*/
 
 @media all and (min-width: 320px) and (max-width: 768px) {

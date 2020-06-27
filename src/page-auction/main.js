@@ -85,3 +85,65 @@ $(".shortlistbtn").on("click", async function () {
 
   await createBid(contractAddress, amount);
 });
+
+function populateAuctions(auctionJson) {
+  const auctionName = "Russian Slave Sculpture";
+  const auctionType = "English Auction";
+  const auctionDescription = `Head of King Sargon of Akkadwas, the first ruler of the Akkadian Empire, known for his conquests of`;
+  const auctionReservePrice = `10,000`;
+  const auctionIncrement = `1000`;
+  const auctionStartDate = "29th June, 8:00pm";
+  const timeLeft = "2 days"; // from start date
+  const auctionDuration = "1 hr 10 mins";
+  const owner = "tz1hz9bEYyYYLjeqhLeCKB2rr1fcL49rEZ3o";
+
+  const auctionItemCard = `
+    <div class="prod-card">
+      <div class="lt auctionImage"><img src="src/images/Image-8.jpg" /></div>
+      <div class="rt">
+          <div class="left">
+            <h1 class="auctionName">${auctionName}</h1>
+            <h2 class="auctionType">${auctionType}</h2>
+            <h3>
+                Owner:
+                <span class="owner">
+                  <a class="carthagelink" href="https://carthage.tzkt.io/${owner}" target="blank">${owner}</a>
+                </span>
+            </h3>
+            <div class="paragrph auctionDescription">
+                <p>${auctionDescription}</p>
+            </div>
+          </div>
+          <div class="right">
+            <h3>
+                Reserve Price <span class="auctionReservePrice">${auctionReservePrice} XTZ</span>
+            </h3>
+            <h4>
+                Min. Increment : <span class="auctionIncrement">${auctionIncrement} XTZ</span>
+            </h4>
+            <ul>
+                <li>
+                  <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
+                  <span class="auctionStartDate">${auctionStartDate}</span>
+                </li>
+                <li>
+                  <span>Round Duration</span>
+                  <span class="auctionDuration">${auctionDuration}</span>
+                </li>
+            </ul>
+            <input
+                type="button"
+                class="btn shortlistbtn"
+                value="Shortlist"
+                />
+          </div>
+      </div>
+    </div>
+    `;
+
+  $("#upcoming-list").append(auctionItemCard);
+}
+
+$(document).ready(function () {
+  populateAuctions([]);
+});
