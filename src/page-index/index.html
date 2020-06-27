@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= require('html-loader!../partials/header.html') %>
+  </head>
+
+  <body class="">
+    <!-- wrp -->
+    <div class="wrp">
+      <!-- right panel -->
+      <%= require('html-loader!../partials/auctionpanel.html') %>
+      <!-- right panel -->
+      <!-- header start -->
+      <header>
+        <div class="thanos-banner">
+          Thanos Wallet not available. Install from
+          <a href="https://thanoswallet.com/download/">here</a>
+          and enable dApp interaction in wallet settings
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="logo">
+                <a href="/">
+                  <img src="/images/logo.svg" alt="logo" />
+                </a>
+              </div>
+
+              <div class="menuBox">
+                <ul>
+                  <li class="prodct"><a href="#">Auction your product</a></li>
+                  <li class="">
+                    <a href="viewauctions.html">View Auctions</a>
+                  </li>
+                  <li><a href="viewauctions.html">My Auction</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- header end -->
+
+      <!-- banner -->
+      <section class="banner">
+        <div class="container">
+          <div class="lt">
+            <h1>Auctions Are Fun, Get Ready, Set, Run.</h1>
+            <p>
+              Auction is a trading process that allows seller to identify
+              potential buyers and the prices the buyers are willing to pay.
+            </p>
+
+            <span class="pwd"
+              >Powered by
+              <a href="https://tezos.com/" target="blank">tezos</a></span
+            >
+
+            <ul>
+              <li>
+                <a href="#" class="butn prodct"
+                  ><span>Auction your product</span></a
+                >
+              </li>
+              <li class="scnd">
+                <a href="viewauctions.html" class="butn"
+                  ><span>View Auctions</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="rt">
+            <img src="/images/banner.svg" />
+          </div>
+        </div>
+      </section>
+      <!-- banner -->
+
+      <!-- trading -->
+      <section class="trading">
+        <div class="container">
+          <div class="oneLine">
+            <p>
+              Auction is a trading process that allows seller to identify
+              potential buyers and the prices the buyers are willing to pay.
+            </p>
+          </div>
+
+          <div class="tradingBox moveUp">
+            <ul>
+              <li>
+                <div class="insdTarde">
+                  <h2>English Auction</h2>
+                  <p>
+                    Auction is a trading process that allows seller to identify
+                    potential buyers and the prices the buyers are willing to
+                    pay.
+                  </p>
+                  <img src="/images/trade1.svg" />
+                </div>
+              </li>
+
+              <li>
+                <div class="insdTarde">
+                  <h2>Dutch Auction</h2>
+                  <p>
+                    Auction is a trading process that allows seller to identify
+                    potential buyers and the prices the buyers are willing to
+                    pay.
+                  </p>
+                  <img src="/images/trade2.svg" />
+                </div>
+              </li>
+
+              <li>
+                <div class="insdTarde">
+                  <h2>Sealed Bid</h2>
+                  <p>
+                    Auction is a trading process that allows seller to identify
+                    potential buyers and the prices the buyers are willing to
+                    pay.
+                  </p>
+                  <img src="/images/trade3.svg" />
+                </div>
+              </li>
+
+              <li>
+                <div class="insdTarde">
+                  <h2>Vickery</h2>
+                  <p>
+                    Auction is a trading process that allows seller to identify
+                    potential buyers and the prices the buyers are willing to
+                    pay.
+                  </p>
+                  <img src="/images/trade4.svg" />
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- trading -->
+
+      <!-- why use auction -->
+      <section class="why moveUp">
+        <div class="container">
+          <h2>Why use Auction?</h2>
+
+          <ul>
+            <li>
+              <div class="item">
+                <img src="/images/yes.svg" />
+                <h3>Transparent</h3>
+                <p>
+                  An auction is usually a process of buying and selling goods or
+                  services by offering them up for bid,
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <div class="item">
+                <img src="/images/Secure.svg" />
+                <h3>Secure</h3>
+                <p>
+                  An auction is usually a process of buying and selling goods or
+                  services by offering them up for bid,
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <div class="item">
+                <img src="/images/calendar.svg" />
+                <h3>Fast</h3>
+                <p>
+                  An auction is usually a process of buying and selling goods or
+                  services by offering them up for bid,
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <div class="item">
+                <img src="/images/ok.svg" />
+                <h3>Cheaper</h3>
+                <p>
+                  An auction is usually a process of buying and selling goods or
+                  services by offering them up for bid,
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <!-- why use auction -->
+    </div>
+    <!-- wrp -->
+
+    <lottie-player
+      class="loader"
+      src="/script/410-lego-loader.json"
+      background="#3490dc"
+      speed="1"
+      style="width: 200px; height: 200px;"
+      loop
+      autoplay
+    ></lottie-player>
+
+    <script src="/script/jquery.min.js"></script>
+    <script src="/script/bootstrap.min.js"></script>
+    <script src="/script/animations.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="script/jquery.slimscroll.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="/script/custom.js"></script>
+  </body>
+</html>

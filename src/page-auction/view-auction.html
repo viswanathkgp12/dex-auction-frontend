@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= require('html-loader!../partials/header.html') %>
+  </head>
+
+  <body class="inside">
+    <!-- wrp -->
+    <div class="wrp">
+      <!-- right panel -->
+      <%= require('html-loader!../partials/auctionpanel.html') %>
+      <!-- right panel -->
+
+      <!-- header start -->
+      <header>
+        <div class="thanos-banner">
+          Thanos Wallet not available. Install from
+          <a href="https://thanoswallet.com/download/">here</a>
+          and enable dApp interaction in wallet settings
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="logo">
+                <a href="/">
+                  <img src="/images/logo.svg" alt="logo" />
+                </a>
+              </div>
+
+              <div class="menuBox">
+                <ul>
+                  <li class=""><a href="#">Auction your product</a></li>
+                  <li class="active"><a href="#">View Auctions</a></li>
+                  <li><a href="#">My Auction</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- header end -->
+
+      <!-- cardBox -->
+      <section class="cardBox">
+        <div class="container">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a data-toggle="tab" href="#Upcoming"
+                ><span> Upcoming </span><i id="upcoming-count">0</i></a
+              >
+            </li>
+            <li class="">
+              <a data-toggle="tab" href="#Ongoing"
+                ><span> Ongoing </span><i id="ongoing-count">0</i></a
+              >
+            </li>
+            <li>
+              <a data-toggle="tab" href="#Completed"
+                ><span> Completed </span><i id="completed-count">0</i></a
+              >
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="Upcoming" class="tab-pane fade in active">
+              <div id="upcoming-list"></div>
+            </div>
+
+            <div id="Ongoing" class="tab-pane fade">
+              <div id="ongoing-list"></div>
+            </div>
+
+            <div id="Completed" class="tab-pane fade">
+              <div id="completed-list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- cardBox -->
+    </div>
+    <!-- wrp -->
+
+    <script src="/script/jquery.min.js"></script>
+    <script src="/script/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/script/jquery.timepicker.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/script/animations.js"></script>
+    <script src="/script/jquery.slimscroll.js"></script>
+    <script src="/script/custom.js"></script>
+  </body>
+</html>
