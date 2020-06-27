@@ -194,6 +194,10 @@ export function checkAndSetKeys() {
   $("div#three.comnTab").addClass("active");
   // $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
   // $("#configureAuctionBtn").prop("disabled", true).css("opacity", 0.5);
+
+  getContractStorage(contractAddress).then((storage) => {
+    setStorage(storage);
+  });
 }
 
 // Fill asset name and click
@@ -269,6 +273,7 @@ window.chooseAuction = async function () {
   $(".tabHead ul li.two").addClass("disabled").css("opacity", 0.5);
   $(".creatdAuctn").hide();
   $(".ldngAuctn").hide();
+  $("#tab3-auction-type").html(getAuctionType());
 };
 
 /**
@@ -289,8 +294,6 @@ function getAuctionType() {
 }
 
 window.configureAuction = async function () {
-  $("#tab3-auction-type").html(getAuctionType());
-
   const reservePrice = $("#reservePrice").val();
   const increment = $("#increment").val();
   const datepicker = $("#datepicker").val();
@@ -389,6 +392,7 @@ window.configureAuction = async function () {
     starttime,
     waittime
   );
+
   const storage = await getContractStorage(contractAddress);
   setStorage(storage);
   await submitForm();
@@ -406,7 +410,7 @@ window.setAuctionType = function (type) {
 
 async function submitForm() {
   $("form#auction-details-form").submit(function (e) {
-    e.preventDefault();
+    // e.preventDefault();
   });
 }
 
