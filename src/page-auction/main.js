@@ -88,7 +88,7 @@ $(".shortlistbtn").on("click", async function () {
 
 function populateAuctions(auctionJson) {
   const auctionStatus = auctionJson.auctionStatus;
-  const auctionName = auctionJson.auctionName;
+  const auctionName = auctionJson.assetName;
   const auctionType = auctionJson.auctionType;
   const auctionDescription = auctionJson.assetDescription;
   const auctionReservePrice = auctionJson.auctionParams.currentBid;
