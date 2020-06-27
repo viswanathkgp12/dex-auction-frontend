@@ -86,10 +86,21 @@ $(".shortlistbtn").on("click", async function () {
   await createBid(contractAddress, amount);
 });
 
+function getAuctionType(auctionType) {
+  const auctionTypeMapping = {
+    english: "English Auction",
+    dutch: "Dutch Auction",
+    vickery: "Vickery",
+    sealedbid: "Sealed Bid",
+  };
+
+  return auctionTypeMapping[auctionType];
+}
+
 function populateAuctions(auctionJson) {
   const auctionStatus = auctionJson.auctionStatus;
   const auctionName = auctionJson.assetName;
-  const auctionType = auctionJson.auctionType;
+  const auctionType = getAuctionType(auctionJson.auctionType);
   const auctionDescription = auctionJson.assetDescription;
   const auctionReservePrice = auctionJson.auctionParams.currentBid;
   const auctionIncrement = auctionJson.auctionParams.minIncrease;
