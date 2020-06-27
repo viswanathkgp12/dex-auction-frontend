@@ -34,3 +34,20 @@ export async function getOpByHashTzkt(hash) {
     return res.data;
   });
 }
+
+// Backend URL
+const BACKEND_BASE_URL = "http://54.172.0.221:8080";
+
+export async function getAuctions() {
+  const api = axios.create({
+    baseURL: BACKEND_BASE_URL,
+    timeout: 3000,
+    responseType: "json",
+  });
+  return api.get(`/auctions`).then((res) => {
+    if (res.status != 200) {
+      throw new RequestFailedError(res);
+    }
+    return res.data;
+  });
+}

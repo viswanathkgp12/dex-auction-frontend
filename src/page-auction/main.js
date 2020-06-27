@@ -1,4 +1,4 @@
-import { getOpByHashTzkt } from "../utils/api";
+import { getOpByHashTzkt, getAuctions } from "../utils/api";
 import { sleep } from "../utils/sleep";
 import { startAuction, bid } from "../utils/thanos";
 import { connectWallet, checkAvailability, checkAndSetKeys } from "../common";
@@ -87,15 +87,16 @@ $(".shortlistbtn").on("click", async function () {
 });
 
 function populateAuctions(auctionJson) {
-  const auctionName = "Russian Slave Sculpture";
-  const auctionType = "English Auction";
-  const auctionDescription = `Head of King Sargon of Akkadwas, the first ruler of the Akkadian Empire, known for his conquests of`;
-  const auctionReservePrice = `10,000`;
-  const auctionIncrement = `1000`;
+  const auctionStatus = auctionJson.auctionStatus;
+  const auctionName = auctionJson.auctionName;
+  const auctionType = auctionJson.auctionType;
+  const auctionDescription = auctionJson.assetDescription;
+  const auctionReservePrice = auctionJson.auctionParams.currentBid;
+  const auctionIncrement = auctionJson.auctionParams.minIncrease;
   const auctionStartDate = "29th June, 8:00pm";
   const timeLeft = "2 days"; // from start date
   const auctionDuration = "1 hr 10 mins";
-  const owner = "tz1hz9bEYyYYLjeqhLeCKB2rr1fcL49rEZ3o";
+  const owner = auctionJson.auctionParams.highestBidder;
 
   const auctionItemCard = `
     <div class="prod-card">
@@ -144,6 +145,14 @@ function populateAuctions(auctionJson) {
   $("#upcoming-list").append(auctionItemCard);
 }
 
+async function updateAuctionData() {
+  const auctions = await getAuctions();
+
+  auctions.forEach((auction) => {
+    populateAuctions(auction);
+  });
+}
+
 $(document).ready(function () {
-  populateAuctions([]);
+  updateAuctionData();
 });
