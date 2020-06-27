@@ -233,7 +233,6 @@ export function hideSlider() {
 window.chooseAuction = async function () {
   const assetName = $("#assetName").val();
 
-  const auctionType = "english";
   localStorage.setItem("auctionType", auctionType);
 
   $("#chooseAuctionBtn").prop("disabled", true).css("opacity", 0.5);
@@ -358,3 +357,9 @@ window.configureAuction = async function () {
   $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
   $("#configureAuctionBtn").prop("disabled", true).css("opacity", 0.5);
 };
+
+let auctionType;
+
+window.setAuctionType = function(type) {
+  auctionType = type;
+}

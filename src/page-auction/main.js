@@ -91,7 +91,7 @@ function getAuctionType(auctionType) {
     english: "English Auction",
     dutch: "Dutch Auction",
     vickery: "Vickery",
-    sealedbid: "Sealed Bid",
+    sealed_bid: "Sealed Bid",
   };
 
   return auctionTypeMapping[auctionType];
