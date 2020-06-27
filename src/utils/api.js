@@ -2,6 +2,7 @@ const axios = require("axios").default;
 
 // // Better Call Dev
 const BASE_URL = "https://api.better-call.dev/v1";
+const NETWORK = "carthagenet";
 
 export async function getOpByHashBcd(hash) {
   console.log("Better call dev");
@@ -12,7 +13,7 @@ export async function getOpByHashBcd(hash) {
   });
   return api.get(`/opg/${hash}`).then((res) => {
     if (res.status != 200) {
-      throw new RequestFailedError(res);
+      throw new Error(res);
     }
     return res.data;
   });
@@ -29,7 +30,7 @@ export async function getOpByHashTzkt(hash) {
   });
   return api.get(`/operations/${hash}`).then((res) => {
     if (res.status != 200) {
-      throw new RequestFailedError(res);
+      throw new Error(res);
     }
     return res.data;
   });
@@ -45,8 +46,23 @@ export async function getAuctions() {
     responseType: "json",
   });
   return api.get(`/auctions`).then((res) => {
-    if (res.status != 200) {
-      throw new RequestFailedError(res);
+    if (res.status !== 200) {
+      throw new Error(res);
+    }
+    return res.data;
+  });
+}
+
+export async function getContractStorage(address) {
+  const api = axios.create({
+    baseURL: BASE_URL,
+    timeout: 2000,
+    responseType: "json",
+  });
+
+  return api.get(`/contract/${NETWORK}/${address}/storage`).then((res) => {
+    if (res.status !== 200) {
+      throw new Error(res);
     }
     return res.data;
   });

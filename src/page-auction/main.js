@@ -123,7 +123,7 @@ function populateAuctions(auctionJson) {
   const waitMins = Math.ceil((waitTime - waitHours * (60 * 60)) / 60);
 
   const auctionDuration = `${waitHours} hr ${waitMins} mins`;
-  const owner = auctionJson.auctionParams.highestBidder;
+  const owner = auctionJson.owner;
 
   const auctionItemCard = `
     <div class="prod-card">

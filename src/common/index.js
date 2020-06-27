@@ -2,7 +2,7 @@ import "../style/style.css";
 import "../style/bootstrap.min.css";
 import "../style/jquery.timepicker.css";
 
-import { getOpByHashTzkt } from "../utils/api";
+import { getOpByHashTzkt, getContractStorage } from "../utils/api";
 import { sleep } from "../utils/sleep";
 import {
   isAvailable,
@@ -24,6 +24,7 @@ const CONNECTING = "connecting";
 const CONNECTED = "connected";
 
 let walletState = NOT_CONNECTED;
+let walletAddress;
 
 export async function checkAvailability() {
   console.log("Checking thanos wallet availability ...");
@@ -42,6 +43,7 @@ export async function connectWallet() {
   const { tezos, address } = await getWalletInfo();
   console.log("Address of wallet: ", address);
   walletState = CONNECTED;
+  walletAddress = address;
 }
 
 /**
@@ -54,7 +56,7 @@ let contractAddress;
 
 async function createAuctionInstance(assetName, auctionType) {
   const { err, opHash } = await createInstance(0, assetName, auctionType);
-  $("#chooseAuctionResult").html(`OpHash: ${opHash}`);
+  $("#chooseAuctionResult").html(`${opHash}`);
   if (err) {
     console.log("Error occured");
     return;
@@ -144,7 +146,7 @@ export function checkAndSetKeys() {
   $("li.one").addClass("bold");
   $("div#one.comnTab").addClass("active");
 
-  const auctionType = localStorage.getItem("auctionType");
+  auctionType = localStorage.getItem("auctionType");
   if (!auctionType) return;
 
   $("#auctionType").val(auctionType);
@@ -160,9 +162,9 @@ export function checkAndSetKeys() {
   $("li.two").addClass("bold");
   $("div#one.comnTab").removeClass("active");
   $("div#two.comnTab").addClass("active");
-  $(".tabHead ul li.one").addClass("disabled").css("opacity", 0.5);
-  $(".tabHead ul li.two").addClass("disabled").css("opacity", 0.5);
-  $("#chooseAuctionBtn").prop("disabled", true).css("opacity", 0.5);
+  // $(".tabHead ul li.one").addClass("disabled").css("opacity", 0.5);
+  // $(".tabHead ul li.two").addClass("disabled").css("opacity", 0.5);
+  // $("#chooseAuctionBtn").prop("disabled", true).css("opacity", 0.5);
 
   const reservePrice = localStorage.getItem("reservePrice");
   const increment = localStorage.getItem("increment");
@@ -181,7 +183,7 @@ export function checkAndSetKeys() {
   $("#datepicker").val(datepicker);
 
   if (!timepicker) return;
-  $("#datepicker").val(timepicker);
+  $("#timepicker").val(timepicker);
 
   if (!waithour) return;
   $("#waithour").val(waithour);
@@ -194,8 +196,8 @@ export function checkAndSetKeys() {
   $("li.three").addClass("bold");
   $("div#two.comnTab").removeClass("active");
   $("div#three.comnTab").addClass("active");
-  $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
-  $("#configureAuctionBtn").prop("disabled", true).css("opacity", 0.5);
+  // $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
+  // $("#configureAuctionBtn").prop("disabled", true).css("opacity", 0.5);
 }
 
 // Fill asset name and click
@@ -235,6 +237,7 @@ window.chooseAuction = async function () {
   localStorage.setItem("auctionType", auctionType);
 
   $("#chooseAuctionBtn").prop("disabled", true).css("opacity", 0.5);
+  $(".tea-sip").show();
   const result = await createAuctionInstance(assetName, auctionType);
 
   if (result.err) {
@@ -263,6 +266,7 @@ window.chooseAuction = async function () {
 
   $(".tabHead ul li.one").addClass("disabled").css("opacity", 0.5);
   $(".tabHead ul li.two").addClass("disabled").css("opacity", 0.5);
+  $(".tea-sip").hide();
 };
 
 /**
@@ -351,6 +355,9 @@ window.configureAuction = async function () {
     starttime,
     waittime
   );
+  const storage = await getContractStorage(contractAddress);
+  setStorage(storage);
+  await submitForm();
 
   hideSlider();
   $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
@@ -359,6 +366,70 @@ window.configureAuction = async function () {
 
 let auctionType;
 
-window.setAuctionType = function(type) {
+window.setAuctionType = function (type) {
   auctionType = type;
+};
+
+async function submitForm() {
+  $("form#auction-details-form").submit(function (e) {
+    e.preventDefault();
+  });
+}
+
+function setStorage(instanceStorageDetails) {
+  let assetId = "";
+  let startTime = "";
+  let waitTime = "";
+  let auctionParams = {};
+  instanceStorageDetails.children.forEach((element) => {
+    switch (element.name) {
+      // generic auction details
+      case "asset_id":
+        assetId = element.value;
+        break;
+      case "start_time":
+        startTime = element.value;
+        break;
+      case "wait_time":
+        waitTime = element.value;
+        break;
+      // English auction params
+      case "current_bid":
+        auctionParams.currentBid = element.value;
+        break;
+      case "min_increase":
+        auctionParams.minIncrease = element.value;
+        break;
+      case "highest_bidder":
+        auctionParams.highestBidder = element.value;
+        break;
+      // Dutch auction params
+      case "current_price":
+        auctionParams.currentPrice = element.value;
+        break;
+      case "reserve_price":
+        auctionParams.reservePrice = element.value;
+        break;
+      // Sealed bid auction params
+      case "participation_fee":
+        auctionParams.participationFee = element.value;
+        break;
+      case "highest_bid":
+        auctionParams.highestBid = element.value;
+        break;
+      case "highest_bidder":
+        auctionParams.highestBidder = element.value;
+        break;
+      default:
+      //
+    }
+  });
+
+  $("#assetId").val(assetId);
+  $("#auctionType").val(auctionType);
+  $("#startTime").val(startTime);
+  $("#waitTime").val(waitTime);
+  $("#auctionParams").val(JSON.stringify(auctionParams));
+  $("#userPubKey").val(walletAddress);
+  $("#contractAddress").val(contractAddress);
 }

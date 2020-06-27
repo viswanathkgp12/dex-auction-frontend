@@ -1,6 +1,6 @@
 <!-- right panel -->
 <div class="slidePanel">
-  <span class="closePanel"><img src="../images/close-icon.png" /></span>
+  <!-- <span class="closePanel"><img src="images/close-icon.png"></span> -->
   <div class="tabHead">
     <h2>Three Simple Steps to upload your auction</h2>
 
@@ -23,32 +23,61 @@
     <!-- tab 1 -->
     <div class="comnTab active" id="one">
       <div class="aucPro">
-        <form action="" class="inptForm">
-          <div id="testDiv">
+        <form
+          id="auction-details-form"
+          action="http://localhost:8080/update-auction-details"
+          class="inptForm"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="testDiv">
             <div class="input-group">
-              <label for="name">Name of the Auction Product</label>
-              <input
-                type="text"
-                class="focus"
-                name="assetName"
-                id="assetName"
-              />
+              <div class="form-group">
+                <label class="form-label" for="auctnProdct"
+                  >Name of the Auction Product</label
+                >
+                <input
+                  name="assetName"
+                  id="assetName"
+                  class="form-input focus"
+                  type="text"
+                  required
+                />
+              </div>
+              <span class="aucPro error">Required field</span>
             </div>
 
-            <div class="input-group">
-              <label for="name">Description of the Product</label>
-              <textarea class="focus" rows="1" id="assetDescription"></textarea>
+            <div class="input-group txtara">
+              <label for="name"></label>
+              <textarea
+                class="focus"
+                rows="1"
+                name="description"
+                id="assetDescription"
+                placeholder="Description of the Product"
+              ></textarea>
             </div>
 
             <div class="fileUpld">
               <h4>Drag & Drop Image</h4>
               <span>or</span>
               <cite>Browse Image</cite>
-              <input type="file" name="assetImage" id="myFile" />
+              <input type="file" name="image" id="myFile" />
             </div>
           </div>
 
-          <p class="assetDetailsError"></p>
+          <input type="text" name="assetId" id="assetId" hidden />
+          <input type="text" name="auctionType" id="auctionType" hidden />
+          <input type="text" name="startTime" id="startTime" hidden />
+          <input type="text" name="waitTime" id="waitTime" hidden />
+          <input type="text" name="auctionParams" id="auctionParams" hidden />
+          <input type="text" name="userPubKey" id="userPubKey" hidden />
+          <input
+            type="text"
+            name="contractAddress"
+            id="contractAddress"
+            hidden
+          />
 
           <input type="button" class="sbmt first" value="Next" />
         </form>
@@ -59,28 +88,27 @@
     <!-- tab 2 -->
     <div class="comnTab" id="two">
       <div class="acc">
-        <!---Auction Type---->
-
         <div class="acc__card">
-          <div class="acc__title active">
+          <div class="acc__title">
             <span>English Auction</span><cite class="slctd">Selected</cite>
           </div>
-          <div class="acc__panel" style="display: block;">
+          <div class="acc__panel">
             <p>
               An auction is usually a process of buying and selling goods or
               services by offering them up for bid,
             </p>
             <label class="checkCntr">
               <input type="checkbox" />
-              <span class="checkmark" onclick="setAuctionType('english')">Choose English Auction</span>
+              <span class="checkmark" onclick="setAuctionType('english')"
+                >Choose English Auction</span
+              >
             </label>
           </div>
         </div>
 
         <div class="acc__card">
           <div class="acc__title">
-            <span>Dutch Auction</span>
-            <cite class="slctd">Selected</cite>
+            <span>Dutch Auction</span> <cite class="slctd">Selected</cite>
           </div>
           <div class="acc__panel">
             <p>
@@ -89,15 +117,16 @@
             </p>
             <label class="checkCntr">
               <input type="checkbox" />
-              <span class="checkmark" onclick="setAuctionType('dutch')">Choose Dutch Auction</span>
+              <span class="checkmark" onclick="setAuctionType('dutch')"
+                >Choose Dutch Auction</span
+              >
             </label>
           </div>
         </div>
 
         <div class="acc__card">
           <div class="acc__title">
-            <span>Sealed Bid</span>
-            <cite class="slctd">Selected</cite>
+            <span>Sealed Bid</span> <cite class="slctd">Selected</cite>
           </div>
           <div class="acc__panel">
             <p>
@@ -106,15 +135,16 @@
             </p>
             <label class="checkCntr">
               <input type="checkbox" />
-              <span class="checkmark" onclick="setAuctionType('sealed bid')">Choose Sealed Bid Auction</span>
+              <span class="checkmark" onclick="setAuctionType('sealed bid')"
+                >Choose Sealed Bid Auction</span
+              >
             </label>
           </div>
         </div>
 
         <div class="acc__card">
           <div class="acc__title">
-            <span>Vickery Auction</span>
-            <cite class="slctd">Selected</cite>
+            <span>Vickery</span> <cite class="slctd">Selected</cite>
           </div>
           <div class="acc__panel">
             <p>
@@ -123,12 +153,12 @@
             </p>
             <label class="checkCntr">
               <input type="checkbox" />
-              <span class="checkmark" onclick="setAuctionType('vickery')">Choose Vickery Auction</span>
+              <span class="checkmark" onclick="setAuctionType('vickery')"
+                >Choose Vickery Auction</span
+              >
             </label>
           </div>
         </div>
-
-        <p id="chooseAuctionResult"></p>
 
         <input
           type="button"
@@ -137,6 +167,27 @@
           value="Next"
           onclick="chooseAuction()"
         />
+      </div>
+
+      <div class="ldngAuctn">
+        <lottie-player
+          class="lottie"
+          src="script/lf30_editor_lCQXDf.json"
+          background="transparent"
+          speed="1"
+          style="width: 200px; height: 200px;"
+          loop
+          autoplay
+        ></lottie-player>
+        <div class="txt tea-sip">
+          <h2>Take a Sip!</h2>
+          <p>while we're creating your auction house in background</p>
+        </div>
+      </div>
+
+      <div class="creatdAuctn">
+        <h3>Operation Hash</h3>
+        <span id="chooseAuctionResult">54d8asd48as5d4as8d5a4d8asd</span>
       </div>
     </div>
     <!-- tab 2 -->
@@ -148,33 +199,60 @@
           <h3>English Auction</h3>
 
           <div class="input-group">
-            <label for="name">Reserve Price</label>
-            <input
-              type="number"
-              class="focus"
-              name="reservePrice"
-              id="reservePrice"
-            />
+            <div class="form-group">
+              <input
+                class="form-input focus requFild"
+                placeholder="Reserve Price"
+                name="reservePrice"
+                id="reservePrice"
+                type="number"
+                required
+              />
+              <i class="toolTp">i<span>Lorem Ipsum dummy text</span></i>
+            </div>
+            <span class="Reserve error">Required field</span>
           </div>
 
           <div class="input-group">
-            <label for="name">Minimum Increment</label>
-            <input
-              type="number"
-              class="focus"
-              name="increment"
-              id="increment"
-            />
+            <div class="form-group">
+              <input
+                type="number"
+                name="increment"
+                id="increment"
+                class="form-input focus requFild"
+                placeholder="Minimum Increment"
+                required
+              />
+              <i class="toolTp">i<span>Lorem Ipsum dummy text</span></i>
+            </div>
+            <span class="Increment error">Required field</span>
           </div>
 
-          <div class="input-group date">
-            <label for="name">Start Date</label>
-            <input type="text" class="focus" name="date" id="datepicker" />
+          <div class="input-group">
+            <div class="form-group">
+              <input
+                id="datepicker"
+                class="form-input focus requFild"
+                placeholder="Start Date"
+                type="text"
+                required
+              />
+              <i class="toolTp">i<span>Lorem Ipsum dummy text</span></i>
+            </div>
+            <span class="Date error">Required field</span>
           </div>
 
-          <div class="input-group time">
-            <label for="name">Start Time</label>
-            <input type="text" class="focus" name="time" id="timepicker" />
+          <div class="input-group">
+            <div class="form-group">
+              <input
+                class="form-input focus requFild timepicker"
+                placeholder="Start Time"
+                type="text"
+                required
+              />
+              <i class="toolTp">i<span>Lorem Ipsum dummy text</span></i>
+            </div>
+            <span class="Time error">Required field</span>
           </div>
 
           <div class="input-group round">
@@ -196,11 +274,11 @@
             />
           </div>
 
-          <p class="configureAuctionError"></p>
+          <input type="button" class="sbmt cancel" value="Cancel" />
 
           <input
             type="button"
-            class="sbmt third"
+            class="sbmt finish"
             id="configureAuctionBtn"
             value="Finish"
             onclick="configureAuction()"
