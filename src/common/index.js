@@ -303,6 +303,7 @@ window.chooseAuction = async function () {
   $("#chooseAuctionBtn").prop("disabled", true).css("opacity", 0.5);
   $(".ldngAuctn").show();
 
+  await checkAvailability();
   const result = await createAuctionInstance(assetName, auctionType);
 
   if (!result) {
@@ -451,6 +452,7 @@ window.configureAuction = async function () {
   console.log(contractAddress, increment, reservePrice, starttime, waittime);
 
   try {
+    await checkAvailability();
     const opHash = await configureAuctionInstance(
       contractAddress,
       increment,

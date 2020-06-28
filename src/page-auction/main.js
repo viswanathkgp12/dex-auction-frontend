@@ -10,6 +10,7 @@ import { connectWallet, checkAvailability, checkAndSetKeys } from "../common";
  */
 
 async function createBid(contractAddress, amount) {
+  await checkAvailability();
   await startAuction(contractAddress);
   const { err, opHash } = await bid(contractAddress, amount);
   if (err) {
@@ -100,6 +101,7 @@ $("#prodct").on("click", async function () {
 window.shortlistAuction = async function shortlistAuction() {
   console.log("---------------");
   // Check Thanos Availability
+  await checkAvailability();
   await connectWallet();
 
   const contractAddress = "KT19uwQwQjeqgH9tyrzWFEHeiqBVChVVfZB1";
