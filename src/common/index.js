@@ -139,6 +139,8 @@ export function checkAndSetKeys() {
   if (!assetName) return;
 
   $("#auctnProdct").val(assetName);
+  $("#auctnProdct").addClass("filled");
+  $("#aucProParent").addClass("focused");
   $("li.one").addClass("active");
   $("li.one").addClass("bold");
   $("div#one.comnTab").addClass("active");

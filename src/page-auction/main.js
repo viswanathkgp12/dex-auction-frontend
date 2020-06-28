@@ -63,12 +63,34 @@ async function poll(opHash, retries = 10) {
  * ----------------------
  */
 
+function myFunction() {
+  var x = document.getElementById("myFile");
+  var txt = "";
+  if ("files" in x) {
+    if (x.files.length == 0) {
+      txt = "Select one or more files.";
+    } else {
+      for (var i = 0; i < x.files.length; i++) {
+        txt += "<br><strong>" + (i + 1) + ". file</strong><br>";
+        var file = x.files[i];
+        if ("name" in file) {
+          //txt += "name: " + file.name + "<br>";
+          element.classList.add("mystyle");
+        }
+      }
+    }
+  }
+
+  document.getElementById("fileError").innerHTML = txt;
+}
+
 $("#prodct").on("click", async function () {
   // Check Thanos Availability
   await checkAvailability();
   await connectWallet();
 
   checkAndSetKeys();
+  myFunction();
 
   // Open slider
   $("body").addClass("openSlide");
@@ -108,9 +130,15 @@ function populateAuctions(auctionJson) {
   const auctionName = auctionJson.assetName;
   const auctionType = getAuctionType(auctionJson.auctionType);
   const auctionDescription = auctionJson.assetDescription;
-  const auctionReservePrice = auctionJson.auctionParams.currentBid;
-  const auctionIncrement = auctionJson.auctionParams.minIncrease;
+  const auctionReservePrice = auctionJson.auctionParams.reservePrice;
+  const auctionIncrement = auctionJson.auctionParams.currentPrice;
   const auctionStartDate = new Date(auctionJson.startTime);
+  const assetImageFileName = auctionJson.assetImageFileName;
+
+  const imgUrl =
+    assetImageFileName == ""
+      ? ""
+      : "http://54.172.0.221:8080/images/${assetImageFileName}";
 
   const diffTime = Math.abs(auctionStartDate - Date.now());
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
@@ -118,16 +146,24 @@ function populateAuctions(auctionJson) {
   const diffHours = Math.ceil(rem / (1000 * 60 * 60));
   const timeLeft = `${diffDays} day ${diffHours} hrs`;
 
-  const waitTime = auctionJson.waitTime;
+  const waitTime = auctionJson.roundTime;
   const waitHours = Math.floor(waitTime / (60 * 60));
   const waitMins = Math.ceil((waitTime - waitHours * (60 * 60)) / 60);
 
   const auctionDuration = `${waitHours} hr ${waitMins} mins`;
-  const owner = auctionJson.owner;
+  let owner;
+
+  if (auctionStatus == "upcoming") {
+    owner = auctionJson.seller;
+  } else if (auctionStatus == "ongoing") {
+    owner = auctionJson.seller;
+  } else if (auctionStatus == "completed") {
+    owner = auctionJson.buyer;
+  }
 
   const auctionItemCard = `
     <div class="prod-card">
-      <div class="lt auctionImage"><img src="src/images/Image-8.jpg" /></div>
+      <div class="lt auctionImage"><img alt="bid-item-image" src="${imgUrl}" /></div>
       <div class="rt">
           <div class="left">
             <h1 class="auctionName">${auctionName}</h1>
@@ -170,17 +206,17 @@ function populateAuctions(auctionJson) {
     </div>
     `;
 
-  if (auctionStatus === "upcoming") {
+  if (auctionStatus == "upcoming") {
     upcomingAuctionsCount++;
     $("#upcoming-count").html(upcomingAuctionsCount);
     $("#upcoming-list").append(auctionItemCard);
-  } else if (auctionStatus === "ongoing") {
+  } else if (auctionStatus == "ongoing") {
     ongoingAuctionsCount++;
-    $("#ongoing-count").html(upcomingAuctionsCount);
+    $("#ongoing-count").html(ongoingAuctionsCount);
     $("#ongoing-list").append(auctionItemCard);
-  } else if (auctionStatus === "completed") {
+  } else if (auctionStatus == "completed") {
     completedAuctionsCount++;
-    $("#completed-count").html(upcomingAuctionsCount);
+    $("#completed-count").html(completedAuctionsCount);
     $("#completed-list").append(auctionItemCard);
   }
 }
