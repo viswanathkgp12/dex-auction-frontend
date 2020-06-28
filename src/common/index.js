@@ -367,7 +367,7 @@ window.configureAuction = async function () {
   tzOffsetHours = tzOffsetHours < 10 ? "0" + tzOffsetHours : tzOffsetHours;
 
   const isAM = timepicker.includes("AM");
-  console.log(timepicker.slice(0, -3))
+  console.log(timepicker.slice(0, -3));
   if (isAM) {
     let hour = timepicker.split(":")[0];
     const min = timepicker.slice(0, -3).split(":")[1];
@@ -395,7 +395,9 @@ window.configureAuction = async function () {
 
   const storage = await getContractStorage(contractAddress);
   setStorage(storage);
-  await submitForm();
+
+  console.log("submitting form");
+  submitForm();
 
   hideSlider();
   $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
@@ -408,10 +410,8 @@ window.setAuctionType = function (type) {
   auctionType = type;
 };
 
-async function submitForm() {
-  $("form#auction-details-form").submit(function (e) {
-    // e.preventDefault();
-  });
+function submitForm() {
+  $("form#auction-details-form").submit();
 }
 
 function setStorage(instanceStorageDetails) {
@@ -476,6 +476,10 @@ $(document).ready(function () {
   // Hide animations
   $(".ldngAuctn").hide();
   $(".creatdAuctn").hide();
+
+  $(document).on("submit", "#auction-details-form", function () {
+    return false;
+  });
 
   isAvailable().then((available) => {
     if (available) {
