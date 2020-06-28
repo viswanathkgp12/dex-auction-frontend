@@ -228,6 +228,19 @@ export function hideSlider() {
   $("body").removeClass("openSlide");
   $(".menuBox ul li.prodct").removeClass("active");
   $("body").addClass("overlaLoader");
+
+  // setTimeout(() => {
+  //   $("body").removeClass("overlaLoader");
+  //   $(".wrp").hide();
+
+  //   //
+  //   $(".failure").show();
+  //   $(location).attr("href", "/");
+
+  //   //
+  //   $(".success").show();
+  //   $(location).attr("href", "/viewauctions");
+  // }, 5000);
 }
 
 /**

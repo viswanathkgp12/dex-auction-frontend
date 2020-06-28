@@ -360,7 +360,7 @@ header {
   color: #606060;
   font-size: 24px;
   font-weight: normal;
-  padding: 6 0 26px;
+  padding: 0 0 24px;
   text-align: center;
 }
 .why ul {
@@ -1266,4 +1266,56 @@ body.overlaLoader:before {
 
 .thanos-banner a:visited {
   color: #0082d3;
+}
+
+.loading.failure:after {
+  content: " .";
+  animation: dots 1s steps(5, end) infinite;
+  font-weight: bolder;
+  font-size: 100px;
+}
+
+.loading.success:after {
+  content: " .";
+  animation: dotss 1s steps(5, end) infinite;
+  font-weight: bolder;
+  font-size: 100px;
+}
+
+@keyframes dots {
+  0%,
+  20% {
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  40% {
+    color: rgba(230, 138, 138, 1);
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  60% {
+    text-shadow: 0.25em 0 0 rgba(230, 138, 138, 1), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  80%,
+  100% {
+    text-shadow: 0.25em 0 0 rgba(230, 138, 138, 1), 0.5em 0 0 rgba(230, 138, 138, 1);
+  }
+}
+
+@keyframes dotss {
+  0%,
+  20% {
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  40% {
+    color: rgb(173, 240, 134);
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  60% {
+    text-shadow: 0.25em 0 0 rgb(173, 240, 134), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  80%,
+  100% {
+    text-shadow: 0.25em 0 0 rgb(173, 240, 134), 0.5em 0 0 rgb(173, 240, 134);
+  }
 }
