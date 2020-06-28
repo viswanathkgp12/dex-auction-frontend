@@ -122,9 +122,9 @@ async function pollForAuctionConfigure(opHash, retries = 12) {
     if (
       tzktOpdata !== null &&
       tzktOpdata.length > 0 &&
-      tzktOpdata.length == 4
+      tzktOpdata.length == 2
     ) {
-      const status = tzktOpdata[3].status;
+      const status = tzktOpdata[1].status;
       if (status === "applied") {
         return true;
       }

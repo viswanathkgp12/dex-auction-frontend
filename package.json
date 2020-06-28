@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server",
-    "prestart": "cp -R static/images dist && cp -R static/style dist && cp -R static/script dist ",
-    "build": "webpack --config webpack.prod.js --mode production",
+    "prestart": "cp -R static/images dist && cp -R static/style dist && cp -R static/script dist && cp static/favicon.ico dist",
+    "build": "webpack --config webpack.prod.js --mode production && npm run prestart",
     "start": "http-server dist --port ${PORT:-80}"
   },
   "author": "",
