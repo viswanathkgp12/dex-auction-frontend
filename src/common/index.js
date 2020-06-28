@@ -402,12 +402,14 @@ window.configureAuction = async function () {
   hideSlider();
   $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
   $("#configureAuctionBtn").prop("disabled", true).css("opacity", 0.5);
+  localStorage.clear();
 };
 
 let auctionType;
 
 window.setAuctionType = function (type) {
   auctionType = type;
+  $("#tab3-auction-type").html(getAuctionType());
 };
 
 function submitForm() {

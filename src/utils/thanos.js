@@ -4,7 +4,7 @@ let wallet, tzs, pkh;
 
 export const APP_NAME = "DEX Auction dApp";
 export const NETWORK = "carthagenet";
-export const AUCTION_ADDRESS = "KT1NG33RboNuw4KSQmFBZtY5ast5334o5zfh";
+export const AUCTION_ADDRESS = "KT1EN3rEg171zisjuC117VkGSiBbkgrpJ8EN";
 
 export async function isAvailable() {
   return ThanosWallet.isAvailable();
