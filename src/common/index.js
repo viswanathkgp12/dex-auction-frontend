@@ -52,8 +52,12 @@ let contractAddress;
 
 async function createAuctionInstance(assetName, auctionType) {
   const { err, opHash } = await createInstance(0, assetName, auctionType);
-  $("#chooseAuctionResult").html(`${opHash}`);
-  $(".creatdAuctn").show();
+  $("#chooseAuctionResult").html(
+    `<a href="https://carthage.tzkt.io/${opHash}" target="blank">${opHash.slice(
+      0,
+      11
+    )}...</a>`
+  );
   if (err) {
     console.log("Error occured");
     return;
@@ -67,7 +71,7 @@ async function createAuctionInstance(assetName, auctionType) {
   return pollResult;
 }
 
-async function pollForAuctionAddress(opHash, retries = 10) {
+async function pollForAuctionAddress(opHash, retries = 12) {
   try {
     if (!retries) {
       return {
@@ -90,6 +94,11 @@ async function pollForAuctionAddress(opHash, retries = 10) {
           err: null,
           contractInstance: tzktOpdata[2].originatedContract.address,
         };
+      } else {
+        return {
+          err: "Transaction failed",
+          contractInstance: null,
+        };
       }
     }
 
@@ -98,6 +107,35 @@ async function pollForAuctionAddress(opHash, retries = 10) {
   } catch (error) {
     console.log(error);
     return pollForAuctionAddress(opHash, retries - 1);
+  }
+}
+
+async function pollForAuctionConfigure(opHash, retries = 12) {
+  try {
+    if (!retries) {
+      return false;
+    }
+
+    const tzktOpdata = await getOpByHashTzkt(opHash);
+    console.log("TZKT Operation data received: ", tzktOpdata);
+
+    if (
+      tzktOpdata !== null &&
+      tzktOpdata.length > 0 &&
+      tzktOpdata.length == 4
+    ) {
+      const status = tzktOpdata[3].status;
+      if (status === "applied") {
+        return true;
+      }
+      return false;
+    }
+
+    await sleep(5000);
+    return pollForAuctionConfigure(opHash, retries - 1);
+  } catch (error) {
+    console.log(error);
+    return pollForAuctionConfigure(opHash, retries - 1);
   }
 }
 
@@ -126,6 +164,8 @@ async function configureAuctionInstance(
     "Create Instance succeeded with: ",
     configureAuctionResult.opHash
   );
+
+  return configureAuctionResult.opHash;
 }
 
 /**
@@ -228,19 +268,25 @@ export function hideSlider() {
   $("body").removeClass("openSlide");
   $(".menuBox ul li.prodct").removeClass("active");
   $("body").addClass("overlaLoader");
+}
 
-  // setTimeout(() => {
-  //   $("body").removeClass("overlaLoader");
-  //   $(".wrp").hide();
+function redirect(status) {
+  $("body").removeClass("overlaLoader");
+  $(".wrp").hide();
 
-  //   //
-  //   $(".failure").show();
-  //   $(location).attr("href", "/");
+  if (!status) {
+    $(".failure").show();
 
-  //   //
-  //   $(".success").show();
-  //   $(location).attr("href", "/viewauctions");
-  // }, 5000);
+    setTimeout(() => {
+      $(location).attr("href", "/");
+    }, 2000);
+    return;
+  }
+
+  $(".success").show();
+  setTimeout(() => {
+    $(location).attr("href", "/viewauctions");
+  }, 2000);
 }
 
 /**
@@ -270,10 +316,14 @@ window.chooseAuction = async function () {
   contractAddress = result.contractInstance;
   if (!contractAddress) {
     $("#chooseAuctionBtn").prop("disabled", false).css("opacity", 1);
+    $(".ldngAuctn").hide();
+    $("#chooseAuctionResult").html("❌ Failed...");
+    $(".creatdAuctn").show();
     return;
   }
 
   localStorage.setItem("contractAddress", contractAddress);
+  await sleep(2000);
 
   // UI
   $(".tabHead ul li.two").removeClass("bold");
@@ -286,8 +336,8 @@ window.chooseAuction = async function () {
 
   $(".tabHead ul li.one").addClass("disabled").css("opacity", 0.5);
   $(".tabHead ul li.two").addClass("disabled").css("opacity", 0.5);
-  $(".creatdAuctn").hide();
-  $(".ldngAuctn").hide();
+  $(".ldngAuctn").css("visibility: hidden");
+  $(".creatdAuctn").show();
   $("#tab3-auction-type").html(getAuctionType());
 };
 
@@ -400,24 +450,29 @@ window.configureAuction = async function () {
 
   console.log(contractAddress, increment, reservePrice, starttime, waittime);
 
-  await configureAuctionInstance(
-    contractAddress,
-    increment,
-    reservePrice,
-    starttime,
-    waittime
-  );
+  try {
+    const opHash = await configureAuctionInstance(
+      contractAddress,
+      increment,
+      reservePrice,
+      starttime,
+      waittime
+    );
+    hideSlider();
 
-  const storage = await getContractStorage(contractAddress);
-  setStorage(storage);
+    const storage = await getContractStorage(contractAddress);
+    setStorage(storage);
 
-  console.log("submitting form");
-  submitForm();
+    console.log("submitting form");
+    submitForm();
 
-  hideSlider();
-  $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
-  $("#configureAuctionBtn").prop("disabled", true).css("opacity", 0.5);
-  localStorage.clear();
+    const status = await pollForAuctionConfigure(opHash);
+    redirect(status);
+
+    $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
+    $("#configureAuctionBtn").prop("disabled", true).css("opacity", 0.5);
+    localStorage.clear();
+  } catch (error) {}
 };
 
 let auctionType;

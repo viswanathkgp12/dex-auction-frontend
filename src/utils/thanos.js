@@ -56,7 +56,7 @@ export async function configureAuction(
   try {
     const auction = await fetchContract(tzs, address);
     const { opHash } = await auction.methods
-      .configureAuction(minIncrease, reservePrice, startTime, waitTime)
+      .configureAuction(minIncrease, reservePrice, waitTime, startTime)
       .send();
     console.log("operation hash for configure auction: ", opHash);
     return {
