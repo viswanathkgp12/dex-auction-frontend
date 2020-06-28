@@ -53,6 +53,7 @@ let contractAddress;
 async function createAuctionInstance(assetName, auctionType) {
   const { err, opHash } = await createInstance(0, assetName, auctionType);
   $("#chooseAuctionResult").html(`${opHash}`);
+  $(".creatdAuctn").show();
   if (err) {
     console.log("Error occured");
     return;
@@ -240,12 +241,11 @@ window.chooseAuction = async function () {
 
   $("#chooseAuctionBtn").prop("disabled", true).css("opacity", 0.5);
   $(".ldngAuctn").show();
-  $(".creatdAuctn").show();
 
   const result = await createAuctionInstance(assetName, auctionType);
 
-  if (result.err) {
-    $("#chooseAuctionError").html(result.err);
+  if (!result) {
+    // $("#chooseAuctionError").html(result.err);
     $("#chooseAuctionBtn").prop("disabled", false).css("opacity", 1);
     $(".ldngAuctn").hide();
     $(".creatdAuctn").hide();
