@@ -132,35 +132,73 @@ function populateAuctions(auctionJson) {
   const auctionName = auctionJson.assetName;
   const auctionType = getAuctionType(auctionJson.auctionType);
   const auctionDescription = auctionJson.assetDescription;
-  const auctionReservePrice = auctionJson.auctionParams.reservePrice;
-  const auctionIncrement = auctionJson.auctionParams.currentPrice;
+
+  let auctionReservePrice, auctionIncrement, priceElement;
+
+  if (auctionType === "English Auction") {
+    auctionReservePrice = auctionJson.auctionParams.currentBid;
+    auctionIncrement = auctionJson.auctionParams.minIncrease;
+    priceElement = `
+    <h4>
+      Min. Increment : <span class="auctionIncrement">${auctionIncrement} XTZ</span>
+    </h4>
+    `;
+  } else {
+    auctionReservePrice = auctionJson.auctionParams.reservePrice;
+    const auctionCurrentPrice = auctionJson.auctionParams.currentPrice;
+    priceElement = `
+    <h4>
+      Curr. Price : <span class="auctionIncrement">${auctionCurrentPrice} XTZ</span>
+    </h4>
+    `;
+  }
+
   const auctionStartDate = new Date(auctionJson.startTime);
   const assetImageFileName = auctionJson.assetImageFileName;
 
   const imgUrl =
     assetImageFileName == ""
       ? ""
-      : "http://54.172.0.221:8080/images/${assetImageFileName}";
+      : `http://54.172.0.221:8080/images/${assetImageFileName}`;
 
   const diffTime = Math.abs(auctionStartDate - Date.now());
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
   const rem = diffTime - diffDays * (1000 * 60 * 60 * 24);
   const diffHours = Math.ceil(rem / (1000 * 60 * 60));
-  const timeLeft = `${diffDays} day ${diffHours} hrs`;
+  let timeLeft = `${diffDays} day ${diffHours} hrs`;
 
   const waitTime = auctionJson.roundTime;
   const waitHours = Math.floor(waitTime / (60 * 60));
   const waitMins = Math.ceil((waitTime - waitHours * (60 * 60)) / 60);
 
   const auctionDuration = `${waitHours} hr ${waitMins} mins`;
-  let owner;
+  let owner, button;
 
   if (auctionStatus == "upcoming") {
     owner = auctionJson.seller;
+    button = `
+    <input
+      type="button"
+      class="btn shortlistbtn"
+      value="Shortlist"
+      onclick="shortlistAuction()"
+    />
+    `;
+    timeLeft += " left";
   } else if (auctionStatus == "ongoing") {
     owner = auctionJson.seller;
+    button = `
+    <input
+      type="button"
+      class="btn shortlistbtn"
+      value="Bid"
+      onclick="shortlistAuction()"
+    />
+    `;
+    timeLeft = "Ongoing";
   } else if (auctionStatus == "completed") {
     owner = auctionJson.buyer;
+    timeLeft += " ago";
   }
 
   const auctionItemCard = `
@@ -184,9 +222,7 @@ function populateAuctions(auctionJson) {
             <h3>
                 Reserve Price <span class="auctionReservePrice">${auctionReservePrice} XTZ</span>
             </h3>
-            <h4>
-                Min. Increment : <span class="auctionIncrement">${auctionIncrement} XTZ</span>
-            </h4>
+            ${priceElement}
             <ul>
                 <li>
                   <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
@@ -197,12 +233,7 @@ function populateAuctions(auctionJson) {
                   <span class="auctionDuration">${auctionDuration}</span>
                 </li>
             </ul>
-            <input
-                type="button"
-                class="btn shortlistbtn"
-                value="Shortlist"
-                onclick="shortlistAuction()"
-                />
+            ${button}
           </div>
       </div>
     </div>
