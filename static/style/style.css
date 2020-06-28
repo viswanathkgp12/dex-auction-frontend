@@ -118,7 +118,7 @@ h5 {
 }
 .logo {
   float: left;
-  padding: 9px 0 50px;
+  padding: 12px 0 45px;
   perspective: 1000px;
 }
 .logo img {
@@ -199,7 +199,7 @@ header {
 .banner .lt h1 {
   color: #707070;
   margin: 0;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 300;
   padding: 0 0 40px;
   max-width: 375px;
@@ -245,7 +245,6 @@ header {
   color: #0082d3;
   display: inline-block;
   position: relative;
-  text-decoration: underline;
 }
 .banner .lt span.pwd a:after {
   position: absolute;
@@ -288,7 +287,7 @@ header {
 .oneLine p {
   color: #707070;
   margin: 0;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 300;
   width: 100%;
   padding: 0 0 32px;
@@ -319,7 +318,7 @@ header {
 }
 .tradingBox ul li img {
   position: absolute;
-  bottom: 19px;
+  bottom: 9px;
   right: 0;
   left: 0;
   margin: 0 auto;
@@ -361,7 +360,8 @@ header {
   color: #606060;
   font-size: 24px;
   font-weight: normal;
-  padding: 0 0 24px;
+  padding: 6 0 26px;
+  text-align: center;
 }
 .why ul {
   overflow: hidden;
