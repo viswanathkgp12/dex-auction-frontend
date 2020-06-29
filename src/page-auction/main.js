@@ -153,7 +153,31 @@ function populateAuctions(auctionJson) {
     `;
   }
 
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   const auctionStartDate = new Date(auctionJson.startTime);
+  const dateString =
+    auctionStartDate.getDate() +
+    " " +
+    monthNames[auctionStartDate.getMonth()] +
+    ", " +
+    auctionStartDate.getHours() +
+    ":" +
+    auctionStartDate.getMinutes()
+    + " UTC";
   const assetImageFileName = auctionJson.assetImageFileName;
 
   const imgUrl =
@@ -226,7 +250,7 @@ function populateAuctions(auctionJson) {
             <ul>
                 <li>
                   <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
-                  <span class="auctionStartDate">${auctionStartDate}</span>
+                  <span class="auctionStartDate">${dateString}</span>
                 </li>
                 <li>
                   <span>Round Duration</span>

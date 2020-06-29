@@ -50,7 +50,7 @@ img {
 ul,
 li {
   margin: 0;
-  padding: 0;
+  padding: 0px 7px 0px 7px;
   list-style: none;
 }
 h1 {
@@ -101,7 +101,7 @@ button:focus {
 }
 .container {
   width: 100%;
-  max-width: 1050px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 h1,
@@ -996,11 +996,11 @@ span.error {
   border-top: 1px dashed #d5d5d5;
 }
 .cardBox .prod-card .rt .right ul li:first-child {
-  width: 55%;
+  width: 60%;
   float: left;
 }
 .cardBox .prod-card .rt .right ul li:last-child {
-  width: 45%;
+  width: 40%;
   float: left;
 }
 .cardBox .prod-card .rt .right ul li span {
@@ -1014,7 +1014,7 @@ span.error {
   font-weight: 600;
   color: #606060;
   font-style: normal;
-  width: 80px;
+  width: 100px;
   height: 16px;
   border-radius: 4px;
   background-color: #eaeaea;
