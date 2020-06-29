@@ -353,7 +353,7 @@ function getAuctionType() {
     english: "English Auction",
     dutch: "Dutch Auction",
     vickery: "Vickery",
-    sealed_bid: "Sealed Bid",
+    "sealed bid": "Sealed Bid",
   };
 
   return auctionTypeMapping[auctionType];
@@ -551,9 +551,9 @@ $(document).ready(function () {
   $(".ldngAuctn").hide();
   $(".creatdAuctn").hide();
 
-  $(document).on("submit", "#auction-details-form", function () {
-    return false;
-  });
+  // $(document).on("submit", "#auction-details-form", function () {
+  //   return false;
+  // });
 
   isAvailable().then((available) => {
     if (available) {

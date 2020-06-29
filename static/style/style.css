@@ -515,7 +515,7 @@ body:before {
   padding-top: 29px;
   width: 100%;
 }
-.tabContnt .aucPro .input-group:before {
+/* .tabContnt .aucPro .input-group:before {
   position: absolute;
   right: 0;
   bottom: 10px;
@@ -526,7 +526,7 @@ body:before {
   height: 23px;
   padding: 0 0 0;
   z-index: 9;
-}
+} */
 .tabContnt .aucPro .input-group:nth-child(2) {
   padding-top: 25px;
   margin-bottom: 0;
