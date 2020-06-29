@@ -50,7 +50,7 @@ img {
 ul,
 li {
   margin: 0;
-  padding: 0;
+  padding: 0px 7px 0px 7px;
   list-style: none;
 }
 h1 {
@@ -101,7 +101,7 @@ button:focus {
 }
 .container {
   width: 100%;
-  max-width: 1050px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 h1,
@@ -118,7 +118,7 @@ h5 {
 }
 .logo {
   float: left;
-  padding: 9px 0 50px;
+  padding: 12px 0 45px;
   perspective: 1000px;
 }
 .logo img {
@@ -199,7 +199,7 @@ header {
 .banner .lt h1 {
   color: #707070;
   margin: 0;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 300;
   padding: 0 0 40px;
   max-width: 375px;
@@ -245,7 +245,6 @@ header {
   color: #0082d3;
   display: inline-block;
   position: relative;
-  text-decoration: underline;
 }
 .banner .lt span.pwd a:after {
   position: absolute;
@@ -288,7 +287,7 @@ header {
 .oneLine p {
   color: #707070;
   margin: 0;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 300;
   width: 100%;
   padding: 0 0 32px;
@@ -319,7 +318,7 @@ header {
 }
 .tradingBox ul li img {
   position: absolute;
-  bottom: 19px;
+  bottom: 9px;
   right: 0;
   left: 0;
   margin: 0 auto;
@@ -362,6 +361,7 @@ header {
   font-size: 24px;
   font-weight: normal;
   padding: 0 0 24px;
+  text-align: center;
 }
 .why ul {
   overflow: hidden;
@@ -515,7 +515,7 @@ body:before {
   padding-top: 29px;
   width: 100%;
 }
-.tabContnt .aucPro .input-group:before {
+/* .tabContnt .aucPro .input-group:before {
   position: absolute;
   right: 0;
   bottom: 10px;
@@ -526,7 +526,7 @@ body:before {
   height: 23px;
   padding: 0 0 0;
   z-index: 9;
-}
+} */
 .tabContnt .aucPro .input-group:nth-child(2) {
   padding-top: 25px;
   margin-bottom: 0;
@@ -996,11 +996,11 @@ span.error {
   border-top: 1px dashed #d5d5d5;
 }
 .cardBox .prod-card .rt .right ul li:first-child {
-  width: 55%;
+  width: 60%;
   float: left;
 }
 .cardBox .prod-card .rt .right ul li:last-child {
-  width: 45%;
+  width: 40%;
   float: left;
 }
 .cardBox .prod-card .rt .right ul li span {
@@ -1014,7 +1014,7 @@ span.error {
   font-weight: 600;
   color: #606060;
   font-style: normal;
-  width: 80px;
+  width: 100px;
   height: 16px;
   border-radius: 4px;
   background-color: #eaeaea;
@@ -1266,4 +1266,56 @@ body.overlaLoader:before {
 
 .thanos-banner a:visited {
   color: #0082d3;
+}
+
+.loading.failure:after {
+  content: " .";
+  animation: dots 1s steps(5, end) infinite;
+  font-weight: bolder;
+  font-size: 100px;
+}
+
+.loading.success:after {
+  content: " .";
+  animation: dotss 1s steps(5, end) infinite;
+  font-weight: bolder;
+  font-size: 100px;
+}
+
+@keyframes dots {
+  0%,
+  20% {
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  40% {
+    color: rgba(230, 138, 138, 1);
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  60% {
+    text-shadow: 0.25em 0 0 rgba(230, 138, 138, 1), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  80%,
+  100% {
+    text-shadow: 0.25em 0 0 rgba(230, 138, 138, 1), 0.5em 0 0 rgba(230, 138, 138, 1);
+  }
+}
+
+@keyframes dotss {
+  0%,
+  20% {
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  40% {
+    color: rgb(173, 240, 134);
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  60% {
+    text-shadow: 0.25em 0 0 rgb(173, 240, 134), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  80%,
+  100% {
+    text-shadow: 0.25em 0 0 rgb(173, 240, 134), 0.5em 0 0 rgb(173, 240, 134);
+  }
 }
