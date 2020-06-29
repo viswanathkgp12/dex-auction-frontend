@@ -553,9 +553,9 @@ $(document).ready(function () {
   $(".ldngAuctn").hide();
   $(".creatdAuctn").hide();
 
-  // $(document).on("submit", "#auction-details-form", function () {
-  //   return false;
-  // });
+  $(document).on("submit", "#auction-details-form", function () {
+    return false;
+  });
 
   isAvailable().then((available) => {
     if (available) {
