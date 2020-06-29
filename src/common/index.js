@@ -326,6 +326,8 @@ window.chooseAuction = async function () {
   localStorage.setItem("contractAddress", contractAddress);
   await sleep(2000);
 
+  changeConfigureFormByAuctionType(auctionType)
+
   // UI
   $(".tabHead ul li.two").removeClass("bold");
 
@@ -352,7 +354,7 @@ function getAuctionType() {
   const auctionTypeMapping = {
     english: "English Auction",
     dutch: "Dutch Auction",
-    vickery: "Vickery",
+    vickrey: "Vickrey",
     "sealed bid": "Sealed Bid",
   };
 
@@ -546,6 +548,31 @@ function setStorage(instanceStorageDetails) {
   $("#auctionParams").val(JSON.stringify(auctionParams));
   $("#userPubKey").val(walletAddress);
   $("#contractAddress").val(contractAddress);
+}
+
+function changeConfigureFormByAuctionType(auctionType){
+  switch(auctionType){
+    case 'dutch':
+      $("#tab3-auction-type").html("Dutch Auction");
+      $("#fieldInfoTooltip1").html("Base Price below which the price cannot be decreased");
+      $("#increment").placeholder = "Opening Price (in XTZ)";
+      $("#fieldInfoTooltip2").html("Auction Starting Price");
+      break;
+    case "sealed bid":
+      $("#tab3-auction-type").html("Sealed Bid Auction");
+      $("#reservePrice").placeholder = "Deposit amount (in XTZ)";
+      $("#fieldInfoTooltip1").html("Deposit for bidders to participate");
+      $("#secondAuctionDetailField").hide()
+      break;
+    case "vickrey":
+      $("#tab3-auction-type").html("Vickrey Auction");
+      $("#reservePrice").placeholder = "Deposit amount (in XTZ)";
+      $("#fieldInfoTooltip1").html("Deposit for bidders to participate");
+      $("#secondAuctionDetailField").hide()
+      break;
+    default:
+      //
+    }
 }
 
 $(document).ready(function () {

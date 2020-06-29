@@ -97,8 +97,8 @@
           </div>
           <div class="acc__panel">
             <p>
-              An auction is usually a process of buying and selling goods or
-              services by offering them up for bid,
+              An ascending price auction where the bid price keeps increasing 
+              starting from a reserve price till no bidder can match the highest standing bid.
             </p>
             <label class="checkCntr">
               <input type="checkbox" />
@@ -115,8 +115,8 @@
           </div>
           <div class="acc__panel">
             <p>
-              An auction is usually a process of buying and selling goods or
-              services by offering them up for bid,
+              A descending price auction which begins with a high asking price which 
+              decreases until one bidder is willing to pay the quoted price            
             </p>
             <label class="checkCntr">
               <input type="checkbox" />
@@ -133,8 +133,8 @@
           </div>
           <div class="acc__panel">
             <p>
-              An auction is usually a process of buying and selling goods or
-              services by offering them up for bid,
+              A sealed bid first price auction, where bidders submit sealed bids and
+              the highest bidder wins and pays his bid.
             </p>
             <label class="checkCntr">
               <input type="checkbox" />
@@ -147,12 +147,12 @@
 
         <div class="acc__card">
           <div class="acc__title">
-            <span>Vickery</span> <cite class="slctd">Selected</cite>
+            <span>Vickrey</span> <cite class="slctd">Selected</cite>
           </div>
           <div class="acc__panel">
             <p>
-              An auction is usually a process of buying and selling goods or
-              services by offering them up for bid,
+              An sealed bid second price auction where bidders submit sealed bids and
+              the highest bidder wins and pays the amount of the second highest bid.
             </p>
             <label class="checkCntr">
               <input type="checkbox" />
@@ -206,29 +206,29 @@
             <div class="form-group">
               <input
                 class="form-input focus requFild"
-                placeholder="Reserve Price"
+                placeholder="Reserve Price (in XTZ)"
                 name="reservePrice"
                 id="reservePrice"
                 type="number"
                 required
               />
-              <i class="toolTp">i<span>Base price in XTZ</span></i>
+              <i class="toolTp">i<span id = "fieldInfoTooltip1">Opening price</span></i>
             </div>
             <span class="Reserve error">Required field</span>
           </div>
 
-          <div class="input-group">
+          <div id="secondAuctionDetailField" class="input-group">
             <div class="form-group">
               <input
                 type="number"
                 name="increment"
                 id="increment"
                 class="form-input focus requFild"
-                placeholder="Minimum Increment"
+                placeholder="Minimum Increment (in XTZ)"
                 type="text"
                 required
               />
-              <i class="toolTp">i<span>Min. increase per bid in XTZ</span></i>
+              <i class="toolTp">i<span id = "fieldInfoTooltip2">Minimum increase per bid</span></i>
             </div>
             <span class="Increment error">Required field</span>
           </div>
