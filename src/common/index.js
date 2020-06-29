@@ -465,7 +465,7 @@ window.configureAuction = async function () {
     hideSlider();
 
     const storage = await getContractStorage(contractAddress);
-    setStorage(storage);
+    setStorage(storage, contractAddress);
 
     console.log("submitting form");
     submitForm();
@@ -492,7 +492,7 @@ function submitForm() {
   $("form#auction-details-form").submit();
 }
 
-function setStorage(instanceStorageDetails) {
+function setStorage(instanceStorageDetails, contractAddress) {
   let assetId = "";
   let startTime = "";
   let waitTime = "";
