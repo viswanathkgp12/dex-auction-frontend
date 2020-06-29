@@ -468,6 +468,8 @@ window.configureAuction = async function () {
     console.log("submitting form");
     submitForm();
 
+    await sleep(3000);
+
     const status = await pollForAuctionConfigure(opHash);
     redirect(status);
 
