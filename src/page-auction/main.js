@@ -2,6 +2,10 @@ import { getOpByHashTzkt, getAuctions } from "../utils/api";
 import { sleep } from "../utils/sleep";
 import { startAuction, bid } from "../utils/thanos";
 import { connectWallet, checkAvailability, checkAndSetKeys } from "../common";
+import {
+  getEnglishAuctionTemplate,
+  getDutchAuctionTemplate,
+} from "./templates";
 
 /**
  * ---------------------------
@@ -132,26 +136,7 @@ function populateAuctions(auctionJson) {
   const auctionName = auctionJson.assetName;
   const auctionType = getAuctionType(auctionJson.auctionType);
   const auctionDescription = auctionJson.assetDescription;
-
-  let auctionReservePrice, auctionIncrement, priceElement;
-
-  if (auctionType === "English Auction") {
-    auctionReservePrice = auctionJson.auctionParams.currentBid;
-    auctionIncrement = auctionJson.auctionParams.minIncrease;
-    priceElement = `
-    <h4>
-      Min. Increment : <span class="auctionIncrement">${auctionIncrement} XTZ</span>
-    </h4>
-    `;
-  } else {
-    auctionReservePrice = auctionJson.auctionParams.reservePrice;
-    const auctionCurrentPrice = auctionJson.auctionParams.currentPrice;
-    priceElement = `
-    <h4>
-      Curr. Price : <span class="auctionIncrement">${auctionCurrentPrice} XTZ</span>
-    </h4>
-    `;
-  }
+  const auctionParams = auctionJson.auctionParams;
 
   const monthNames = [
     "January",
@@ -176,14 +161,14 @@ function populateAuctions(auctionJson) {
     ", " +
     auctionStartDate.getHours() +
     ":" +
-    auctionStartDate.getMinutes()
-    + " UTC";
+    auctionStartDate.getMinutes() +
+    " UTC";
   const assetImageFileName = auctionJson.assetImageFileName;
 
   const imgUrl =
     assetImageFileName == ""
       ? ""
-      : `http://54.172.0.221:8080/images/${assetImageFileName}`;
+      : `http://54.172.0.221:8080${assetImageFileName}`;
 
   const diffTime = Math.abs(auctionStartDate - Date.now());
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
@@ -196,72 +181,46 @@ function populateAuctions(auctionJson) {
   const waitMins = Math.ceil((waitTime - waitHours * (60 * 60)) / 60);
 
   const auctionDuration = `${waitHours} hr ${waitMins} mins`;
-  let owner, button;
+  let owner;
 
   if (auctionStatus == "upcoming") {
     owner = auctionJson.seller;
-    button = `
-    <input
-      type="button"
-      class="btn shortlistbtn"
-      value="Shortlist"
-      onclick="shortlistAuction()"
-    />
-    `;
-    timeLeft += " left";
   } else if (auctionStatus == "ongoing") {
     owner = auctionJson.seller;
-    button = `
-    <input
-      type="button"
-      class="btn shortlistbtn"
-      value="Bid"
-      onclick="shortlistAuction()"
-    />
-    `;
-    timeLeft = "Ongoing";
   } else if (auctionStatus == "completed") {
     owner = auctionJson.buyer;
-    timeLeft += " ago";
   }
 
-  const auctionItemCard = `
-    <div class="prod-card">
-      <div class="lt auctionImage"><img alt="bid-item-image" src="${imgUrl}" /></div>
-      <div class="rt">
-          <div class="left">
-            <h1 class="auctionName">${auctionName}</h1>
-            <h2 class="auctionType">${auctionType}</h2>
-            <h3>
-                Owner:
-                <span class="owner">
-                  <a class="carthagelink" href="https://carthage.tzkt.io/${owner}" target="blank">${owner}</a>
-                </span>
-            </h3>
-            <div class="paragrph auctionDescription">
-                <p>${auctionDescription}</p>
-            </div>
-          </div>
-          <div class="right">
-            <h3>
-                Reserve Price <span class="auctionReservePrice">${auctionReservePrice} XTZ</span>
-            </h3>
-            ${priceElement}
-            <ul>
-                <li>
-                  <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
-                  <span class="auctionStartDate">${dateString}</span>
-                </li>
-                <li>
-                  <span>Round Duration</span>
-                  <span class="auctionDuration">${auctionDuration}</span>
-                </li>
-            </ul>
-            ${button}
-          </div>
-      </div>
-    </div>
-    `;
+  // Get templates
+  let auctionItemCard;
+
+  if (auctionJson.auctionType === "english") {
+    auctionItemCard = getEnglishAuctionTemplate(
+      imgUrl,
+      auctionName,
+      auctionType,
+      auctionStatus,
+      owner,
+      auctionDescription,
+      auctionParams,
+      timeLeft,
+      dateString,
+      auctionDuration
+    );
+  } else if (auctionJson.auctionType === "dutch") {
+    auctionItemCard = getDutchAuctionTemplate(
+      imgUrl,
+      auctionName,
+      auctionType,
+      auctionStatus,
+      owner,
+      auctionDescription,
+      auctionParams,
+      timeLeft,
+      dateString,
+      auctionDuration
+    );
+  }
 
   if (auctionStatus == "upcoming") {
     upcomingAuctionsCount++;
