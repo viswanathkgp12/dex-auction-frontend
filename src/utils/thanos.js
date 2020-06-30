@@ -117,8 +117,38 @@ export async function resolveAuction(address) {
 export async function bid(address, amount) {
   try {
     const auction = await fetchContract(tzs, address);
-    const { opHash } = await auction.methods.bid({}).send({amount});
+    const { opHash } = await auction.methods.bid({}).send({ amount });
     console.log("operation hash for bid: ", opHash);
+    return {
+      err: null,
+      opHash,
+    };
+  } catch (error) {
+    console.log("Error message: ", error.message);
+    return { err: error.message, opHash: null };
+  }
+}
+
+export async function dropPrice(address, amount) {
+  try {
+    const auction = await fetchContract(tzs, address);
+    const { opHash } = await auction.methods.dropPrice({}).send({ amount });
+    console.log("operation hash for drop price: ", opHash);
+    return {
+      err: null,
+      opHash,
+    };
+  } catch (error) {
+    console.log("Error message: ", error.message);
+    return { err: error.message, opHash: null };
+  }
+}
+
+export async function acceptPrice(address, amount) {
+  try {
+    const auction = await fetchContract(tzs, address);
+    const { opHash } = await auction.methods.acceptPrice({}).send({ amount });
+    console.log("operation hash for accept price: ", opHash);
     return {
       err: null,
       opHash,

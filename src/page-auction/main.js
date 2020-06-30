@@ -1,6 +1,13 @@
 import { getOpByHashTzkt, getAuctions } from "../utils/api";
 import { sleep } from "../utils/sleep";
-import { startAuction, bid } from "../utils/thanos";
+import {
+  startAuction,
+  bid,
+  resolveAuction,
+  cancelAuction,
+  dropPrice,
+  acceptPrice,
+} from "../utils/thanos";
 import { connectWallet, checkAvailability, checkAndSetKeys } from "../common";
 import {
   getEnglishAuctionTemplate,
@@ -13,9 +20,82 @@ import {
  * ---------------------------
  */
 
-async function createBid(contractAddress, amount) {
+let walletAddress;
+
+async function connectToThanos() {
   await checkAvailability();
-  await startAuction(contractAddress);
+  const walletInfo = await connectWallet();
+  walletAddress = walletInfo.walletAddress;
+}
+
+async function onClickAuctionStart() {
+  await connectToThanos();
+
+  const { err, opHash } = await startAuction(contractAddress);
+  if (err) {
+    console.log("Error occured");
+    return;
+  }
+
+  console.log("Start auction succeeded with: ", opHash);
+  return poll(opHash);
+}
+
+async function onClickResolveAuction(contractAddress) {
+  await connectToThanos();
+
+  const { err, opHash } = await resolveAuction(contractAddress);
+  if (err) {
+    console.log("Error occured");
+    return;
+  }
+
+  console.log("Resolve auction succeeded with: ", opHash);
+  return poll(opHash);
+}
+
+async function onClickCancelAuction(contractAddress) {
+  await connectToThanos();
+
+  const { err, opHash } = await cancelAuction(contractAddress);
+  if (err) {
+    console.log("Error occured");
+    return;
+  }
+
+  console.log("Cancel auction succeeded with: ", opHash);
+  return poll(opHash);
+}
+
+async function onClickDropPrice(contractAddress) {
+  await connectToThanos();
+
+  const { err, opHash } = await dropPrice(contractAddress);
+  if (err) {
+    console.log("Error occured");
+    return;
+  }
+
+  console.log("Drop price succeeded with: ", opHash);
+  return poll(opHash);
+}
+
+async function onClickAcceptPrice(contractAddress, amount) {
+  await connectToThanos();
+
+  const { err, opHash } = await acceptPrice(contractAddress, amount);
+  if (err) {
+    console.log("Error occured");
+    return;
+  }
+
+  console.log("Accept price succeeded with: ", opHash);
+  return poll(opHash);
+}
+
+async function createBid(contractAddress, amount) {
+  await connectToThanos();
+
   const { err, opHash } = await bid(contractAddress, amount);
   if (err) {
     console.log("Error occured");
@@ -31,23 +111,17 @@ async function poll(opHash, retries = 10) {
     if (!retries) {
       return {
         err: "Timeout exceeded",
-        contractInstance: null,
       };
     }
 
     const tzktOpdata = await getOpByHashTzkt(opHash);
     console.log("TZKT Operation data received: ", tzktOpdata);
 
-    if (
-      tzktOpdata !== null &&
-      tzktOpdata.length > 0 &&
-      tzktOpdata.length == 4
-    ) {
-      const status = tzktOpdata[2].status;
+    if (tzktOpdata !== null && tzktOpdata.length > 0) {
+      const status = tzktOpdata[0].status;
       if (status === "applied") {
         return {
           err: null,
-          contractInstance: tzktOpdata[2].originatedContract.address,
         };
       }
     }
@@ -67,8 +141,20 @@ async function poll(opHash, retries = 10) {
  * ----------------------
  */
 
+$("#prodct").on("click", async function () {
+  // Check Thanos Availability
+  await connectToThanos();
+
+  checkAndSetKeys();
+  checkImageFileSelection();
+
+  // Open slider
+  $("body").addClass("openSlide");
+  $(".menuBox ul li.prodct").addClass("active");
+});
+
 function checkImageFileSelection() {
-  var x = document.getElementById("myFile");
+  const x = document.getElementById("myFile");
   var txt = "";
   if ("files" in x) {
     if (x.files.length == 0) {
@@ -88,45 +174,52 @@ function checkImageFileSelection() {
   document.getElementById("fileError").innerHTML = txt;
 }
 
-$("#prodct").on("click", async function () {
-  // Check Thanos Availability
-  await checkAvailability();
-  const walletInfo = await connectWallet();
-  walletAddress = walletInfo.walletAddress;
-
-  checkAndSetKeys();
-  checkImageFileSelection();
-
-  // Open slider
-  $("body").addClass("openSlide");
-  $(".menuBox ul li.prodct").addClass("active");
-});
-
-let walletAddress;
-
-window.shortlistAuction = window.startAuction = async function shortlistAuction() {
-  console.log("---------------");
-  // Check Thanos Availability
-  await checkAvailability();
-  const walletInfo = await connectWallet();
-  walletAddress = walletInfo.walletAddress;
-
-  const contractAddress = "KT19uwQwQjeqgH9tyrzWFEHeiqBVChVVfZB1";
+window.bid = async function () {
+  const contractAddress = localStorage.getItem("contractAddress");
   const amount = 1e-6;
 
   await createBid(contractAddress, amount);
 };
 
-/**
- * Auctions populate
- */
+window.startAuction = async function () {
+  await onClickAuctionStart();
+};
+
+// TODO: fill this with API
+window.shortlistAuction = function () {
+  console.log("Shortlist auction invoked");
+};
+
+window.resolveAuction = async function () {
+  const contractAddress = localStorage.getItem("contractAddress");
+  await onClickResolveAuction(contractAddress);
+};
+
+window.cancelAuction = async function () {
+  const contractAddress = localStorage.getItem("contractAddress");
+  await onClickCancelAuction(contractAddress);
+};
+
+window.dropPrice = async function () {
+  const contractAddress = localStorage.getItem("contractAddress");
+  await onClickDropPrice(contractAddress);
+};
+
+window.acceptPrice = async function () {
+  const contractAddress = localStorage.getItem("contractAddress");
+  await onClickAcceptPrice(contractAddress);
+};
 
 $(document).ready(async function () {
-  await checkAvailability();
-  const walletInfo = await connectWallet();
-  walletAddress = walletInfo.walletAddress;
+  await connectToThanos();
   updateAuctionData();
 });
+
+/**
+ * ----------------------
+ * Auctions populate
+ * ----------------------
+ */
 
 let upcomingAuctionsCount = 0,
   ongoingAuctionsCount = 0,

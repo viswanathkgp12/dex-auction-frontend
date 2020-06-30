@@ -23,7 +23,7 @@ export function getEnglishAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Start"
           onclick="startAuction()"
         />
@@ -32,7 +32,7 @@ export function getEnglishAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Shortlist"
           onclick="shortlistAuction()"
         />
@@ -66,13 +66,13 @@ export function getEnglishAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Resolve"
           onclick="resolveAuction()"
         />
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Cancel"
           onclick="cancelAuction()"
         />
@@ -81,7 +81,7 @@ export function getEnglishAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Bid"
           onclick="bid()"
         />
@@ -121,7 +121,7 @@ export function getEnglishAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Auction"
           onclick="configureAuction()"
         />
@@ -207,7 +207,7 @@ export function getDutchAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Start"
           onclick="startAuction()"
         />
@@ -216,7 +216,7 @@ export function getDutchAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Shortlist"
           onclick="shortlistAuction()"
         />
@@ -250,7 +250,7 @@ export function getDutchAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Drop Price"
           onclick="dropPrice()"
         />
@@ -259,7 +259,7 @@ export function getDutchAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Accept Price"
           onclick="acceptPrice()"
         />
@@ -299,7 +299,7 @@ export function getDutchAuctionTemplate(
       button = `
         <input
           type="button"
-          class="btn shortlistbtn"
+          class="btn"
           value="Auction"
           onclick="configureAuction()"
         />
