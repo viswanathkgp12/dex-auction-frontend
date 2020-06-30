@@ -352,7 +352,7 @@ window.chooseAuction = async function () {
  * ------------------------------
  */
 
-function getAuctionType() {
+export function getAuctionType() {
   const auctionTypeMapping = {
     english: "English Auction",
     dutch: "Dutch Auction",

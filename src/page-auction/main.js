@@ -8,7 +8,11 @@ import {
   dropPrice,
   acceptPrice,
 } from "../utils/thanos";
-import { connectWallet, checkAvailability, checkAndSetKeys } from "../common";
+import {
+  connectWallet,
+  checkAvailability,
+  checkAndSetKeys,
+} from "../common";
 import {
   getEnglishAuctionTemplate,
   getDutchAuctionTemplate,
@@ -141,7 +145,25 @@ async function poll(opHash, retries = 10) {
  * ----------------------
  */
 
-$("#prodct").on("click", async function () {
+window.reconfigureAuction = async function (address, id) {
+  localStorage.clear();
+  localStorage.setItem("contractAddress", address);
+
+  const auctionType = $(`#bid-item-${id}-type`).html();
+  const assetName = $(`#bid-item-${id}-name`).html();
+  localStorage.setItem("assetName", assetName);
+  $("#aucnProdct").val(assetName);
+  localStorage.setItem("auctionType", auctionType);
+  $("#tab3-auction-type").html(auctionType);
+  localStorage.setItem("reservePrice", 0);
+  $("li.three").addClass("active");
+  $("li.three").addClass("bold");
+  await onClickConfigureAuction();
+};
+
+$("#prodct").on("click", onClickConfigureAuction);
+
+async function onClickConfigureAuction() {
   // Check Thanos Availability
   await connectToThanos();
 
@@ -151,7 +173,7 @@ $("#prodct").on("click", async function () {
   // Open slider
   $("body").addClass("openSlide");
   $(".menuBox ul li.prodct").addClass("active");
-});
+}
 
 function checkImageFileSelection() {
   const x = document.getElementById("myFile");
@@ -227,12 +249,12 @@ async function updateAuctionData() {
 
   const auctions = await getAuctions();
 
-  auctions.forEach((auction) => {
-    populateAuctions(auction);
-  });
+  for (let i = 0; i < auctions.length; i++) {
+    populateAuctions(auctions[i], i);
+  }
 }
 
-function populateAuctions(auctionJson) {
+function populateAuctions(auctionJson, id) {
   const auctionStatus = auctionJson.auctionStatus;
   const auctionName = auctionJson.assetName;
   const auctionType = getAuctionType(auctionJson.auctionType);
@@ -292,7 +314,7 @@ function populateAuctions(auctionJson) {
       auctionJson.seller,
       walletAddress,
       auctionAddress,
-      expired
+      id
     );
   } else if (auctionJson.auctionType === "dutch") {
     auctionItemCard = getDutchAuctionTemplate(
@@ -310,7 +332,7 @@ function populateAuctions(auctionJson) {
       auctionJson.seller,
       walletAddress,
       auctionAddress,
-      expired
+      id
     );
   }
 
