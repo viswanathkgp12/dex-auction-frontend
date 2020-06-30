@@ -27,7 +27,7 @@ export function getEnglishAuctionTemplate(
           type="button"
           class="btn"
           value="Start"
-          onclick="startAuction(${contractAddress})"
+          onclick="startAuction('${contractAddress}')"
         />
         `;
     } else if (userPubKey != seller && userPubKey != buyer && !expired) {
@@ -36,7 +36,7 @@ export function getEnglishAuctionTemplate(
           type="button"
           class="btn"
           value="Shortlist"
-          onclick="shortlistAuction(${contractAddress})"
+          onclick="shortlistAuction('${contractAddress}')"
         />
         `;
     }
@@ -75,13 +75,13 @@ export function getEnglishAuctionTemplate(
           type="button"
           class="btn"
           value="Resolve"
-          onclick="resolveAuction(${contractAddress})"
+          onclick="resolveAuction('${contractAddress}')"
         />
         <input
           type="button"
           class="btn"
           value="Cancel"
-          onclick="cancelAuction(${contractAddress})"
+          onclick="cancelAuction('${contractAddress}')"
         />
         `;
     } else if (userPubKey != seller && userPubKey != buyer && !expired) {
@@ -90,7 +90,7 @@ export function getEnglishAuctionTemplate(
           type="button"
           class="btn"
           value="Bid"
-          onclick="bid(${contractAddress})"
+          onclick="bid('${contractAddress}')"
         />
         `;
     }
@@ -135,7 +135,7 @@ export function getEnglishAuctionTemplate(
           type="button"
           class="btn"
           value="Auction"
-          onclick="configureAuction(${contractAddress})"
+          onclick="configureAuction('${contractAddress}')"
         />
         `;
     }
@@ -155,7 +155,7 @@ export function getEnglishAuctionTemplate(
     `;
     startDateElement = `
     <li style="width: 100% !important">
-      <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
+      <span>Start Date <cite class="timeLeft">${auctionStatus}</cite></span>
       <span class="auctionStartDate">${dateString}</span>
     </li>
     `;
@@ -223,7 +223,7 @@ export function getDutchAuctionTemplate(
           type="button"
           class="btn"
           value="Start"
-          onclick="startAuction(${contractAddress})"
+          onclick="startAuction('${contractAddress}')"
         />
         `;
     } else if (userPubKey != seller && userPubKey != buyer && !expired) {
@@ -232,7 +232,7 @@ export function getDutchAuctionTemplate(
           type="button"
           class="btn"
           value="Shortlist"
-          onclick="shortlistAuction(${contractAddress})"
+          onclick="shortlistAuction('${contractAddress}')"
         />
         `;
     }
@@ -271,7 +271,7 @@ export function getDutchAuctionTemplate(
           type="button"
           class="btn"
           value="Drop Price"
-          onclick="dropPrice(${contractAddress})"
+          onclick="dropPrice('${contractAddress}')"
         />
         `;
     } else if (userPubKey != seller && userPubKey != buyer && !expired) {
@@ -280,7 +280,7 @@ export function getDutchAuctionTemplate(
           type="button"
           class="btn"
           value="Accept Price"
-          onclick="acceptPrice(${contractAddress})"
+          onclick="acceptPrice('${contractAddress}')"
         />
         `;
     }
@@ -325,7 +325,7 @@ export function getDutchAuctionTemplate(
           type="button"
           class="btn"
           value="Auction"
-          onclick="configureAuction(${contractAddress})"
+          onclick="configureAuction('${contractAddress}')"
         />
         `;
     }

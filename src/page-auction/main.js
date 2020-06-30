@@ -264,7 +264,12 @@ function populateAuctions(auctionJson) {
     owner = auctionJson.seller;
   } else if (auctionStatus == "ongoing") {
     owner = auctionJson.seller;
-  } else if (auctionStatus == "completed") {
+  } else if (
+    auctionStatus == "expired" ||
+    auctionStatus == "unresolved" ||
+    auctionStatus == "executed" ||
+    auctionStatus == "cancelled"
+  ) {
     owner = auctionJson.buyer;
   }
 
@@ -331,7 +336,12 @@ function populateAuctions(auctionJson) {
     ongoingAuctionsCount++;
     $("#ongoing-count").html(ongoingAuctionsCount);
     $("#ongoing-list").append(auctionItemCard);
-  } else if (auctionStatus == "completed") {
+  } else if (
+    auctionStatus == "expired" ||
+    auctionStatus == "unresolved" ||
+    auctionStatus == "executed" ||
+    auctionStatus == "cancelled"
+  ) {
     completedAuctionsCount++;
     $("#completed-count").html(completedAuctionsCount);
     $("#completed-list").append(auctionItemCard);
