@@ -11,7 +11,9 @@ export function getEnglishAuctionTemplate(
   auctionDuration,
   buyer,
   seller,
-  userPubKey
+  userPubKey,
+  contractAddress,
+  expired
 ) {
   let button = "",
     maxBidElement = "",
@@ -19,22 +21,22 @@ export function getEnglishAuctionTemplate(
     startDateElement = "",
     roundDurationElement = "";
   if (auctionStatus == "upcoming") {
-    if (userPubKey == seller) {
+    if (userPubKey == seller && !expired) {
       button = `
         <input
           type="button"
           class="btn"
           value="Start"
-          onclick="startAuction()"
+          onclick="startAuction(${contractAddress})"
         />
         `;
-    } else if (userPubKey != seller && userPubKey != buyer) {
+    } else if (userPubKey != seller && userPubKey != buyer && !expired) {
       button = `
         <input
           type="button"
           class="btn"
           value="Shortlist"
-          onclick="shortlistAuction()"
+          onclick="shortlistAuction(${contractAddress})"
         />
         `;
     }
@@ -48,7 +50,12 @@ export function getEnglishAuctionTemplate(
     </h3>
     `;
 
-    timeLeft += " left";
+    if (!expired) {
+      timeLeft += " left";
+    } else {
+      timeLeft = "expired";
+    }
+
     startDateElement = `
     <li>
       <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
@@ -62,28 +69,28 @@ export function getEnglishAuctionTemplate(
     </li>
     `;
   } else if (auctionStatus == "ongoing") {
-    if (userPubKey == seller) {
+    if (userPubKey == seller && !expired) {
       button = `
         <input
           type="button"
           class="btn"
           value="Resolve"
-          onclick="resolveAuction()"
+          onclick="resolveAuction(${contractAddress})"
         />
         <input
           type="button"
           class="btn"
           value="Cancel"
-          onclick="cancelAuction()"
+          onclick="cancelAuction(${contractAddress})"
         />
         `;
-    } else if (userPubKey != seller && userPubKey != buyer) {
+    } else if (userPubKey != seller && userPubKey != buyer && !expired) {
       button = `
         <input
           type="button"
           class="btn"
           value="Bid"
-          onclick="bid()"
+          onclick="bid(${contractAddress})"
         />
         `;
     }
@@ -102,7 +109,12 @@ export function getEnglishAuctionTemplate(
     </h3>
     `;
 
-    timeLeft = "Ongoing";
+    if (!expired) {
+      timeLeft = "Ongoing";
+    } else {
+      timeLeft = "expired";
+    }
+
     startDateElement = `
     <li>
       <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
@@ -123,7 +135,7 @@ export function getEnglishAuctionTemplate(
           type="button"
           class="btn"
           value="Auction"
-          onclick="configureAuction()"
+          onclick="configureAuction(${contractAddress})"
         />
         `;
     }
@@ -195,7 +207,9 @@ export function getDutchAuctionTemplate(
   auctionDuration,
   buyer,
   seller,
-  userPubKey
+  userPubKey,
+  contractAddress,
+  expired
 ) {
   let button = "",
     currPriceElement = "",
@@ -203,22 +217,22 @@ export function getDutchAuctionTemplate(
     roundDurationElement = "",
     startDateElement = "";
   if (auctionStatus == "upcoming") {
-    if (userPubKey == seller) {
+    if (userPubKey == seller && !expired) {
       button = `
         <input
           type="button"
           class="btn"
           value="Start"
-          onclick="startAuction()"
+          onclick="startAuction(${contractAddress})"
         />
         `;
-    } else if (userPubKey != seller && userPubKey != buyer) {
+    } else if (userPubKey != seller && userPubKey != buyer && !expired) {
       button = `
         <input
           type="button"
           class="btn"
           value="Shortlist"
-          onclick="shortlistAuction()"
+          onclick="shortlistAuction(${contractAddress})"
         />
         `;
     }
@@ -232,7 +246,12 @@ export function getDutchAuctionTemplate(
       </h3>
       `;
 
-    timeLeft += " left";
+    if (!expired) {
+      timeLeft += " left";
+    } else {
+      timeLeft = "expired";
+    }
+
     startDateElement = `
       <li>
         <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
@@ -246,22 +265,22 @@ export function getDutchAuctionTemplate(
       </li>
       `;
   } else if (auctionStatus == "ongoing") {
-    if (userPubKey == seller) {
+    if (userPubKey == seller && !expired) {
       button = `
         <input
           type="button"
           class="btn"
           value="Drop Price"
-          onclick="dropPrice()"
+          onclick="dropPrice(${contractAddress})"
         />
         `;
-    } else if (userPubKey != seller && userPubKey != buyer) {
+    } else if (userPubKey != seller && userPubKey != buyer && !expired) {
       button = `
         <input
           type="button"
           class="btn"
           value="Accept Price"
-          onclick="acceptPrice()"
+          onclick="acceptPrice(${contractAddress})"
         />
         `;
     }
@@ -280,7 +299,12 @@ export function getDutchAuctionTemplate(
       </h3>
       `;
 
-    timeLeft = "Ongoing";
+    if (!expired) {
+      timeLeft = "Ongoing";
+    } else {
+      timeLeft = "expired";
+    }
+
     startDateElement = `
   <li>
     <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
@@ -301,7 +325,7 @@ export function getDutchAuctionTemplate(
           type="button"
           class="btn"
           value="Auction"
-          onclick="configureAuction()"
+          onclick="configureAuction(${contractAddress})"
         />
         `;
     }

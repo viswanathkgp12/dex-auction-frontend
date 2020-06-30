@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server",
-    "prebuild": "cp -R static/images dist && cp -R static/style dist && cp -R static/script dist && cp static/favicon.ico dist",
-    "build": "npm run prebuild && webpack --config webpack.prod.js --mode production",
+    "postbuild": "cp -R static/images dist && cp -R static/style dist && cp -R static/script dist && cp static/favicon.ico dist",
+    "build": "webpack --config webpack.prod.js --mode production && npm run postbuild",
     "start": "http-server dist --port ${PORT:-80}"
   },
   "author": "",

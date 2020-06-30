@@ -28,7 +28,7 @@ async function connectToThanos() {
   walletAddress = walletInfo.walletAddress;
 }
 
-async function onClickAuctionStart() {
+async function onClickAuctionStart(contractAddress) {
   await connectToThanos();
 
   const { err, opHash } = await startAuction(contractAddress);
@@ -174,15 +174,14 @@ function checkImageFileSelection() {
   document.getElementById("fileError").innerHTML = txt;
 }
 
-window.bid = async function () {
-  const contractAddress = localStorage.getItem("contractAddress");
+window.bid = async function (auctionAddress) {
   const amount = 1e-6;
 
-  await createBid(contractAddress, amount);
+  await createBid(auctionAddress, amount);
 };
 
-window.startAuction = async function () {
-  await onClickAuctionStart();
+window.startAuction = async function (auctionAddress) {
+  await onClickAuctionStart(auctionAddress);
 };
 
 // TODO: fill this with API
@@ -190,24 +189,20 @@ window.shortlistAuction = function () {
   console.log("Shortlist auction invoked");
 };
 
-window.resolveAuction = async function () {
-  const contractAddress = localStorage.getItem("contractAddress");
-  await onClickResolveAuction(contractAddress);
+window.resolveAuction = async function (auctionAddress) {
+  await onClickResolveAuction(auctionAddress);
 };
 
-window.cancelAuction = async function () {
-  const contractAddress = localStorage.getItem("contractAddress");
-  await onClickCancelAuction(contractAddress);
+window.cancelAuction = async function (auctionAddress) {
+  await onClickCancelAuction(auctionAddress);
 };
 
-window.dropPrice = async function () {
-  const contractAddress = localStorage.getItem("contractAddress");
-  await onClickDropPrice(contractAddress);
+window.dropPrice = async function (auctionAddress) {
+  await onClickDropPrice(auctionAddress);
 };
 
-window.acceptPrice = async function () {
-  const contractAddress = localStorage.getItem("contractAddress");
-  await onClickAcceptPrice(contractAddress);
+window.acceptPrice = async function (auctionAddress) {
+  await onClickAcceptPrice(auctionAddress);
 };
 
 $(document).ready(async function () {
@@ -243,6 +238,7 @@ function populateAuctions(auctionJson) {
   const auctionType = getAuctionType(auctionJson.auctionType);
   const auctionDescription = auctionJson.assetDescription;
   const auctionParams = auctionJson.auctionParams;
+  const auctionAddress = auctionJson.contractAddress;
 
   const auctionStartDate = new Date(auctionJson.startTime);
   const dateString =
@@ -257,6 +253,7 @@ function populateAuctions(auctionJson) {
   const assetImageFileName = auctionJson.assetImageFileName;
   const imgUrl = getImageUrl(assetImageFileName);
   const timeLeft = getTimeLeftForAuctionStart(auctionStartDate);
+  const expired = isExpired(auctionStartDate);
 
   const waitTime = auctionJson.roundTime;
   const auctionDuration = getAuctionDuration(waitTime);
@@ -288,7 +285,9 @@ function populateAuctions(auctionJson) {
       auctionDuration,
       auctionJson.buyer,
       auctionJson.seller,
-      walletAddress
+      walletAddress,
+      auctionAddress,
+      expired
     );
   } else if (auctionJson.auctionType === "dutch") {
     auctionItemCard = getDutchAuctionTemplate(
@@ -304,15 +303,31 @@ function populateAuctions(auctionJson) {
       auctionDuration,
       auctionJson.buyer,
       auctionJson.seller,
-      walletAddress
+      walletAddress,
+      auctionAddress,
+      expired
     );
   }
 
   if (auctionStatus == "upcoming") {
+    if (expired) {
+      completedAuctionsCount++;
+      $("#completed-count").html(completedAuctionsCount);
+      $("#completed-list").append(auctionItemCard);
+      return;
+    }
+
     upcomingAuctionsCount++;
     $("#upcoming-count").html(upcomingAuctionsCount);
     $("#upcoming-list").append(auctionItemCard);
   } else if (auctionStatus == "ongoing") {
+    if (expired) {
+      completedAuctionsCount++;
+      $("#completed-count").html(completedAuctionsCount);
+      $("#completed-list").append(auctionItemCard);
+      return;
+    }
+
     ongoingAuctionsCount++;
     $("#ongoing-count").html(ongoingAuctionsCount);
     $("#ongoing-list").append(auctionItemCard);
@@ -366,6 +381,10 @@ function getTimeLeftForAuctionStart(auctionStartDate) {
   const rem = diffTime - diffDays * (1000 * 60 * 60 * 24);
   const diffHours = Math.ceil(rem / (1000 * 60 * 60));
   return `${diffDays} day ${diffHours} hrs`;
+}
+
+function isExpired(auctionStartDate) {
+  return auctionStartDate - Date.now() < 0;
 }
 
 function getImageUrl(assetImageFileName) {
