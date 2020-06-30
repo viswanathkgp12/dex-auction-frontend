@@ -1,11 +1,11 @@
 {
-  "name": "webpack-babel-es7",
+  "name": "dex-auction",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server",
-    "prestart": "cp -R static/images dist && cp -R static/style dist && cp -R static/script dist && cp static/favicon.ico dist",
-    "build": "webpack --config webpack.prod.js --mode production && npm run prestart",
+    "prebuild": "cp -R static/images dist && cp -R static/style dist && cp -R static/script dist && cp static/favicon.ico dist",
+    "build": "npm run prebuild && webpack --config webpack.prod.js --mode production",
     "start": "http-server dist --port ${PORT:-80}"
   },
   "author": "",
