@@ -40,6 +40,8 @@ export async function connectWallet() {
   console.log("Address of wallet: ", address);
   walletState = CONNECTED;
   walletAddress = address;
+
+  return { walletAddress, walletState };
 }
 
 /**

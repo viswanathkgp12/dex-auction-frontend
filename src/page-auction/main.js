@@ -23,8 +23,7 @@ async function createBid(contractAddress, amount) {
   }
 
   console.log("Bid for auction succeeded with: ", opHash);
-
-  //   return poll(opHash);
+  return poll(opHash);
 }
 
 async function poll(opHash, retries = 10) {
@@ -68,7 +67,7 @@ async function poll(opHash, retries = 10) {
  * ----------------------
  */
 
-function myFunction() {
+function checkImageFileSelection() {
   var x = document.getElementById("myFile");
   var txt = "";
   if ("files" in x) {
@@ -92,21 +91,25 @@ function myFunction() {
 $("#prodct").on("click", async function () {
   // Check Thanos Availability
   await checkAvailability();
-  await connectWallet();
+  const walletInfo = await connectWallet();
+  walletAddress = walletInfo.walletAddress;
 
   checkAndSetKeys();
-  myFunction();
+  checkImageFileSelection();
 
   // Open slider
   $("body").addClass("openSlide");
   $(".menuBox ul li.prodct").addClass("active");
 });
 
-window.shortlistAuction = async function shortlistAuction() {
+let walletAddress;
+
+window.shortlistAuction = window.startAuction = async function shortlistAuction() {
   console.log("---------------");
   // Check Thanos Availability
   await checkAvailability();
-  await connectWallet();
+  const walletInfo = await connectWallet();
+  walletAddress = walletInfo.walletAddress;
 
   const contractAddress = "KT19uwQwQjeqgH9tyrzWFEHeiqBVChVVfZB1";
   const amount = 1e-6;
@@ -114,21 +117,31 @@ window.shortlistAuction = async function shortlistAuction() {
   await createBid(contractAddress, amount);
 };
 
-// Auctions populate
+/**
+ * Auctions populate
+ */
+
+$(document).ready(async function () {
+  await checkAvailability();
+  const walletInfo = await connectWallet();
+  walletAddress = walletInfo.walletAddress;
+  updateAuctionData();
+});
 
 let upcomingAuctionsCount = 0,
   ongoingAuctionsCount = 0,
   completedAuctionsCount = 0;
 
-function getAuctionType(auctionType) {
-  const auctionTypeMapping = {
-    english: "English Auction",
-    dutch: "Dutch Auction",
-    vickery: "Vickery",
-    sealed_bid: "Sealed Bid",
-  };
+async function updateAuctionData() {
+  upcomingAuctionsCount = 0;
+  ongoingAuctionsCount = 0;
+  completedAuctionsCount = 0;
 
-  return auctionTypeMapping[auctionType];
+  const auctions = await getAuctions();
+
+  auctions.forEach((auction) => {
+    populateAuctions(auction);
+  });
 }
 
 function populateAuctions(auctionJson) {
@@ -138,49 +151,23 @@ function populateAuctions(auctionJson) {
   const auctionDescription = auctionJson.assetDescription;
   const auctionParams = auctionJson.auctionParams;
 
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
   const auctionStartDate = new Date(auctionJson.startTime);
   const dateString =
     auctionStartDate.getDate() +
     " " +
-    monthNames[auctionStartDate.getMonth()] +
+    getMonthName(auctionStartDate.getMonth()) +
     ", " +
     auctionStartDate.getHours() +
     ":" +
     auctionStartDate.getMinutes() +
     " UTC";
   const assetImageFileName = auctionJson.assetImageFileName;
-
-  const imgUrl =
-    assetImageFileName == ""
-      ? ""
-      : `http://54.172.0.221:8080${assetImageFileName}`;
-
-  const diffTime = Math.abs(auctionStartDate - Date.now());
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  const rem = diffTime - diffDays * (1000 * 60 * 60 * 24);
-  const diffHours = Math.ceil(rem / (1000 * 60 * 60));
-  let timeLeft = `${diffDays} day ${diffHours} hrs`;
+  const imgUrl = getImageUrl(assetImageFileName);
+  const timeLeft = getTimeLeftForAuctionStart(auctionStartDate);
 
   const waitTime = auctionJson.roundTime;
-  const waitHours = Math.floor(waitTime / (60 * 60));
-  const waitMins = Math.ceil((waitTime - waitHours * (60 * 60)) / 60);
+  const auctionDuration = getAuctionDuration(waitTime);
 
-  const auctionDuration = `${waitHours} hr ${waitMins} mins`;
   let owner;
 
   if (auctionStatus == "upcoming") {
@@ -205,7 +192,10 @@ function populateAuctions(auctionJson) {
       auctionParams,
       timeLeft,
       dateString,
-      auctionDuration
+      auctionDuration,
+      auctionJson.buyer,
+      auctionJson.seller,
+      walletAddress
     );
   } else if (auctionJson.auctionType === "dutch") {
     auctionItemCard = getDutchAuctionTemplate(
@@ -218,7 +208,10 @@ function populateAuctions(auctionJson) {
       auctionParams,
       timeLeft,
       dateString,
-      auctionDuration
+      auctionDuration,
+      auctionJson.buyer,
+      auctionJson.seller,
+      walletAddress
     );
   }
 
@@ -237,18 +230,53 @@ function populateAuctions(auctionJson) {
   }
 }
 
-async function updateAuctionData() {
-  upcomingAuctionsCount = 0;
-  ongoingAuctionsCount = 0;
-  completedAuctionsCount = 0;
+function getAuctionType(auctionType) {
+  const auctionTypeMapping = {
+    english: "English Auction",
+    dutch: "Dutch Auction",
+    vickery: "Vickery",
+    sealed_bid: "Sealed Bid",
+  };
 
-  const auctions = await getAuctions();
-
-  auctions.forEach((auction) => {
-    populateAuctions(auction);
-  });
+  return auctionTypeMapping[auctionType];
 }
 
-$(document).ready(function () {
-  updateAuctionData();
-});
+function getMonthName(monthNumber) {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return monthNames[monthNumber];
+}
+
+function getAuctionDuration(waitTime) {
+  const waitHours = Math.floor(waitTime / (60 * 60));
+  const waitMins = Math.ceil((waitTime - waitHours * (60 * 60)) / 60);
+
+  return `${waitHours} hr ${waitMins} mins`;
+}
+
+function getTimeLeftForAuctionStart(auctionStartDate) {
+  const diffTime = Math.abs(auctionStartDate - Date.now());
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const rem = diffTime - diffDays * (1000 * 60 * 60 * 24);
+  const diffHours = Math.ceil(rem / (1000 * 60 * 60));
+  return `${diffDays} day ${diffHours} hrs`;
+}
+
+function getImageUrl(assetImageFileName) {
+  return assetImageFileName == ""
+    ? ""
+    : `http://54.172.0.221:8080${assetImageFileName}`;
+}

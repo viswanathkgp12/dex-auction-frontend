@@ -8,7 +8,10 @@ export function getEnglishAuctionTemplate(
   auctionParams,
   timeLeft,
   dateString,
-  auctionDuration
+  auctionDuration,
+  buyer,
+  seller,
+  userPubKey
 ) {
   let button = "",
     maxBidElement = "",
@@ -16,7 +19,17 @@ export function getEnglishAuctionTemplate(
     startDateElement = "",
     roundDurationElement = "";
   if (auctionStatus == "upcoming") {
-    button = `
+    if (userPubKey == seller) {
+      button = `
+        <input
+          type="button"
+          class="btn shortlistbtn"
+          value="Start"
+          onclick="startAuction()"
+        />
+        `;
+    } else if (userPubKey != seller && userPubKey != buyer) {
+      button = `
         <input
           type="button"
           class="btn shortlistbtn"
@@ -24,6 +37,8 @@ export function getEnglishAuctionTemplate(
           onclick="shortlistAuction()"
         />
         `;
+    }
+
     ownerElement = `
     <h3>
         Owner:
@@ -47,14 +62,32 @@ export function getEnglishAuctionTemplate(
     </li>
     `;
   } else if (auctionStatus == "ongoing") {
-    button = `
+    if (userPubKey == seller) {
+      button = `
+        <input
+          type="button"
+          class="btn shortlistbtn"
+          value="Resolve"
+          onclick="resolveAuction()"
+        />
+        <input
+          type="button"
+          class="btn shortlistbtn"
+          value="Cancel"
+          onclick="cancelAuction()"
+        />
+        `;
+    } else if (userPubKey != seller && userPubKey != buyer) {
+      button = `
         <input
           type="button"
           class="btn shortlistbtn"
           value="Bid"
-          onclick="shortlistAuction()"
+          onclick="bid()"
         />
         `;
+    }
+
     maxBidElement = `
     <h3 style="width: 50%">
         Highest Bid <span class="auctionReservePrice">${auctionParams.highestBid} XTZ</span>
@@ -83,6 +116,18 @@ export function getEnglishAuctionTemplate(
     </li>
     `;
   } else {
+    // TODO:
+    if (userPubKey == buyer) {
+      button = `
+        <input
+          type="button"
+          class="btn shortlistbtn"
+          value="Auction"
+          onclick="configureAuction()"
+        />
+        `;
+    }
+
     maxBidElement = `
     <h3 style="width: 50%">
         Winning Bid <span class="auctionReservePrice">${auctionParams.highestBid} XTZ</span>
@@ -147,7 +192,10 @@ export function getDutchAuctionTemplate(
   auctionParams,
   timeLeft,
   dateString,
-  auctionDuration
+  auctionDuration,
+  buyer,
+  seller,
+  userPubKey
 ) {
   let button = "",
     currPriceElement = "",
@@ -155,14 +203,26 @@ export function getDutchAuctionTemplate(
     roundDurationElement = "",
     startDateElement = "";
   if (auctionStatus == "upcoming") {
-    button = `
-          <input
-            type="button"
-            class="btn shortlistbtn"
-            value="Shortlist"
-            onclick="shortlistAuction()"
-          />
-          `;
+    if (userPubKey == seller) {
+      button = `
+        <input
+          type="button"
+          class="btn shortlistbtn"
+          value="Start"
+          onclick="startAuction()"
+        />
+        `;
+    } else if (userPubKey != seller && userPubKey != buyer) {
+      button = `
+        <input
+          type="button"
+          class="btn shortlistbtn"
+          value="Shortlist"
+          onclick="shortlistAuction()"
+        />
+        `;
+    }
+
     ownerElement = `
       <h3>
           Owner:
@@ -186,14 +246,26 @@ export function getDutchAuctionTemplate(
       </li>
       `;
   } else if (auctionStatus == "ongoing") {
-    button = `
-          <input
-            type="button"
-            class="btn shortlistbtn"
-            value="Bid"
-            onclick="shortlistAuction()"
-          />
-          `;
+    if (userPubKey == seller) {
+      button = `
+        <input
+          type="button"
+          class="btn shortlistbtn"
+          value="Drop Price"
+          onclick="dropPrice()"
+        />
+        `;
+    } else if (userPubKey != seller && userPubKey != buyer) {
+      button = `
+        <input
+          type="button"
+          class="btn shortlistbtn"
+          value="Accept Price"
+          onclick="acceptPrice()"
+        />
+        `;
+    }
+
     currPriceElement = `
       <h3 style="width: 50%">
           Current Price <span class="auctionReservePrice">${auctionParams.currentPrice} XTZ</span>
@@ -222,6 +294,18 @@ export function getDutchAuctionTemplate(
       </li>
       `;
   } else {
+    // TODO:
+    if (userPubKey == buyer) {
+      button = `
+        <input
+          type="button"
+          class="btn shortlistbtn"
+          value="Auction"
+          onclick="configureAuction()"
+        />
+        `;
+    }
+
     currPriceElement = `
         <h3 style="width: 50%">
             Winning Price <span class="auctionReservePrice">${auctionParams.currentPrice} XTZ</span>
