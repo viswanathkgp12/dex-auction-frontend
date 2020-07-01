@@ -228,6 +228,7 @@ window.dropPrice = async function (auctionAddress) {
 
 window.acceptPrice = async function (auctionAddress, id) {
   const price = $(`#bid-item-${id}-price`).html().split(" XTZ")[0];
+  console.log(price, id);
   await onClickAcceptPrice(auctionAddress, price);
 };
 
