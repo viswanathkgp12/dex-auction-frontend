@@ -37,6 +37,7 @@
     "@taquito/taquito": "^6.3.2-beta.0",
     "@thanos-wallet/dapp": "^0.4.4",
     "axios": "^0.19.2",
+    "bignumber.js": "^9.0.0",
     "dayjs": "^1.8.28",
     "http-server": "^0.12.3"
   }

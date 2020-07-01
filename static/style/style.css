@@ -1297,7 +1297,8 @@ body.overlaLoader:before {
   }
   80%,
   100% {
-    text-shadow: 0.25em 0 0 rgba(230, 138, 138, 1), 0.5em 0 0 rgba(230, 138, 138, 1);
+    text-shadow: 0.25em 0 0 rgba(230, 138, 138, 1),
+      0.5em 0 0 rgba(230, 138, 138, 1);
   }
 }
 
@@ -1318,4 +1319,86 @@ body.overlaLoader:before {
   100% {
     text-shadow: 0.25em 0 0 rgb(173, 240, 134), 0.5em 0 0 rgb(173, 240, 134);
   }
+}
+
+.priceReserv {
+  width: 415px;
+  height: 385px;
+  background: #fff;
+  padding: 10px;
+}
+.priceReserv .tp {
+  overflow: hidden;
+}
+.priceReserv .tp .lt {
+  float: left;
+  width: 50%;
+}
+.priceReserv .tp .rt {
+  float: left;
+  width: 50%;
+}
+.priceReserv .tp h2 {
+  font-weight: 700;
+  padding: 0 0 4px;
+  font-size: 22px;
+}
+.priceReserv .tp span {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 0 18px;
+}
+.priceReserv p {
+  margin: 0 0 23px;
+  font-weight: 600;
+  border-bottom: 1px dashed #303030;
+  padding: 0 0 10px;
+}
+.priceReserv .tp.dateBox h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.priceReserv .tp.dateBox span {
+  padding: 0 0 10px;
+}
+.priceReserv h3 {
+  background: #e5e5e5;
+  float: left;
+  border: 1px solid #303030;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 3px 4px;
+}
+.priceReserv .btnBox {
+  border-top: 1px dashed #303030;
+  margin: 22px 0 0;
+  float: left;
+  width: 100%;
+  padding: 15px 0 0;
+}
+.priceReserv .btnBox ul {
+  overflow: hidden;
+}
+.priceReserv .btnBox ul li {
+  float: left;
+  width: 50%;
+  text-align: center;
+  padding: 0 15px 15px;
+}
+.priceReserv .btnBox ul li:nth-child(3) {
+  clear: both;
+  width: 100%;
+}
+.priceReserv .btnBox ul li a {
+  display: block;
+  background: #ff6766;
+  height: 45px;
+  line-height: 45px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.priceReserv .btnBox ul li a:hover {
+  background: #e93c3a;
 }

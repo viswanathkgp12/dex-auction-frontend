@@ -1,3 +1,5 @@
+import { BigNumber } from "bignumber.js";
+
 export function getEnglishAuctionTemplate(
   imgUrl,
   auctionName,
@@ -20,6 +22,18 @@ export function getEnglishAuctionTemplate(
     ownerElement = "",
     startDateElement = "",
     roundDurationElement = "";
+
+  const minIncrease = new BigNumber(auctionParams.minIncrease)
+    .div(1e6)
+    .toFixed(6);
+  const reservePrice = new BigNumber(auctionParams.reservePrice)
+    .div(1e6)
+    .toFixed(6);
+  const highestBid = new BigNumber(auctionParams.highestBid)
+    .div(1e6)
+    .toFixed(6);
+
+  console.log(minIncrease, reservePrice, highestBid, auctionName);
   if (auctionStatus == "upcoming") {
     if (userPubKey == seller) {
       button = `
@@ -93,7 +107,7 @@ export function getEnglishAuctionTemplate(
 
     maxBidElement = `
     <h3 style="width: 50%">
-        Highest Bid <span class="auctionReservePrice">${auctionParams.highestBid} XTZ</span>
+        Highest Bid <span class="auctionReservePrice">${highestBid} XTZ</span>
     </h3>
     `;
     ownerElement = `
@@ -134,7 +148,7 @@ export function getEnglishAuctionTemplate(
 
     maxBidElement = `
     <h3 style="width: 50%">
-        Winning Bid <span class="auctionReservePrice">${auctionParams.highestBid} XTZ</span>
+        Winning Bid <span class="auctionReservePrice">${highestBid} XTZ</span>
     </h3>
     `;
     ownerElement = `
@@ -168,12 +182,12 @@ export function getEnglishAuctionTemplate(
           <div class="right">
             <span>
               <h3 style="width: 50%">
-                  Reserve Price <span class="auctionReservePrice">${auctionParams.reservePrice} XTZ</span>
+                  Reserve Price <span class="auctionReservePrice">${reservePrice} XTZ</span>
               </h3>
               ${maxBidElement}
             </span>
             <h4>
-                Min. Increment : <span class="auctionIncrement">${auctionParams.minIncrease} XTZ</span>
+                Min. Increment : <span class="auctionIncrement">${minIncrease} XTZ</span>
             </h4>
             <ul>
                 ${startDateElement}
@@ -208,6 +222,13 @@ export function getDutchAuctionTemplate(
     ownerElement = "",
     roundDurationElement = "",
     startDateElement = "";
+
+  const currPrice = new BigNumber(auctionParams.currentPrice)
+    .div(1e6)
+    .toFixed(6);
+  const reservePrice = new BigNumber(auctionParams.reservePrice)
+    .div(1e6)
+    .toFixed(6);
   if (auctionStatus == "upcoming") {
     if (userPubKey == seller) {
       button = `
@@ -275,7 +296,7 @@ export function getDutchAuctionTemplate(
 
     currPriceElement = `
       <h3 style="width: 50%">
-          Current Price <span class="auctionReservePrice" id="bid-item-${id}-price">${auctionParams.currentPrice} XTZ</span>
+          Current Price <span class="auctionReservePrice" id="bid-item-${id}-price">${currPrice} XTZ</span>
       </h3>
       `;
     ownerElement = `
@@ -316,7 +337,7 @@ export function getDutchAuctionTemplate(
 
     currPriceElement = `
         <h3 style="width: 50%">
-            Winning Price <span class="auctionReservePrice" id="bid-item-${id}-price">${auctionParams.currentPrice} XTZ</span>
+            Winning Price <span class="auctionReservePrice" id="bid-item-${id}-price">${currPrice} XTZ</span>
         </h3>
         `;
     ownerElement = `
@@ -350,12 +371,12 @@ export function getDutchAuctionTemplate(
             <div class="right">
               <span>
                 <h3 style="width: 50%">
-                    Reserve Price <span class="auctionReservePrice">${auctionParams.reservePrice} XTZ</span>
+                    Reserve Price <span class="auctionReservePrice">${reservePrice} XTZ</span>
                 </h3>
                 ${currPriceElement}
               </span>
               <h4>
-                  Current Price : <span class="auctionIncrement">${auctionParams.currentPrice} XTZ</span>
+                  Current Price : <span class="auctionIncrement">${currPrice} XTZ</span>
               </h4>
               <ul>
                   ${startDateElement}

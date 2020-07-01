@@ -328,7 +328,7 @@ window.chooseAuction = async function () {
   localStorage.setItem("contractAddress", contractAddress);
   await sleep(2000);
 
-  changeConfigureFormByAuctionType(auctionType)
+  changeConfigureFormByAuctionType(auctionType);
 
   // UI
   $(".tabHead ul li.two").removeClass("bold");
@@ -552,11 +552,13 @@ function setStorage(instanceStorageDetails, contractAddress) {
   $("#contractAddress").val(contractAddress);
 }
 
-function changeConfigureFormByAuctionType(auctionType){
-  switch(auctionType){
-    case 'dutch':
+function changeConfigureFormByAuctionType(auctionType) {
+  switch (auctionType) {
+    case "dutch":
       $("#tab3-auction-type").html("Dutch Auction");
-      $("#fieldInfoTooltip1").html("Base Price below which the price cannot be decreased");
+      $("#fieldInfoTooltip1").html(
+        "Base Price below which the price cannot be decreased"
+      );
       $("#increment").placeholder = "Opening Price (in XTZ)";
       $("#fieldInfoTooltip2").html("Auction Starting Price");
       break;
@@ -564,17 +566,17 @@ function changeConfigureFormByAuctionType(auctionType){
       $("#tab3-auction-type").html("Sealed Bid Auction");
       $("#reservePrice").placeholder = "Deposit amount (in XTZ)";
       $("#fieldInfoTooltip1").html("Deposit for bidders to participate");
-      $("#secondAuctionDetailField").hide()
+      $("#secondAuctionDetailField").hide();
       break;
     case "vickrey":
       $("#tab3-auction-type").html("Vickrey Auction");
       $("#reservePrice").placeholder = "Deposit amount (in XTZ)";
       $("#fieldInfoTooltip1").html("Deposit for bidders to participate");
-      $("#secondAuctionDetailField").hide()
+      $("#secondAuctionDetailField").hide();
       break;
     default:
-      //
-    }
+    //
+  }
 }
 
 $(document).ready(function () {
@@ -586,9 +588,11 @@ $(document).ready(function () {
     return false;
   });
 
-  isAvailable().then((available) => {
-    if (available) {
-      $(".thanos-banner").hide();
-    }
+  sleep(500).then(() => {
+    isAvailable().then((available) => {
+      if (available) {
+        $(".thanos-banner").hide();
+      }
+    });
   });
 });

@@ -1,3 +1,5 @@
+import { BigNumber } from "bignumber.js";
+
 import { getOpByHashTzkt, getAuctions } from "../utils/api";
 import { sleep } from "../utils/sleep";
 import {
@@ -228,8 +230,11 @@ window.dropPrice = async function (auctionAddress) {
 
 window.acceptPrice = async function (auctionAddress, id) {
   const price = $(`#bid-item-${id}-price`).html().split(" XTZ")[0];
-  console.log(price, id);
-  await onClickAcceptPrice(auctionAddress, price);
+  console.log(price);
+  await onClickAcceptPrice(
+    auctionAddress,
+    price
+  );
 };
 
 $(document).ready(async function () {
