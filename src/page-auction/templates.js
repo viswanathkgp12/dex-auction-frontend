@@ -329,7 +329,7 @@ export function getDutchAuctionTemplate(
       `;
     startDateElement = `
   <li style="width: 100% !important">
-    <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
+    <span>Start Date <cite class="timeLeft">${auctionStatus}</cite></span>
     <span class="auctionStartDate">${dateString}</span>
   </li>
   `;
