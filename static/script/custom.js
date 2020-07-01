@@ -1,4 +1,10 @@
 $(document).ready(function () {
+  // $('.cardBox.frstCard .cardItem').each(function (i) {
+  //     setTimeout(() => {
+  //         $(this).addClass('active');
+  //     }, i * 150);
+  // })
+
   setTimeout(() => {
     $(".banner .lt h1").addClass("active");
     $(".logo").addClass("active");
@@ -50,6 +56,10 @@ $(document).ready(function () {
           $(this).addClass("active");
         }, i * 200);
       });
+    }
+
+    if ($(".footerBox").hasClass("in-view")) {
+      $(".footerBox").addClass("active");
     }
   }
   screenVisible();
@@ -112,10 +122,6 @@ $(document).ready(function () {
     height: ttl - 80,
   });
 
-  $(".cancel").on("click", function () {
-    location.reload();
-  });
-
   $(function () {
     $(".acc__title").click(function (j) {
       var dropDown = $(this).closest(".acc__card").find(".acc__panel");
@@ -156,7 +162,7 @@ $(document).ready(function () {
   });
 
   $(function () {
-    $("#datepicker").datepicker({ minDate: 0 });
+    $("#datepicker").datepicker();
   });
 
   $(".tabHead ul li.one").on("click", function () {
@@ -211,6 +217,20 @@ $(document).ready(function () {
     }
   });
 
+  $("input.sbmt.finish").on("click", function () {
+    $(".aucPro").hide();
+    $(".wrenchBox").show();
+
+    setTimeout(() => {
+      $(".wrenchBox").hide();
+      $(".procesComplete").show();
+    }, 3000);
+  });
+
+  $("#Posted").on("click", function () {
+    location.reload();
+  });
+
   $(document).click(function (e) {
     // if (!$(e.target).is('.prodct, .slidePanel *')) {
     //     $('body').removeClass('openSlide');
@@ -226,11 +246,75 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on(".datepicker-modal button", "click", function () {});
+  $(document).on(".datepicker-modal button", "click", function () {
+    console.log("sssssssssssssssss");
+  });
 
   $("#three .input-group .focus").keypress(function () {
     $(this).parent(".form-group").next().hide();
   });
 
   $(".timepicker").timepicker();
+
+  /* new */
+  $(window).scroll(function () {
+    var sticky = $("header"),
+      scroll = $(window).scrollTop();
+
+    if (scroll >= 75) sticky.addClass("fixed");
+    else sticky.removeClass("fixed");
+  });
+
+  function makeTimer() {
+    //		var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");
+    var endTime = new Date("29 April 2020 9:56:00 GMT+01:00");
+    endTime = Date.parse(endTime) / 1000;
+
+    var now = new Date();
+    now = Date.parse(now) / 1000;
+
+    var timeLeft = endTime - now;
+
+    var days = Math.floor(timeLeft / 86400);
+    var hours = Math.floor((timeLeft - days * 86400) / 3600);
+    var minutes = Math.floor((timeLeft - days * 86400 - hours * 3600) / 60);
+    var seconds = Math.floor(
+      timeLeft - days * 86400 - hours * 3600 - minutes * 60
+    );
+
+    if (hours < "10") {
+      hours = "0" + hours;
+    }
+    if (minutes < "10") {
+      minutes = "0" + minutes;
+    }
+    if (seconds < "10") {
+      seconds = "0" + seconds;
+    }
+
+    $("#days").html(days + "<span>Days</span>");
+    $("#hours").html(hours + "<span>h</span>");
+    $("#minutes").html(minutes + "<span>m</span>");
+    $("#seconds").html(seconds + "<span>s</span>");
+  }
+
+  setInterval(function () {
+    makeTimer();
+  }, 1000);
+  /* new */
+
+  $(".auctioBid").on("click", function () {
+    $("body").addClass("bidding");
+  });
+
+  $(".bidDone").on("click", function () {
+    $("body").addClass("gudLuck");
+    setTimeout(() => {
+      $("body").addClass("biddingDone");
+    }, 3000);
+  });
+
+  $(".finisfBid button").on("click", function () {
+    $("body").removeClass("bidding", "gudLuck", "biddingDone");
+  });
 });

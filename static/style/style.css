@@ -101,7 +101,7 @@ button:focus {
 }
 .container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1050px;
   margin: 0 auto;
 }
 h1,
@@ -118,7 +118,7 @@ h5 {
 }
 .logo {
   float: left;
-  padding: 12px 0 45px;
+  padding: 9px 0 50px;
   perspective: 1000px;
 }
 .logo img {
@@ -191,6 +191,9 @@ h5 {
 }
 header {
   min-height: 75px;
+  position: relative;
+  top: 0;
+  transition: all 0.6s ease;
 }
 .banner .rt img.active {
   transform: translate(0, 0);
@@ -199,7 +202,7 @@ header {
 .banner .lt h1 {
   color: #707070;
   margin: 0;
-  font-size: 35px;
+  font-size: 40px;
   font-weight: 300;
   padding: 0 0 40px;
   max-width: 375px;
@@ -245,6 +248,7 @@ header {
   color: #0082d3;
   display: inline-block;
   position: relative;
+  text-decoration: underline;
 }
 .banner .lt span.pwd a:after {
   position: absolute;
@@ -287,7 +291,7 @@ header {
 .oneLine p {
   color: #707070;
   margin: 0;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 300;
   width: 100%;
   padding: 0 0 32px;
@@ -318,7 +322,7 @@ header {
 }
 .tradingBox ul li img {
   position: absolute;
-  bottom: 9px;
+  bottom: 19px;
   right: 0;
   left: 0;
   margin: 0 auto;
@@ -361,7 +365,6 @@ header {
   font-size: 24px;
   font-weight: normal;
   padding: 0 0 24px;
-  text-align: center;
 }
 .why ul {
   overflow: hidden;
@@ -399,7 +402,7 @@ header {
   line-height: 1.17;
 }
 .why {
-  margin: 0 0 80px;
+  margin: 0 0 200px;
 }
 .slidePanel {
   width: 400px;
@@ -515,7 +518,7 @@ body:before {
   padding-top: 29px;
   width: 100%;
 }
-/* .tabContnt .aucPro .input-group:before {
+.tabContnt .aucPro .input-group:before {
   position: absolute;
   right: 0;
   bottom: 10px;
@@ -526,10 +529,11 @@ body:before {
   height: 23px;
   padding: 0 0 0;
   z-index: 9;
-} */
+}
 .tabContnt .aucPro .input-group:nth-child(2) {
-  padding-top: 25px;
+  padding-top: 0;
   margin-bottom: 0;
+  margin-top: 39px;
 }
 .tabContnt .aucPro .input-group label {
   color: #aaaaaa;
@@ -537,6 +541,10 @@ body:before {
   font-weight: normal;
   display: block;
   margin: 0;
+  transform: translateY(-94%);
+  font-size: 15px;
+  position: absolute;
+  top: 0;
 }
 .tabContnt .aucPro .input-group .focus {
   width: 100%;
@@ -811,7 +819,7 @@ span.error {
   font-size: 18px;
   font-weight: normal;
   color: #aaaaaa;
-  padding: 0 0 5px;
+  padding: 0 0 17px;
 }
 .tabContnt .aucPro .input-group.date:before {
   position: absolute;
@@ -996,11 +1004,11 @@ span.error {
   border-top: 1px dashed #d5d5d5;
 }
 .cardBox .prod-card .rt .right ul li:first-child {
-  width: 60%;
+  width: 55%;
   float: left;
 }
 .cardBox .prod-card .rt .right ul li:last-child {
-  width: 40%;
+  width: 45%;
   float: left;
 }
 .cardBox .prod-card .rt .right ul li span {
@@ -1014,7 +1022,7 @@ span.error {
   font-weight: 600;
   color: #606060;
   font-style: normal;
-  width: 100px;
+  width: 69px;
   height: 16px;
   border-radius: 4px;
   background-color: #eaeaea;
@@ -1047,6 +1055,9 @@ span.error {
 .cardBox .prod-card .rt .right .resrv .rt-rs {
   width: 50%;
   float: left;
+}
+.tabContnt #three .aucPro .input-group label {
+  top: 7px;
 }
 
 body {
@@ -1081,9 +1092,7 @@ body {
   transform: translateY(-94%);
 }
 
-.tabContnt .aucPro .input-group .focused label {
-  font-size: 12px;
-}
+/* .tabContnt .aucPro .input-group .focused label {font-size: 12px;} */
 
 .form-input {
   position: relative;
@@ -1154,7 +1163,11 @@ body {
   padding: 0 0 15px;
 }
 .tabContnt #three .aucPro .input-group {
-  padding-top: 20px;
+  padding-top: 10px;
+  margin: 0 0 12px 0;
+}
+.tabContnt #three .aucPro .input-group.round {
+  margin: 42px 0 12px 0;
 }
 
 .tabContnt .sbmt.cancel {
@@ -1236,6 +1249,354 @@ body.overlaLoader:before {
   visibility: visible;
 }
 
+/**  new css 30 june **/
+.conectd {
+  float: left;
+  width: 150px;
+  position: relative;
+  margin: 22px 0 0 30px;
+}
+.conectd span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #606060;
+  position: relative;
+  padding: 0 0 0 15px;
+}
+.conectd span:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 1px;
+  width: 10px;
+  height: 10px;
+  border: solid 1.5px #fe3418;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+.conectd .dropTip {
+  position: absolute;
+  width: 100%;
+  border: solid 1px #d3d3d3;
+  padding: 7px 9px;
+  background-color: #ffffff;
+  top: 52px;
+  transition: all 0.4s ease;
+  z-index: 9;
+  opacity: 0;
+  visibility: hidden;
+}
+.conectd .dropTip p {
+  margin: 0;
+  color: #606060;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.17;
+}
+.conectd .dropTip:before {
+  position: absolute;
+  left: 62px;
+  top: -8px;
+  background: url("../images/aro.png") no-repeat left top;
+  width: 14px;
+  height: 8px;
+  content: "";
+}
+.conectd:hover .dropTip {
+  opacity: 1;
+  top: 30px;
+  visibility: visible;
+}
+.conectd.active span:before {
+  border: solid 1.5px #45c513;
+}
+.footerBox {
+  background: #606060;
+  position: relative;
+  padding: 30px 0 50px;
+  transition: all 1s ease;
+  transform: translate(0, 50px);
+  opacity: 0;
+  visibility: hidden;
+}
+.footerBox:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.fooDesign img {
+  width: 100%;
+}
+.fooDesign {
+  position: absolute;
+  top: -223px;
+  left: 0;
+  width: 100%;
+}
+.notFound {
+  height: 27px;
+  background-color: rgba(254, 52, 24, 0.55);
+  line-height: 27px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+}
+header.fixed {
+  position: fixed;
+  background: #fff;
+  height: 75px;
+  z-index: 9;
+  width: 100%;
+  box-shadow: 0 0 10px 0px #ccc;
+}
+.footerBox .lt {
+  float: left;
+  width: 50%;
+  padding: 0 120px 0 0;
+}
+.footerBox .rt {
+  float: left;
+  width: 50%;
+  padding: 0 0 0 135px;
+}
+.footerBox .fooLogo {
+  display: block;
+  padding: 0 0 43px;
+}
+.footerBox p {
+  font-size: 16px;
+  color: #d3d3d3;
+  line-height: 1.19;
+  margin: 0;
+}
+.footerBox p a {
+  color: #d3d3d3;
+  text-decoration: underline;
+}
+.footerBox .copyRt {
+  padding-top: 40px;
+}
+.footerBox li {
+  overflow: hidden;
+  padding: 0 0 10px;
+}
+.footerBox li span {
+  float: left;
+}
+.footerBox li p {
+  float: left;
+  margin: 9px 0 0 15px;
+}
+.footerBox li a {
+  color: #d3d3d3;
+}
+.footerBox.active {
+  transform: translate(0, 0);
+  opacity: 1;
+  visibility: visible;
+}
+.comnPopup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 399px;
+  height: 373px;
+  transform: translate(-50%, -50%) scale(0.3);
+  border-radius: 8px;
+  border: solid 1px #707070;
+  background-color: #ffffff;
+  z-index: 99;
+  transition: all 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+  padding: 35px 35px;
+}
+body.bidding:before {
+  opacity: 1;
+  visibility: visible;
+  z-index: 99;
+}
+.bidding .comnPopup {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+.comnPopup {
+  text-align: center;
+}
+.countDown {
+  display: none;
+}
+.bidding .countDown {
+  display: block;
+}
+.countDown h2 {
+  color: #707070;
+  font-size: 20px;
+  margin: 0 0 15px;
+}
+.countDown #timer {
+  overflow: hidden;
+  padding: 0 0 30px;
+  color: #606060;
+  font-size: 40px;
+  font-weight: 300;
+}
+.countDown #timer #hours {
+  display: inline-block;
+}
+.countDown #timer #minutes {
+  display: inline-block;
+}
+.countDown #timer #seconds {
+  display: inline-block;
+}
+.countDown #timer span {
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 30px;
+}
+.countDown h3 {
+  font-size: 20px;
+  color: #707070;
+  margin-bottom: 20px;
+}
+.countDown h4 {
+  font-size: 14px;
+  color: #707070;
+  margin-bottom: 3px;
+}
+.countDown .blnc {
+  width: 279px;
+  height: 59px;
+  border-radius: 4px;
+  border: solid 1px #d3d3d3;
+  margin: 0 auto 30px;
+  text-align: left;
+  padding: 0 32px 0 13px;
+  position: relative;
+}
+.countDown .blnc span {
+  font-size: 50px;
+  font-weight: 300;
+  color: #707070;
+  line-height: 54px;
+  display: block;
+}
+.countDown .blnc:before {
+  position: absolute;
+  right: 7px;
+  top: 11px;
+  width: 28px;
+  height: 37px;
+  content: "";
+  background: url("../images/TezosLogo.png") no-repeat;
+}
+.countDown button {
+  border: 0;
+  box-shadow: none;
+  width: 168px;
+  height: 38px;
+  border-radius: 8px;
+  background-color: #fe3418;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+.countDown button:hover {
+  background: #dc2b13;
+}
+.sending {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+body.gudLuck .gudlk {
+  padding: 218px 0 0;
+}
+body.gudLuck .countDown {
+  display: none;
+}
+.gudlk {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  transition: all 0.4s ease;
+  width: 100%;
+  left: 0;
+}
+.finisfBid .sending {
+  top: 45px;
+}
+.gudlk h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #606060;
+}
+.gudlk h3 {
+  color: #606060;
+  font-size: 12px;
+}
+body.gudLuck .gudlk {
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  top: 0;
+}
+section.cardBox {
+  padding: 0 0 200px;
+}
+body.biddingDone .gudlk {
+  display: none;
+}
+body.biddingDone .finisfBid {
+  display: block;
+  padding: 50px 0 0;
+}
+.finisfBid {
+  display: none;
+}
+.finisfBid button {
+  height: 53px;
+  border-radius: 8px;
+  background-color: #73a7fb;
+  line-height: 53px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  border: 0;
+  display: block;
+  width: 100%;
+  margin: 177px 0 0;
+  transition: all 0.4s ease;
+}
+.finisfBid button:hover {
+  background: #407ee3;
+}
+lottie-player.wrench {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -75%);
+}
+.wrenchBox {
+  display: none;
+}
+.procesComplete {
+  display: none;
+}
+
+/** *8/
+
+
 /*media query*/
 
 @media all and (min-width: 320px) and (max-width: 768px) {
@@ -1248,20 +1609,6 @@ body.overlaLoader:before {
 }
 
 @media all and (min-width: 320px) and (max-width: 768px) {
-}
-
-.thanos-banner {
-  width: 100%;
-  height: 20px;
-  background-color: rgba(254, 52, 24, 0.55);
-  font-family: Raleway;
-  font-size: 14px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #ffffff;
 }
 
 .thanos-banner a:visited {
@@ -1319,86 +1666,4 @@ body.overlaLoader:before {
   100% {
     text-shadow: 0.25em 0 0 rgb(173, 240, 134), 0.5em 0 0 rgb(173, 240, 134);
   }
-}
-
-.priceReserv {
-  width: 415px;
-  height: 385px;
-  background: #fff;
-  padding: 10px;
-}
-.priceReserv .tp {
-  overflow: hidden;
-}
-.priceReserv .tp .lt {
-  float: left;
-  width: 50%;
-}
-.priceReserv .tp .rt {
-  float: left;
-  width: 50%;
-}
-.priceReserv .tp h2 {
-  font-weight: 700;
-  padding: 0 0 4px;
-  font-size: 22px;
-}
-.priceReserv .tp span {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 0 0 18px;
-}
-.priceReserv p {
-  margin: 0 0 23px;
-  font-weight: 600;
-  border-bottom: 1px dashed #303030;
-  padding: 0 0 10px;
-}
-.priceReserv .tp.dateBox h2 {
-  font-size: 16px;
-  font-weight: 600;
-}
-.priceReserv .tp.dateBox span {
-  padding: 0 0 10px;
-}
-.priceReserv h3 {
-  background: #e5e5e5;
-  float: left;
-  border: 1px solid #303030;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 3px 4px;
-}
-.priceReserv .btnBox {
-  border-top: 1px dashed #303030;
-  margin: 22px 0 0;
-  float: left;
-  width: 100%;
-  padding: 15px 0 0;
-}
-.priceReserv .btnBox ul {
-  overflow: hidden;
-}
-.priceReserv .btnBox ul li {
-  float: left;
-  width: 50%;
-  text-align: center;
-  padding: 0 15px 15px;
-}
-.priceReserv .btnBox ul li:nth-child(3) {
-  clear: both;
-  width: 100%;
-}
-.priceReserv .btnBox ul li a {
-  display: block;
-  background: #ff6766;
-  height: 45px;
-  line-height: 45px;
-  color: #fff;
-  font-size: 16px;
-  border-radius: 4px;
-}
-.priceReserv .btnBox ul li a:hover {
-  background: #e93c3a;
 }
