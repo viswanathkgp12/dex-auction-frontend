@@ -8,11 +8,7 @@ import {
   dropPrice,
   acceptPrice,
 } from "../utils/thanos";
-import {
-  connectWallet,
-  checkAvailability,
-  checkAndSetKeys,
-} from "../common";
+import { connectWallet, checkAvailability, checkAndSetKeys } from "../common";
 import {
   getEnglishAuctionTemplate,
   getDutchAuctionTemplate,
@@ -38,6 +34,7 @@ async function onClickAuctionStart(contractAddress) {
   const { err, opHash } = await startAuction(contractAddress);
   if (err) {
     console.log("Error occured");
+    alert(`Transaction failed: ${err}`);
     return;
   }
 
@@ -51,6 +48,7 @@ async function onClickResolveAuction(contractAddress) {
   const { err, opHash } = await resolveAuction(contractAddress);
   if (err) {
     console.log("Error occured");
+    alert(`Transaction failed: ${err}`);
     return;
   }
 
@@ -64,6 +62,7 @@ async function onClickCancelAuction(contractAddress) {
   const { err, opHash } = await cancelAuction(contractAddress);
   if (err) {
     console.log("Error occured");
+    alert(`Transaction failed: ${err}`);
     return;
   }
 
@@ -77,6 +76,7 @@ async function onClickDropPrice(contractAddress) {
   const { err, opHash } = await dropPrice(contractAddress);
   if (err) {
     console.log("Error occured");
+    alert(`Transaction failed: ${err}`);
     return;
   }
 
@@ -90,6 +90,7 @@ async function onClickAcceptPrice(contractAddress, amount) {
   const { err, opHash } = await acceptPrice(contractAddress, amount);
   if (err) {
     console.log("Error occured");
+    alert(`Transaction failed: ${err}`);
     return;
   }
 
@@ -103,6 +104,7 @@ async function createBid(contractAddress, amount) {
   const { err, opHash } = await bid(contractAddress, amount);
   if (err) {
     console.log("Error occured");
+    alert(`Transaction failed: ${err}`);
     return;
   }
 
@@ -124,6 +126,7 @@ async function poll(opHash, retries = 10) {
     if (tzktOpdata !== null && tzktOpdata.length > 0) {
       const status = tzktOpdata[0].status;
       if (status === "applied") {
+        alert("Transaction succeeded");
         return {
           err: null,
         };
@@ -223,13 +226,14 @@ window.dropPrice = async function (auctionAddress) {
   await onClickDropPrice(auctionAddress);
 };
 
-window.acceptPrice = async function (auctionAddress) {
-  await onClickAcceptPrice(auctionAddress);
+window.acceptPrice = async function (auctionAddress, id) {
+  const price = $(`#bid-item-${id}-price`).html().split(" XTZ")[0];
+  await onClickAcceptPrice(auctionAddress, price);
 };
 
 $(document).ready(async function () {
-  await connectToThanos();
   updateAuctionData();
+  await connectToThanos();
 });
 
 /**
@@ -275,7 +279,6 @@ function populateAuctions(auctionJson, id) {
   const assetImageFileName = auctionJson.assetImageFileName;
   const imgUrl = getImageUrl(assetImageFileName);
   const timeLeft = getTimeLeftForAuctionStart(auctionStartDate);
-  const expired = isExpired(auctionStartDate);
 
   const waitTime = auctionJson.roundTime;
   const auctionDuration = getAuctionDuration(waitTime);
@@ -337,24 +340,10 @@ function populateAuctions(auctionJson, id) {
   }
 
   if (auctionStatus == "upcoming") {
-    if (expired) {
-      completedAuctionsCount++;
-      $("#completed-count").html(completedAuctionsCount);
-      $("#completed-list").append(auctionItemCard);
-      return;
-    }
-
     upcomingAuctionsCount++;
     $("#upcoming-count").html(upcomingAuctionsCount);
     $("#upcoming-list").append(auctionItemCard);
   } else if (auctionStatus == "ongoing") {
-    if (expired) {
-      completedAuctionsCount++;
-      $("#completed-count").html(completedAuctionsCount);
-      $("#completed-list").append(auctionItemCard);
-      return;
-    }
-
     ongoingAuctionsCount++;
     $("#ongoing-count").html(ongoingAuctionsCount);
     $("#ongoing-list").append(auctionItemCard);
@@ -413,10 +402,6 @@ function getTimeLeftForAuctionStart(auctionStartDate) {
   const rem = diffTime - diffDays * (1000 * 60 * 60 * 24);
   const diffHours = Math.ceil(rem / (1000 * 60 * 60));
   return `${diffDays} day ${diffHours} hrs`;
-}
-
-function isExpired(auctionStartDate) {
-  return auctionStartDate - Date.now() < 0;
 }
 
 function getImageUrl(assetImageFileName) {

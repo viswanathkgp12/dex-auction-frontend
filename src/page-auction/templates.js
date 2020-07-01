@@ -268,14 +268,14 @@ export function getDutchAuctionTemplate(
           type="button"
           class="btn"
           value="Accept Price"
-          onclick="acceptPrice('${contractAddress}')"
+          onclick="acceptPrice('${contractAddress}', '${id}')"
         />
         `;
     }
 
     currPriceElement = `
       <h3 style="width: 50%">
-          Current Price <span class="auctionReservePrice">${auctionParams.currentPrice} XTZ</span>
+          Current Price <span class="auctionReservePrice" id="bid-item-${id}-price">${auctionParams.currentPrice} XTZ</span>
       </h3>
       `;
     ownerElement = `
@@ -316,7 +316,7 @@ export function getDutchAuctionTemplate(
 
     currPriceElement = `
         <h3 style="width: 50%">
-            Winning Price <span class="auctionReservePrice">${auctionParams.currentPrice} XTZ</span>
+            Winning Price <span class="auctionReservePrice" id="bid-item-${id}-price">${auctionParams.currentPrice} XTZ</span>
         </h3>
         `;
     ownerElement = `
