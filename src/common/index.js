@@ -594,6 +594,9 @@ $(document).ready(function () {
         $(".thanos-banner").hide();
         $(".conectd").toggleClass("wallet-exists");
         $("#thanos-status").html("Connected");
+        $("#droptip-text").html(
+          `Thanos Wallet connected with address: ${walletAddress}`
+        );
       }
     });
   });
