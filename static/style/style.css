@@ -1274,6 +1274,17 @@ body.overlaLoader:before {
   background-color: #ffffff;
   border-radius: 50%;
 }
+.conectd.wallet-exists span:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 1px;
+  width: 10px;
+  height: 10px;
+  border: solid 1.5px #51f74f;
+  background-color: #51f74f;
+  border-radius: 50%;
+}
 .conectd .dropTip {
   position: absolute;
   width: 100%;

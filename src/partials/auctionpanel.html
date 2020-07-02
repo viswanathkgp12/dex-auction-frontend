@@ -97,8 +97,9 @@
           </div>
           <div class="acc__panel">
             <p>
-              An ascending price auction where the bid price keeps increasing 
-              starting from a reserve price till no bidder can match the highest standing bid.
+              An ascending price auction where the bid price keeps increasing
+              starting from a reserve price till no bidder can match the highest
+              standing bid.
             </p>
             <label class="checkCntr">
               <input type="button" />
@@ -115,8 +116,9 @@
           </div>
           <div class="acc__panel">
             <p>
-              A descending price auction which begins with a high asking price which 
-              decreases until one bidder is willing to pay the quoted price            
+              A descending price auction which begins with a high asking price
+              which decreases until one bidder is willing to pay the quoted
+              price
             </p>
             <label class="checkCntr">
               <input type="button" />
@@ -133,8 +135,8 @@
           </div>
           <div class="acc__panel">
             <p>
-              A sealed bid first price auction, where bidders submit sealed bids and
-              the highest bidder wins and pays his bid.
+              A sealed bid first price auction, where bidders submit sealed bids
+              and the highest bidder wins and pays his bid.
             </p>
             <label class="checkCntr">
               <input type="button" />
@@ -151,8 +153,9 @@
           </div>
           <div class="acc__panel">
             <p>
-              An sealed bid second price auction where bidders submit sealed bids and
-              the highest bidder wins and pays the amount of the second highest bid.
+              An sealed bid second price auction where bidders submit sealed
+              bids and the highest bidder wins and pays the amount of the second
+              highest bid.
             </p>
             <label class="checkCntr">
               <input type="button" />
@@ -212,7 +215,9 @@
                 type="number"
                 required
               />
-              <i class="toolTp">i<span id = "fieldInfoTooltip1">Opening price</span></i>
+              <i class="toolTp"
+                >i<span id="fieldInfoTooltip1">Opening price</span></i
+              >
             </div>
             <span class="Reserve error">Required field</span>
           </div>
@@ -228,7 +233,11 @@
                 type="text"
                 required
               />
-              <i class="toolTp">i<span id = "fieldInfoTooltip2">Minimum increase per bid</span></i>
+              <i class="toolTp"
+                >i<span id="fieldInfoTooltip2"
+                  >Minimum increase per bid</span
+                ></i
+              >
             </div>
             <span class="Increment error">Required field</span>
           </div>
@@ -250,7 +259,7 @@
           <div class="input-group">
             <div class="form-group">
               <input
-              id="timepicker"
+                id="timepicker"
                 class="form-input focus requFild timepicker"
                 placeholder="Start Time"
                 type="text"
@@ -292,6 +301,34 @@
             onclick="configureAuction()"
           />
         </form>
+      </div>
+
+      <div class="wrenchBox">
+        <lottie-player
+          class="wrench"
+          src="/script/Wrench.json"
+          background="transparent"
+          speed="1"
+          style="width: 200px; height: 200px;"
+          loop
+          autoplay
+        ></lottie-player>
+
+        <input type="button" class="sbmt" id="cnl" value="Cancel" />
+      </div>
+
+      <div class="procesComplete">
+        <lottie-player
+          class="wrench"
+          src="/script/Tick.json"
+          background="transparent"
+          speed="1"
+          style="width: 200px; height: 200px;"
+          loop
+          autoplay
+        ></lottie-player>
+
+        <input type="button" class="sbmt" id="Posted" value="Posted" />
       </div>
     </div>
     <!-- tab 3 -->

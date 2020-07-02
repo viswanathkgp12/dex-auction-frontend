@@ -592,6 +592,8 @@ $(document).ready(function () {
     isAvailable().then((available) => {
       if (available) {
         $(".thanos-banner").hide();
+        $(".conectd").toggleClass("wallet-exists");
+        $("#thanos-status").html("Connected");
       }
     });
   });
