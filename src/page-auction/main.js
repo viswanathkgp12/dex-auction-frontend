@@ -1,5 +1,3 @@
-import { BigNumber } from "bignumber.js";
-
 import { getOpByHashTzkt, getAuctions } from "../utils/api";
 import { sleep } from "../utils/sleep";
 import {
@@ -166,6 +164,8 @@ window.reconfigureAuction = async function (address, id) {
   await onClickConfigureAuction();
 };
 
+window.onClickConfigureAuction = onClickConfigureAuction;
+
 $("#prodct").on("click", onClickConfigureAuction);
 
 async function onClickConfigureAuction() {
@@ -269,7 +269,7 @@ async function updateAuctionData() {
 
       <h3>No Auction to showcase now</h3>
 
-      <a href="#" class="butn"><span>Auction your product</span></a>
+      <a href="#" class="butn" onclick="onClickConfigureAuction()"><span>Auction your product</span></a>
     </div>
 
 
