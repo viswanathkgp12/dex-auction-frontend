@@ -14,6 +14,7 @@ module.exports = {
     babel: "@babel/polyfill",
     index: "./src/page-index/main.js",
     viewauctions: "./src/page-auction/main.js",
+    myauction: "./src/page-myauction/main.js",
   },
 
   output: {
@@ -66,6 +67,17 @@ module.exports = {
         "src",
         "page-auction",
         "view-auction.html"
+      ),
+    }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      chunks: ["babel", "myauction"],
+      filename: "myauction.html",
+      template: path.resolve(
+        __dirname,
+        "src",
+        "page-myauction",
+        "my-auction.html"
       ),
     }),
     new webpack.ProvidePlugin({
