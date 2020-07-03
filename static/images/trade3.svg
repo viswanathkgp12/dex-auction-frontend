@@ -12,6 +12,15 @@
             <g id="prefix__Group_84" data-name="Group 84" transform="translate(0 6.639)">
                 <path id="prefix__Path_362" d="M1.68 9.106l30.1 21.7L2.61 59.977A8.937 8.937 0 0 1 0 53.649V14.325a8.83 8.83 0 0 1 1.68-5.219z" class="prefix__cls-4" data-name="Path 362" transform="translate(0 -9.07)"/>
                 <path id="prefix__Path_363" d="M115.214 14.3v39.326a8.937 8.937 0 0 1-2.61 6.328L83.433 30.782 113.5 9.047a8.887 8.887 0 0 1 1.714 5.253z" class="prefix__cls-4" data-name="Path 363" transform="translate(-32.991 -9.047)"/>
+                <g id="prefix__Group_172" data-name="Group 172" transform="translate(-976.777 -856.639)">
+                    <g id="prefix__Ellipse_24" fill="#fff" stroke="#707070" data-name="Ellipse 24" transform="translate(1041 843)">
+                        <circle cx="12" cy="12" r="12" stroke="none"/>
+                        <circle cx="12" cy="12" r="11.5" fill="none"/>
+                    </g>
+                    <text id="prefix___1" fill="#606060" data-name="1" font-family="Raleway-Regular, Raleway" font-size="20px" transform="translate(1049 861)">
+                        <tspan x="0" y="0">1</tspan>
+                    </text>
+                </g>
             </g>
             <g id="prefix__Group_86" data-name="Group 86" transform="translate(30.518 18.097)">
                 <circle id="prefix__Ellipse_20" cx="10.592" cy="10.592" r="10.592" fill="#ff3c21" data-name="Ellipse 20"/>

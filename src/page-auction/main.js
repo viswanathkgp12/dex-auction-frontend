@@ -231,10 +231,7 @@ window.dropPrice = async function (auctionAddress) {
 window.acceptPrice = async function (auctionAddress, id) {
   const price = $(`#bid-item-${id}-price`).html().split(" XTZ")[0];
   console.log(price);
-  await onClickAcceptPrice(
-    auctionAddress,
-    price
-  );
+  await onClickAcceptPrice(auctionAddress, price);
 };
 
 $(document).ready(async function () {
@@ -261,6 +258,30 @@ async function updateAuctionData() {
 
   for (let i = 0; i < auctions.length; i++) {
     populateAuctions(auctions[i], i);
+  }
+
+  const noAuctionsElement = `
+  <div class="noFiles">
+
+    <div class="catFile">
+      <lottie-player class="" src="script/Cat.json" background="transparent" speed="1"
+          style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+
+      <h3>No Auction to showcase now</h3>
+
+      <a href="#" class="butn"><span>Auction your product</span></a>
+    </div>
+
+
+  </div>
+  `;
+
+  if (upcomingAuctionsCount === 0) {
+    $("#upcoming-list").append(noAuctionsElement);
+  } else if (ongoingAuctionsCount === 0) {
+    $("#ongoing-list").append(noAuctionsElement);
+  } else if (completedAuctionsCount === 0) {
+    $("#completed-list").append(noAuctionsElement);
   }
 }
 

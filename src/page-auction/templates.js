@@ -21,7 +21,8 @@ export function getEnglishAuctionTemplate(
     maxBidElement = "",
     ownerElement = "",
     startDateElement = "",
-    roundDurationElement = "";
+    roundDurationElement = "",
+    timeLeftElement = "";
 
   const minIncrease = new BigNumber(auctionParams.minIncrease)
     .div(1e6)
@@ -33,25 +34,36 @@ export function getEnglishAuctionTemplate(
     .div(1e6)
     .toFixed(6);
 
-  console.log(minIncrease, reservePrice, highestBid, auctionName);
   if (auctionStatus == "upcoming") {
     if (userPubKey == seller) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Start"
-          onclick="startAuction('${contractAddress}')"
-        />
+      <div class="btnBox">
+        <ul>
+            <li>
+              <input
+              type="button"
+              class="btn"
+              value="Start"
+              onclick="startAuction('${contractAddress}')"
+            />
+          </li>
+        </ul>
+      </div>
         `;
     } else if (userPubKey != seller && userPubKey != buyer) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Shortlist"
-          onclick="shortlistAuction('${contractAddress}')"
-        />
+      <div class="btnBox">
+        <ul>
+            <li>
+              <input
+              type="button"
+              class="btn"
+              value="Shortlist"
+              onclick="shortlistAuction('${contractAddress}')"
+            />
+          </li>
+        </ul>
+      </div>
         `;
     }
 
@@ -67,48 +79,61 @@ export function getEnglishAuctionTemplate(
     timeLeft += " left";
 
     startDateElement = `
-    <li>
-      <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
+      <h2>Start Date</h2>
       <span class="auctionStartDate">${dateString}</span>
-    </li>
     `;
     roundDurationElement = `
-    <li>
-        <span>Round Duration</span>
+        <h2>Round Duration</h2>
         <span class="auctionDuration">${auctionDuration}</span>
-    </li>
+    `;
+    timeLeftElement = `
+    <h3 class="timeLeft">${timeLeft}</h3>
     `;
   } else if (auctionStatus == "ongoing") {
     if (userPubKey == seller) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Resolve"
-          onclick="resolveAuction('${contractAddress}')"
-        />
-        <input
-          type="button"
-          class="btn"
-          value="Cancel"
-          onclick="cancelAuction('${contractAddress}')"
-        />
-        `;
+      <div class="btnBox">
+          <ul>
+            <li>
+                <input
+                  type="button"
+                  class="btn"
+                  value="Resolve"
+                  onclick="resolveAuction('${contractAddress}')"
+                  />
+            </li>
+            <li>
+                <input
+                  type="button"
+                  class="btn"
+                  value="Cancel"
+                  onclick="cancelAuction('${contractAddress}')"
+                  />
+            </li>
+          </ul>
+      </div>
+      `;
     } else if (userPubKey != seller && userPubKey != buyer) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Bid"
-          onclick="bid('${contractAddress}')"
-        />
-        `;
+      <div class="btnBox">
+          <ul>
+            <li>
+                <input
+                  type="button"
+                  class="btn"
+                  value="Bid"
+                  onclick="bid('${contractAddress}')"
+                  />
+            </li>
+          </ul>
+      </div>
+      `;
     }
 
     maxBidElement = `
-    <h3 style="width: 50%">
+    <h2>
         Highest Bid <span class="auctionReservePrice">${highestBid} XTZ</span>
-    </h3>
+    </h2>
     `;
     ownerElement = `
     <h3>
@@ -122,34 +147,39 @@ export function getEnglishAuctionTemplate(
     timeLeft = "Ongoing";
 
     startDateElement = `
-    <li>
-      <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
+      <h2>Start Date</h2>
       <span class="auctionStartDate">${dateString}</span>
-    </li>
     `;
     roundDurationElement = `
-    <li>
-        <span>Round Ends In</span>
+        <h2>Round Ends In</h2>
         <span class="auctionDuration">${auctionDuration}</span>
-    </li>
+    `;
+    timeLeftElement = `
+    <h3 class="timeLeft">${timeLeft}</h3>
     `;
   } else {
     // TODO:
     if (userPubKey == buyer) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Auction"
-          onclick="reconfigureAuction('${contractAddress}', '${id}')"
-        />
-        `;
+      <div class="btnBox">
+          <ul>
+            <li>
+                <input
+                  type="button"
+                  class="btn"
+                  value="Auction"
+                  onclick="reconfigureAuction('${contractAddress}', '${id}')"
+                  />
+            </li>
+          </ul>
+      </div>
+      `;
     }
 
     maxBidElement = `
-    <h3 style="width: 50%">
+    <h2>
         Winning Bid <span class="auctionReservePrice">${highestBid} XTZ</span>
-    </h3>
+    </h2>
     `;
     ownerElement = `
     <h3>
@@ -160,43 +190,53 @@ export function getEnglishAuctionTemplate(
     </h3>
     `;
     startDateElement = `
-    <li style="width: 100% !important">
-      <span>Start Date <cite class="timeLeft">${auctionStatus}</cite></span>
+      <h2>Start Date</h2>
       <span class="auctionStartDate">${dateString}</span>
-    </li>
+    `;
+    timeLeftElement = `
+    <h3 class="timeLeft">${auctionStatus}</h3>
     `;
   }
 
   return `
-    <div class="prod-card">
+      <div class="prod-card">
       <div class="lt auctionImage"><img alt="bid-item-image" src="${imgUrl}" /></div>
       <div class="rt">
-          <div class="left">
+        <div class="left">
             <h1 class="auctionName" id="bid-item-${id}-name">${auctionName}</h1>
             <h2 class="auctionType" id="bid-item-${id}-type">${auctionType}</h2>
             ${ownerElement}
             <div class="paragrph auctionDescription" id="bid-item-${id}-desc">
-                <p>${auctionDescription}</p>
+              <p>${auctionDescription}</p>
             </div>
-          </div>
-          <div class="right">
-            <span>
-              <h3 style="width: 50%">
-                  Reserve Price <span class="auctionReservePrice">${reservePrice} XTZ</span>
-              </h3>
-              ${maxBidElement}
-            </span>
-            <h4>
-                Min. Increment : <span class="auctionIncrement">${minIncrease} XTZ</span>
-            </h4>
-            <ul>
-                ${startDateElement}
-                ${roundDurationElement}
-            </ul>
-            ${button}
-          </div>
+        </div>
+        <div class="right">
+            <div class="priceReserv">
+              <div class="tp">
+                  <div class="lt">
+                    <h2> Reserve Price</h2>
+                    <span class="auctionReservePrice">${reservePrice} XTZ</span>
+                  </div>
+                  <div class="rt">
+                    ${maxBidElement}
+                  </div>
+              </div>
+              <p>
+                  Min. Increment : <span class="auctionIncrement">${minIncrease} XTZ</span>
+              </p>
+              <div class="tp dateBox">
+                  <div class="lt">
+                    ${startDateElement}
+                  </div>
+                  <div class="rt">
+                    ${roundDurationElement}
+                  </div>
+              </div>
+              ${timeLeftElement}
+              ${button}
+            </div>
+        </div>
       </div>
-    </div>
     `;
 }
 
@@ -221,7 +261,8 @@ export function getDutchAuctionTemplate(
     currPriceElement = "",
     ownerElement = "",
     roundDurationElement = "",
-    startDateElement = "";
+    startDateElement = "",
+    timeLeftElement = "";
 
   const currPrice = new BigNumber(auctionParams.currentPrice)
     .div(1e6)
@@ -232,22 +273,34 @@ export function getDutchAuctionTemplate(
   if (auctionStatus == "upcoming") {
     if (userPubKey == seller) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Start"
-          onclick="startAuction('${contractAddress}')"
-        />
-        `;
+      <div class="btnBox">
+          <ul>
+            <li>
+                <input
+                    type="button"
+                    class="btn"
+                    value="Start"
+                    onclick="startAuction('${contractAddress}')"
+                  />
+            </li>
+          </ul>
+      </div>
+      `;
     } else if (userPubKey != seller && userPubKey != buyer) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Shortlist"
-          onclick="shortlistAuction('${contractAddress}')"
-        />
-        `;
+      <div class="btnBox">
+          <ul>
+            <li>
+                <input
+                    type="button"
+                    class="btn"
+                    value="Shortlist"
+                    onclick="shortlistAuction('${contractAddress}')"
+                  />
+            </li>
+          </ul>
+      </div>
+      `;
     }
 
     ownerElement = `
@@ -262,42 +315,53 @@ export function getDutchAuctionTemplate(
     timeLeft += " left";
 
     startDateElement = `
-      <li>
-        <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
+        <h2>Start Date </h2>
         <span class="auctionStartDate">${dateString}</span>
-      </li>
       `;
     roundDurationElement = `
-      <li>
-          <span>Round Duration</span>
+          <h2>Round Duration</h2>
           <span class="auctionDuration">${auctionDuration}</span>
-      </li>
       `;
+    timeLeftElement = `
+    <h3 class="timeLeft">${timeLeft}</h3>
+    `;
   } else if (auctionStatus == "ongoing") {
     if (userPubKey == seller) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Drop Price"
-          onclick="dropPrice('${contractAddress}')"
-        />
-        `;
+      <div class="btnBox">
+          <ul>
+            <li>
+                <input
+                    type="button"
+                    class="btn"
+                    value="Drop Price"
+                    onclick="dropPrice('${contractAddress}')"
+                  />
+            </li>
+          </ul>
+      </div>
+      `;
     } else if (userPubKey != seller && userPubKey != buyer) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Accept Price"
-          onclick="acceptPrice('${contractAddress}', '${id}')"
-        />
-        `;
+      <div class="btnBox">
+          <ul>
+            <li>
+                <input
+                    type="button"
+                    class="btn"
+                    value="Accept Price"
+                    onclick="acceptPrice('${contractAddress}', '${id}')"
+                  />
+            </li>
+          </ul>
+      </div>
+      `;
     }
 
     currPriceElement = `
-      <h3 style="width: 50%">
+      <h2>
           Current Price <span class="auctionReservePrice" id="bid-item-${id}-price">${currPrice} XTZ</span>
-      </h3>
+      </h2>
       `;
     ownerElement = `
       <h3>
@@ -311,34 +375,39 @@ export function getDutchAuctionTemplate(
     timeLeft = "Ongoing";
 
     startDateElement = `
-  <li>
-    <span>Start Date <cite class="timeLeft">${timeLeft}</cite></span>
+    <h2>Start Date</h2>
     <span class="auctionStartDate">${dateString}</span>
-  </li>
   `;
     roundDurationElement = `
-      <li>
-          <span>Round Ends In</span>
+          <h2>Round Ends In</h2>
           <span class="auctionDuration">${auctionDuration}</span>
-      </li>
       `;
+    timeLeftElement = `
+    <h3 class="timeLeft">${timeLeft}</h3>
+    `;
   } else {
     // TODO:
     if (userPubKey == buyer) {
       button = `
-        <input
-          type="button"
-          class="btn"
-          value="Auction"
-          onclick="reconfigureAuction('${contractAddress}', '${id}')"
-        />
-        `;
+      <div class="btnBox">
+          <ul>
+            <li>
+                <input
+                    type="button"
+                    class="btn"
+                    value="Auction"
+                    onclick="reconfigureAuction('${contractAddress}', '${id}')"
+                  />
+            </li>
+          </ul>
+      </div>
+      `;
     }
 
     currPriceElement = `
-        <h3 style="width: 50%">
+        <h2>
             Winning Price <span class="auctionReservePrice" id="bid-item-${id}-price">${currPrice} XTZ</span>
-        </h3>
+        </h2>
         `;
     ownerElement = `
       <h3>
@@ -349,42 +418,51 @@ export function getDutchAuctionTemplate(
       </h3>
       `;
     startDateElement = `
-  <li style="width: 100% !important">
-    <span>Start Date <cite class="timeLeft">${auctionStatus}</cite></span>
-    <span class="auctionStartDate">${dateString}</span>
-  </li>
-  `;
+      <span>Start Date</span>
+      <span class="auctionStartDate">${dateString}</span>
+    `;
+    timeLeftElement = `
+    <h3 class="timeLeft">${auctionStatus}</h3>
+    `;
   }
-
   return `
       <div class="prod-card">
-        <div class="lt auctionImage"><img alt="bid-item-image" src="${imgUrl}" /></div>
-        <div class="rt">
-            <div class="left">
-              <h1 class="auctionName" id="bid-item-${id}-name">${auctionName}</h1>
-              <h2 class="auctionType" id="bid-item-${id}-type">${auctionType}</h2>
-              ${ownerElement}
-              <div class="paragrph auctionDescription" id="bid-item-${id}-desc">
-                  <p>${auctionDescription}</p>
-              </div>
+      <div class="lt auctionImage"><img alt="bid-item-image" src="${imgUrl}" /></div>
+      <div class="rt">
+        <div class="left">
+            <h1 class="auctionName" id="bid-item-${id}-name">${auctionName}</h1>
+            <h2 class="auctionType" id="bid-item-${id}-type">${auctionType}</h2>
+            ${ownerElement}
+            <div class="paragrph auctionDescription" id="bid-item-${id}-desc">
+              <p>${auctionDescription}</p>
             </div>
-            <div class="right">
-              <span>
-                <h3 style="width: 50%">
-                    Reserve Price <span class="auctionReservePrice">${reservePrice} XTZ</span>
-                </h3>
-                ${currPriceElement}
-              </span>
-              <h4>
-                  Current Price : <span class="auctionIncrement">${currPrice} XTZ</span>
-              </h4>
-              <ul>
-                  ${startDateElement}
-                  ${roundDurationElement}
-              </ul>
+        </div>
+        <div class="right">
+            <div class="priceReserv">
+              <div class="tp">
+                  <div class="lt">
+                    <h2> Reserve Price</h2>
+                    <span class="auctionReservePrice">${reservePrice} XTZ</span>
+                  </div>
+                  <div class="rt">
+                    ${currPriceElement}
+                  </div>
+              </div>
+              <p>
+                Current Price : <span class="auctionIncrement">${currPrice} XTZ</span>
+              </p>
+              <div class="tp dateBox">
+                  <div class="lt">
+                    ${startDateElement}
+                  </div>
+                  <div class="rt">
+                    ${roundDurationElement}
+                  </div>
+              </div>
+              ${timeLeftElement}
               ${button}
             </div>
         </div>
       </div>
-      `;
+    `;
 }

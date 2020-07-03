@@ -24,8 +24,8 @@
                     <circle cx="12" cy="12" r="12" stroke="none"/>
                     <circle cx="12" cy="12" r="11.5" fill="none"/>
                 </g>
-                <text id="prefix___1" fill="#606060" data-name="1" font-family="Raleway-Regular, Raleway" font-size="20px" transform="translate(1049 861)">
-                    <tspan x="0" y="0">1</tspan>
+                <text id="prefix___2" fill="#606060" data-name="2" font-family="Raleway-Regular, Raleway" font-size="20px" transform="translate(1048 861)">
+                    <tspan x="0" y="0">2</tspan>
                 </text>
             </g>
         </g>
