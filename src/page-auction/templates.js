@@ -40,12 +40,7 @@ export function getEnglishAuctionTemplate(
       <div class="btnBox">
         <ul>
             <li>
-              <input
-              type="button"
-              class="btn"
-              value="Start"
-              onclick="startAuction('${contractAddress}')"
-            />
+              <a onclick="startAuction('${contractAddress}')">Start</a>
           </li>
         </ul>
       </div>
@@ -55,12 +50,7 @@ export function getEnglishAuctionTemplate(
       <div class="btnBox">
         <ul>
             <li>
-              <input
-              type="button"
-              class="btn"
-              value="Shortlist"
-              onclick="shortlistAuction('${contractAddress}')"
-            />
+              <a onclick="shortlistAuction('${contractAddress}')">Shortlist</a>
           </li>
         </ul>
       </div>
@@ -95,20 +85,10 @@ export function getEnglishAuctionTemplate(
       <div class="btnBox">
           <ul>
             <li>
-                <input
-                  type="button"
-                  class="btn"
-                  value="Resolve"
-                  onclick="resolveAuction('${contractAddress}')"
-                  />
+              <a onclick="resolveAuction('${contractAddress}')">Resolve</a>
             </li>
             <li>
-                <input
-                  type="button"
-                  class="btn"
-                  value="Cancel"
-                  onclick="cancelAuction('${contractAddress}')"
-                  />
+              <a onclick="cancelAuction('${contractAddress}')">Cancel</a>
             </li>
           </ul>
       </div>
@@ -118,12 +98,7 @@ export function getEnglishAuctionTemplate(
       <div class="btnBox">
           <ul>
             <li>
-                <input
-                  type="button"
-                  class="btn auctioBid"
-                  value="Bid"
-                  onclick="bid('${contractAddress}')"
-                  />
+              <a class="auctioBid" onclick="bid('${contractAddress}')">Bid</a>
             </li>
           </ul>
       </div>
@@ -164,12 +139,7 @@ export function getEnglishAuctionTemplate(
       <div class="btnBox">
           <ul>
             <li>
-                <input
-                  type="button"
-                  class="btn"
-                  value="Auction"
-                  onclick="reconfigureAuction('${contractAddress}', '${id}')"
-                  />
+              <a onclick="reconfigureAuction('${contractAddress}', '${id}')">Auction</a>
             </li>
           </ul>
       </div>
@@ -276,12 +246,7 @@ export function getDutchAuctionTemplate(
       <div class="btnBox">
           <ul>
             <li>
-                <input
-                    type="button"
-                    class="btn"
-                    value="Start"
-                    onclick="startAuction('${contractAddress}')"
-                  />
+              <a onclick="startAuction('${contractAddress}')">Start</a>
             </li>
           </ul>
       </div>
@@ -291,12 +256,7 @@ export function getDutchAuctionTemplate(
       <div class="btnBox">
           <ul>
             <li>
-                <input
-                    type="button"
-                    class="btn"
-                    value="Shortlist"
-                    onclick="shortlistAuction('${contractAddress}')"
-                  />
+              <a onclick="shortlistAuction('${contractAddress}')">Shortlist</a>
             </li>
           </ul>
       </div>
@@ -331,12 +291,7 @@ export function getDutchAuctionTemplate(
       <div class="btnBox">
           <ul>
             <li>
-                <input
-                    type="button"
-                    class="btn auctioBid"
-                    value="Drop Price"
-                    onclick="dropPrice('${contractAddress}')"
-                  />
+              <a class="auctioBid" onclick="dropPrice('${contractAddress}')">Drop Price</a>
             </li>
           </ul>
       </div>
@@ -346,12 +301,7 @@ export function getDutchAuctionTemplate(
       <div class="btnBox">
           <ul>
             <li>
-                <input
-                    type="button"
-                    class="btn"
-                    value="Accept Price"
-                    onclick="acceptPrice('${contractAddress}', '${id}')"
-                  />
+              <a class="auctioBid" onclick="acceptPrice('${contractAddress}', '${id}')">Accept Price</a>
             </li>
           </ul>
       </div>
@@ -391,12 +341,7 @@ export function getDutchAuctionTemplate(
       <div class="btnBox">
           <ul>
             <li>
-                <input
-                    type="button"
-                    class="btn"
-                    value="Auction"
-                    onclick="reconfigureAuction('${contractAddress}', '${id}')"
-                  />
+            <a onclick="reconfigureAuction('${contractAddress}', '${id}')">Auction</a>
             </li>
           </ul>
       </div>
