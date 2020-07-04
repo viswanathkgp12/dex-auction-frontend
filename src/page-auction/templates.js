@@ -120,7 +120,7 @@ export function getEnglishAuctionTemplate(
             <li>
                 <input
                   type="button"
-                  class="btn"
+                  class="btn auctioBid"
                   value="Bid"
                   onclick="bid('${contractAddress}')"
                   />
@@ -333,7 +333,7 @@ export function getDutchAuctionTemplate(
             <li>
                 <input
                     type="button"
-                    class="btn"
+                    class="btn auctioBid"
                     value="Drop Price"
                     onclick="dropPrice('${contractAddress}')"
                   />
@@ -386,7 +386,6 @@ export function getDutchAuctionTemplate(
     <h3 class="timeLeft">${timeLeft}</h3>
     `;
   } else {
-    // TODO:
     if (userPubKey == buyer) {
       button = `
       <div class="btnBox">

@@ -122,6 +122,10 @@ $(document).ready(function () {
     height: ttl - 80,
   });
 
+  $(".cancel").on("click", function () {
+    location.reload();
+  });
+
   $(function () {
     $(".acc__title").click(function (j) {
       var dropDown = $(this).closest(".acc__card").find(".acc__panel");
@@ -217,16 +221,6 @@ $(document).ready(function () {
     }
   });
 
-  $("input.sbmt.finish").on("click", function () {
-    $(".aucPro").hide();
-    $(".wrenchBox").show();
-
-    setTimeout(() => {
-      $(".wrenchBox").hide();
-      $(".procesComplete").show();
-    }, 3000);
-  });
-
   $("#Posted").on("click", function () {
     location.reload();
   });
@@ -301,7 +295,6 @@ $(document).ready(function () {
   setInterval(function () {
     makeTimer();
   }, 1000);
-  /* new */
 
   $(".auctioBid").on("click", function () {
     $("body").addClass("bidding");
@@ -316,5 +309,40 @@ $(document).ready(function () {
 
   $(".finisfBid button").on("click", function () {
     $("body").removeClass("bidding", "gudLuck", "biddingDone");
+    location.reload();
   });
+
+  $(function () {
+    $("#myFile").on("change", function () {
+      var filePath = $(this).val();
+      $(".fileUpld").append(
+        '<div class="pathName"><p>' +
+          filePath +
+          '</p><a class="removePath" href="javascript:void(0)">X Remove</a></div>'
+      );
+
+      $(document).on("click", ".removePath", function () {
+        $(".pathName").remove();
+      });
+    });
+  });
+
+  $("#sellr").on("click", function () {
+    $(".switchBtn .plate i").css("left", "47px");
+    $(".switchBtn span").removeClass("active");
+    $(".switchBtn span.sw-rt").addClass("active");
+  });
+
+  $("#allFiltr").on("click", function () {
+    $(".switchBtn .plate i").css("left", "24px");
+    $(".switchBtn span").removeClass("active");
+    $(".switchBtn span.sw-mid").addClass("active");
+  });
+
+  $("#buyr").on("click", function () {
+    $(".switchBtn .plate i").css("left", "0");
+    $(".switchBtn span").removeClass("active");
+    $(".switchBtn span.sw-lt").addClass("active");
+  });
+
 });

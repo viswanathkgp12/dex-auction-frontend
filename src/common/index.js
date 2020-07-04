@@ -437,7 +437,6 @@ window.configureAuction = async function () {
   tzOffsetHours = tzOffsetHours < 10 ? "0" + tzOffsetHours : tzOffsetHours;
 
   const isAM = timepicker.includes("AM");
-  console.log(timepicker.slice(0, -3));
   if (isAM) {
     let hour = timepicker.split(":")[0];
     const min = timepicker.slice(0, -3).split(":")[1];
@@ -464,18 +463,21 @@ window.configureAuction = async function () {
       starttime,
       waittime
     );
-    hideSlider();
+
+    $(".aucPro").hide();
+    $(".wrenchBox").show();
 
     const storage = await getContractStorage(contractAddress);
     setStorage(storage, contractAddress);
 
     console.log("submitting form");
-    submitForm();
+    await submitForm();
 
     await sleep(3000);
 
     const status = await pollForAuctionConfigure(opHash);
-    redirect(status);
+    $(".wrenchBox").hide();
+    $(".procesComplete").show();
 
     $(".tabHead ul li.three").addClass("disabled").css("opacity", 0.5);
     $("#configureAuctionBtn").prop("disabled", true).css("opacity", 0.5);
@@ -490,8 +492,32 @@ window.setAuctionType = function (type) {
   $("#tab3-auction-type").html(getAuctionType());
 };
 
-function submitForm() {
-  $("form#auction-details-form").submit();
+async function submitForm() {
+  return new Promise((resolve, reject) => {
+    var form = $("#auction-details-form")[0];
+
+    // Create an FormData object
+    var data = new FormData(form);
+
+    $.ajax({
+      type: "POST",
+      enctype: "multipart/form-data",
+      url: "http://54.172.0.221:8080/update-auction-details",
+      data: data,
+      processData: false,
+      contentType: false,
+      cache: false,
+      timeout: 800000,
+      success: function (data) {
+        console.log("SUCCESS : ", data);
+        return resolve(data);
+      },
+      error: function (e) {
+        console.log("ERROR : ", e);
+        return reject(e);
+      },
+    });
+  });
 }
 
 function setStorage(instanceStorageDetails, contractAddress) {
@@ -594,9 +620,7 @@ $(document).ready(function () {
         $(".thanos-banner").hide();
         $(".conectd").toggleClass("wallet-exists");
         $("#thanos-status").html("Connected");
-        $("#droptip-text").html(
-          `Thanos Wallet connected`
-        );
+        $("#droptip-text").html(`Thanos Wallet connected`);
       }
     });
   });
