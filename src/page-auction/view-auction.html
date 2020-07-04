@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <%= require('html-loader!../partials/header.html') %>
-  </head>
+<html lang="en">
+  <%= require('html-loader!../partials/header.html') %>
 
   <body class="inside">
     <div class="notFound thanos-banner">
@@ -39,7 +37,9 @@
 
               <div class="menuBox">
                 <ul>
-                  <li id="prodct" class=""><a href="#">Auction your product</a></li>
+                  <li id="prodct" class="">
+                    <a href="#">Auction your product</a>
+                  </li>
                   <li class="active"><a href="#">View Auctions</a></li>
                   <li><a href="myauction.html">My Auction</a></li>
                 </ul>
@@ -147,22 +147,6 @@
 
     <%= require('html-loader!../partials/footer.html') %>
     <!-- wrp -->
-
-    <div
-  class="loading failure"
-  style="text-align: center; font-size: 45px; color: red;"
-  hidden
-  >
-    ❌ Transaction failed<br />Redirecting</p>
-  </div>
-
-  <div
-    class="loading success"
-    style="text-align: center; font-size: 45px; color: greenyellow;"
-    hidden
-  >
-    ✔ Transaction complete<br />Redirecting</p>
-  </div>
 
     <script src="/script/jquery.min.js"></script>
     <script src="/script/bootstrap.min.js"></script>

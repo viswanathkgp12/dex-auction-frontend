@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <%= require('html-loader!../partials/header.html') %>
-  </head>
+<html lang="en">
+  <%= require('html-loader!../partials/header.html') %>
 
   <body class="">
     <div class="notFound thanos-banner">
@@ -24,7 +22,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="logo">
                 <a href="/">
-                  <img src="/images/logo.svg" alt="logo" />
+                  <img src="/images/logo.svg" alt="site-logo" />
                 </a>
               </div>
 
@@ -84,7 +82,7 @@
           </div>
 
           <div class="rt">
-            <img src="/images/banner.svg" />
+            <img src="/images/banner.svg" alt="welcome-banner" />
           </div>
         </div>
       </section>
@@ -112,7 +110,7 @@
                     increasing starting from a reserve price till no bidder can
                     match the highest standing bid.
                   </p>
-                  <img src="/images/trade1.svg" />
+                  <img src="/images/trade1.svg" alt="english-auction-img" />
                 </div>
               </li>
 
@@ -124,7 +122,7 @@
                     a high asking price. The price decreases until one bidder is
                     willing to pay the quoted price.
                   </p>
-                  <img src="/images/trade2.svg" />
+                  <img src="/images/trade2.svg" alt="dutch-auction-img" />
                 </div>
               </li>
 
@@ -135,7 +133,7 @@
                     A sealed bid first price auction is where bidders submit
                     sealed bids and the highest bidder wins and pays his bid.
                   </p>
-                  <img src="/images/trade3.svg" />
+                  <img src="/images/trade3.svg" alt="sealed-bid-img" />
                 </div>
               </li>
 
@@ -147,7 +145,7 @@
                     submit sealed bids and the highest bidder wins and pays the
                     amount of the second highest bid.
                   </p>
-                  <img src="/images/trade4.svg" />
+                  <img src="/images/trade4.svg" alt="vickrey-img" />
                 </div>
               </li>
             </ul>
@@ -164,7 +162,7 @@
           <ul>
             <li>
               <div class="item">
-                <img src="/images/yes.svg" />
+                <img src="/images/yes.svg" alt="transparency-img" />
                 <h3>Transparency</h3>
                 <p>
                   An online auction without central intermediaries conducted
@@ -177,7 +175,7 @@
 
             <li>
               <div class="item">
-                <img src="/images/Secure.svg" />
+                <img src="/images/Secure.svg" alt="secure-img" />
                 <h3>Security</h3>
                 <p>
                   Using audited and tested smart contracts based on Michelson
@@ -190,7 +188,7 @@
 
             <li>
               <div class="item">
-                <img src="/images/calendar.svg" />
+                <img src="/images/calendar.svg" alt="speed-img" />
                 <h3>Speed</h3>
                 <p>
                   Because of the high throughput provided by the Tezos
@@ -202,7 +200,7 @@
 
             <li>
               <div class="item">
-                <img src="/images/ok.svg" />
+                <img src="/images/ok.svg" alt="cost-efficiency-img" />
                 <h3>Cost efficiency</h3>
                 <p>
                   By eliminating the need for central intermediaries to conduct
@@ -219,22 +217,6 @@
       <%= require('html-loader!../partials/footer.html') %>
     </div>
     <!-- wrp -->
-
-    <div
-      class="loading failure"
-      style="text-align: center; font-size: 45px; color: red;"
-      hidden
-    >
-      ❌ Transaction failed<br />Redirecting
-    </div>
-
-    <div
-      class="loading success"
-      style="text-align: center; font-size: 45px; color: greenyellow;"
-      hidden
-    >
-      ✔ Transaction complete<br />Redirecting
-    </div>
 
     <script src="/script/jquery.min.js"></script>
     <script src="/script/bootstrap.min.js"></script>
