@@ -1,4 +1,4 @@
 # tezos
 Frontend for Tezos Coinlist hackathon
 
-[DEX Auction](http://dexauction.in)
+[DEX Auction](https://dex-auction.netlify.app/)
