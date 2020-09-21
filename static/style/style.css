@@ -1433,6 +1433,22 @@ header.fixed {
   visibility: hidden;
   padding: 35px 35px;
 }
+.trackingPopup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 399px;
+  height: 373px;
+  transform: translate(-50%, -50%) scale(0.3);
+  border-radius: 8px;
+  border: solid 1px #707070;
+  background-color: #ffffff;
+  z-index: 99;
+  transition: all 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+  padding: 35px 35px;
+}
 body.bidding:before {
   opacity: 1;
   visibility: visible;
@@ -1443,6 +1459,19 @@ body.bidding:before {
   visibility: visible;
   transform: translate(-50%, -50%) scale(1);
 }
+body.tracking:before {
+  opacity: 1;
+  visibility: visible;
+  z-index: 99;
+}
+.tracking .trackingPopup {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+.trackingPopup {
+  text-align: center;
+}
 .comnPopup {
   text-align: center;
 }
@@ -1450,6 +1479,9 @@ body.bidding:before {
   display: none;
 }
 .bidding .countDown {
+  display: block;
+}
+.tracking .countDown {
   display: block;
 }
 .countDown h2 {

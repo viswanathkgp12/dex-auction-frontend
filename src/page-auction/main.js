@@ -168,8 +168,16 @@ window.onClickConfigureAuction = onClickConfigureAuction;
 
 $("#prodct").on("click", onClickConfigureAuction);
 
-window.onClickConfigureShip = function onClickConfigureShip() {
-  $("body").addClass("bidding");
+window.onClickConfigureShip = function onClickConfigureShip(id) {
+  const shipStatus = localStorage.getItem("shipStatus" + id);
+  console.log(shipStatus)
+
+  if (shipStatus === undefined) {
+    localStorage.setItem("shipStatus" + id, "shipped");
+    $("body").addClass("bidding");
+  } else {
+    $("body").addClass("tracking");
+  }
 };
 
 $(".auctioBid").on("click", onClickConfigureShip);

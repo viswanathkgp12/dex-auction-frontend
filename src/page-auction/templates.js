@@ -145,16 +145,19 @@ export function getEnglishAuctionTemplate(
       </div>
       `;
     } else {
-      if (auctionStatus == "executed")
+      if (auctionStatus == "executed") {
+        const shipStatus = localStorage.getItem("shipStatus" + id);
+        const btnType = shipStatus == "shipped" ? "Track" : "Ship";
         button = `
         <div class="btnBox">
             <ul>
               <li>
-                <input type="button" class="btn" onclick="onClickConfigureShip()" value="Ship">
+                <input type="button" class="btn" onclick="onClickConfigureShip('${id}')" value='${btnType}'>
               </li>
             </ul>
         </div>
         `;
+      }
     }
 
     maxBidElement = `
@@ -358,16 +361,19 @@ export function getDutchAuctionTemplate(
       </div>
       `;
     } else {
-      if (auctionStatus == "executed")
+      if (auctionStatus == "executed") {
+        const shipStatus = localStorage.getItem("shipStatus" + id);
+        const btnType = shipStatus == "shipped" ? "Track" : "Ship";
         button = `
         <div class="btnBox">
             <ul>
               <li>
-                <input type="button" class="btn" onclick="onClickConfigureShip()" value="Ship">
+                <input type="button" class="btn" onclick="onClickConfigureShip('${id}')" value='${btnType}'>
               </li>
             </ul>
         </div>
         `;
+      }
     }
 
     currPriceElement = `
