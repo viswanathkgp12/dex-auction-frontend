@@ -1499,7 +1499,7 @@ body.bidding:before {
   position: relative;
 }
 .countDown .blnc input {
-  font-size: 50px;
+  font-size: 20px;
   font-weight: 300;
   color: #707070;
   line-height: 54px;
@@ -1512,15 +1512,6 @@ body.bidding:before {
   border: 0;
   outline: none;
   padding: 0 0 0 10px;
-}
-.countDown .blnc:before {
-  position: absolute;
-  right: 7px;
-  top: 11px;
-  width: 28px;
-  height: 37px;
-  content: "";
-  background: url("../images/TezosLogo.png") no-repeat;
 }
 .countDown button {
   border: 0;

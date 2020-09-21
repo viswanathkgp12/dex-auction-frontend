@@ -144,6 +144,17 @@ export function getEnglishAuctionTemplate(
           </ul>
       </div>
       `;
+    } else {
+      if (auctionStatus == "executed")
+        button = `
+        <div class="btnBox">
+            <ul>
+              <li>
+                <input type="button" class="btn" onclick="onClickConfigureShip()" value="Ship">
+              </li>
+            </ul>
+        </div>
+        `;
     }
 
     maxBidElement = `
@@ -346,6 +357,17 @@ export function getDutchAuctionTemplate(
           </ul>
       </div>
       `;
+    } else {
+      if (auctionStatus == "executed")
+        button = `
+        <div class="btnBox">
+            <ul>
+              <li>
+                <input type="button" class="btn" onclick="onClickConfigureShip()" value="Ship">
+              </li>
+            </ul>
+        </div>
+        `;
     }
 
     currPriceElement = `

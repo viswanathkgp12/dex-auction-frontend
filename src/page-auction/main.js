@@ -168,6 +168,12 @@ window.onClickConfigureAuction = onClickConfigureAuction;
 
 $("#prodct").on("click", onClickConfigureAuction);
 
+window.onClickConfigureShip = function onClickConfigureShip() {
+  $("body").addClass("bidding");
+};
+
+$(".auctioBid").on("click", onClickConfigureShip);
+
 async function onClickConfigureAuction() {
   // Check Thanos Availability
   await connectToThanos();
@@ -434,5 +440,5 @@ function getTimeLeftForAuctionStart(auctionStartDate) {
 function getImageUrl(assetImageFileName) {
   return assetImageFileName == ""
     ? ""
-    : `http://54.172.0.221:8080${assetImageFileName}`;
+    : `http://52.66.226.201:8080${assetImageFileName}`;
 }
