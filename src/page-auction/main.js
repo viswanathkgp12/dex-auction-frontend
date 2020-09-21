@@ -172,7 +172,7 @@ window.onClickConfigureShip = function onClickConfigureShip(id) {
   const shipStatus = localStorage.getItem("shipStatus" + id);
   console.log(shipStatus)
 
-  if (shipStatus === undefined) {
+  if (shipStatus === undefined || shipStatus === null) {
     localStorage.setItem("shipStatus" + id, "shipped");
     $("body").addClass("bidding");
   } else {
