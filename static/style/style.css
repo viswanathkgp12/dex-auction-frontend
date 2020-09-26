@@ -14,7 +14,7 @@
 /* dynamic element of Site */
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   background: #ebebeb;
   color: var(--main-blk-clr);
   color: var(--main-blk-clr);
@@ -42,7 +42,7 @@ a:focus {
 }
 input,
 textarea {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 img {
   max-width: 100%;
@@ -64,7 +64,7 @@ h2 {
   left: 0;
   bottom: 0;
   width: 100%;
-  content: "";
+  content: '';
   height: 68px;
   background: var(--btn-hvr);
   transition: all 0.3s ease-in;
@@ -109,7 +109,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 .wrp {
@@ -163,7 +163,7 @@ h5 {
   left: 0;
   right: 0;
   margin: 0 auto;
-  content: "";
+  content: '';
   background: #fe3418;
   height: 1px;
   transition: all 0.4s ease;
@@ -250,14 +250,20 @@ header {
   position: relative;
   text-decoration: underline;
 }
-.banner .lt span.pwd a:after {
+.banner .lt span.pwd #tezos-logo:after {
   position: absolute;
   right: -39px;
-  top: -6px;
-  content: "";
-  background: url("../images/TezosLogo.png") no-repeat;
+  top: -18px;
+  content: '';
+  background: url('../images/TezosLogo.png') no-repeat;
   width: 28px;
   height: 38px;
+}
+.link-logo {
+  padding: 0 50px;
+}
+.link-logo svg:not(:root) {
+  overflow: visible;
 }
 .banner .lt ul li {
   float: left;
@@ -428,7 +434,7 @@ body:before {
   height: 100%;
   opacity: 0;
   visibility: hidden;
-  content: "";
+  content: '';
   background: rgba(0, 0, 0, 0.4);
   z-index: 99;
   transition: all 0.4s ease;
@@ -455,7 +461,7 @@ body:before {
   position: relative;
 }
 .tabHead ul:after {
-  content: "";
+  content: '';
   clear: both;
   display: block;
 }
@@ -491,7 +497,7 @@ body:before {
   width: 250px;
   height: 1px;
   background: #73a7fc;
-  content: "";
+  content: '';
   left: 41px;
 }
 .tabHead ul li:before {
@@ -500,7 +506,7 @@ body:before {
   width: 14px;
   height: 14px;
   background: #f0f6ff;
-  content: "";
+  content: '';
   left: 41px;
   border-radius: 50%;
   border: 1px solid #73a7fc;
@@ -522,7 +528,7 @@ body:before {
   position: absolute;
   right: 0;
   bottom: 10px;
-  content: "*";
+  content: '*';
   color: red;
   font-size: 27px;
   width: 10px;
@@ -729,7 +735,7 @@ span.error {
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
 }
@@ -791,10 +797,10 @@ span.error {
   position: absolute;
   right: 17px;
   top: 20px;
-  background: url("../images/accordAro.svg") no-repeat;
+  background: url('../images/accordAro.svg') no-repeat;
   width: 12px;
   height: 8px;
-  content: "";
+  content: '';
   transform: rotate(180deg);
   transition: all 0.4s ease;
 }
@@ -830,8 +836,8 @@ span.error {
   position: absolute;
   right: 0;
   bottom: 6px;
-  content: "";
-  background: url("../images/date.svg") no-repeat;
+  content: '';
+  background: url('../images/date.svg') no-repeat;
   width: 15px;
   height: 17px;
 }
@@ -839,8 +845,8 @@ span.error {
   position: absolute;
   right: 0;
   bottom: 6px;
-  content: "";
-  background: url("../images/time.svg") no-repeat;
+  content: '';
+  background: url('../images/time.svg') no-repeat;
   width: 15px;
   height: 15px;
 }
@@ -905,7 +911,7 @@ span.error {
   left: 0;
   right: 0;
   margin: 0 auto;
-  content: "";
+  content: '';
   background: #fe3418;
   height: 3px;
   transition: all 0.4s ease;
@@ -925,7 +931,7 @@ span.error {
 }
 .cardBox .prod-card:after {
   display: block;
-  content: "";
+  content: '';
   clear: both;
 }
 .cardBox .prod-card .lt {
@@ -950,7 +956,7 @@ span.error {
 }
 .cardBox .prod-card .rt:after {
   display: block;
-  content: "";
+  content: '';
   clear: both;
 }
 .cardBox .prod-card .rt .left h1 {
@@ -963,7 +969,7 @@ span.error {
   font-size: 16px;
   font-weight: normal;
   color: #606060;
-  background: url("../images/hammer.svg") no-repeat left 0;
+  background: url('../images/hammer.svg') no-repeat left 0;
   padding: 0 0 19px 22px;
   border-bottom: 1px dashed #d5d5d5;
 }
@@ -1274,7 +1280,7 @@ body.overlaLoader:before {
 }
 .conectd span:before {
   position: absolute;
-  content: "";
+  content: '';
   left: 0;
   top: 1px;
   width: 10px;
@@ -1285,7 +1291,7 @@ body.overlaLoader:before {
 }
 .conectd.wallet-exists span:before {
   position: absolute;
-  content: "";
+  content: '';
   left: 0;
   top: 1px;
   width: 10px;
@@ -1317,10 +1323,10 @@ body.overlaLoader:before {
   position: absolute;
   left: 62px;
   top: -8px;
-  background: url("../images/aro.png") no-repeat left top;
+  background: url('../images/aro.png') no-repeat left top;
   width: 14px;
   height: 8px;
-  content: "";
+  content: '';
 }
 .conectd:hover .dropTip {
   opacity: 1;
@@ -1481,7 +1487,13 @@ body.tracking:before {
 .bidding .countDown {
   display: block;
 }
-.tracking .countDown {
+body.nextOnTrack .tracking .countDown {
+  display: none;
+}
+.nextOnTrack .tracking .countDown {
+  display: none;
+}
+body.tracking .countDown {
   display: block;
 }
 .countDown h2 {
@@ -1538,7 +1550,7 @@ body.tracking:before {
   display: block;
   border: 0;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 .countDown .blnc input:focus {
   border: 0;
@@ -1558,6 +1570,21 @@ body.tracking:before {
   transition: all 0.4s ease;
 }
 .countDown button:hover {
+  background: #dc2b13;
+}
+.finisfTrack button {
+  border: 0;
+  box-shadow: none;
+  width: 168px;
+  height: 38px;
+  border-radius: 8px;
+  background-color: #fe3418;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+.finisfTrack button:hover {
   background: #dc2b13;
 }
 .sending {
@@ -1585,6 +1612,10 @@ body.gudLuck .countDown {
   left: 0;
 }
 .finisfBid .sending {
+  top: 45px;
+}
+
+.finisfTrack .sending {
   top: 45px;
 }
 .gudlk h2 {
@@ -1615,6 +1646,14 @@ body.biddingDone .finisfBid {
 .finisfBid {
   display: none;
 }
+.finisfTrack {
+  display: none;
+}
+
+body.nextOnTrack .finisfTrack {
+  display: block;
+}
+
 .finisfBid button {
   height: 53px;
   border-radius: 8px;
@@ -1695,7 +1734,7 @@ lottie-player.wrench {
 }
 .sealBid h2:last-child {
   float: right;
-  background: url("../images/participate.svg") no-repeat left top;
+  background: url('../images/participate.svg') no-repeat left top;
 }
 .noFiles {
   display: block;
@@ -1803,7 +1842,7 @@ lottie-player.wrench {
   padding: 0 !important;
 }
 .cardBox .prod-card .rt .left h2:last-child {
-  background: url("../images/participate.svg") no-repeat left 0;
+  background: url('../images/participate.svg') no-repeat left 0;
 }
 .cardBox .tab-content {
   clear: both;
@@ -1837,7 +1876,7 @@ lottie-player.wrench {
   border-radius: 50%;
   background: #fe3418;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   top: 0;

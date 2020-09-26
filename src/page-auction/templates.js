@@ -152,7 +152,7 @@ export function getEnglishAuctionTemplate(
         <div class="btnBox">
             <ul>
               <li>
-                <input type="button" class="btn" onclick="onClickConfigureShip('${id}')" value='${btnType}'>
+                <a class="priceReserv btnbox" onclick="onClickConfigureShip('${id}')">${btnType}</a>
               </li>
             </ul>
         </div>
@@ -368,7 +368,7 @@ export function getDutchAuctionTemplate(
         <div class="btnBox">
             <ul>
               <li>
-                <input type="button" class="btn" onclick="onClickConfigureShip('${id}')" value='${btnType}'>
+                <a class="priceReserv btnbox" onclick="onClickConfigureShip('${id}')">${btnType}</a>
               </li>
             </ul>
         </div>

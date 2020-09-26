@@ -170,15 +170,38 @@ $("#prodct").on("click", onClickConfigureAuction);
 
 window.onClickConfigureShip = function onClickConfigureShip(id) {
   const shipStatus = localStorage.getItem("shipStatus" + id);
-  console.log(shipStatus)
 
   if (shipStatus === undefined || shipStatus === null) {
     localStorage.setItem("shipStatus" + id, "shipped");
     $("body").addClass("bidding");
   } else {
+    const trackStatus = localStorage.getItem("trackStatus" + id);
+    console.log(trackStatus)
+
     $("body").addClass("tracking");
+
+    if (trackStatus === undefined || trackStatus === null) {
+      localStorage.setItem("trackStatus" + id, "inTransit");
+    } else if (trackStatus === "inTransit" || trackStatus === "done") {
+      $(".finisfTrack .sending").hide();
+      $("div.countDown").hide();
+      $("body").addClass("nextOnTrack");
+
+      $("#track-status").html("DELIVERED");
+      $("#track-text").html("The funds are being transferred to the seller.")
+      localStorage.setItem("trackStatus" + id, "done");
+    }
   }
 };
+
+$(".trackDone").on("click", function () {
+  $("div.countDown").hide();
+  $("body").addClass("nextOnTrack");
+});
+
+$(".trackClose").on("click", function () {
+  $("body").removeClass("nextOnTrack tracking");
+});
 
 $(".auctioBid").on("click", onClickConfigureShip);
 
