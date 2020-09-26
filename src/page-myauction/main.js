@@ -354,9 +354,13 @@ async function updateAuctionData(role = "all") {
 
   if (upcomingAuctionsCount === 0) {
     $("#upcoming-list").append(noAuctionsElement);
-  } else if (ongoingAuctionsCount === 0) {
+  }
+
+  if (ongoingAuctionsCount === 0) {
     $("#ongoing-list").append(noAuctionsElement);
-  } else if (completedAuctionsCount === 0) {
+  }
+
+  if (completedAuctionsCount === 0) {
     $("#completed-list").append(noAuctionsElement);
   }
 }

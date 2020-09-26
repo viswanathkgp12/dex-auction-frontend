@@ -176,7 +176,7 @@ window.onClickConfigureShip = function onClickConfigureShip(id) {
     $("body").addClass("bidding");
   } else {
     const trackStatus = localStorage.getItem("trackStatus" + id);
-    console.log(trackStatus)
+    console.log(trackStatus);
 
     $("body").addClass("tracking");
 
@@ -188,7 +188,7 @@ window.onClickConfigureShip = function onClickConfigureShip(id) {
       $("body").addClass("nextOnTrack");
 
       $("#track-status").html("DELIVERED");
-      $("#track-text").html("The funds are being transferred to the seller.")
+      $("#track-text").html("The funds are being transferred to the seller.");
       localStorage.setItem("trackStatus" + id, "done");
     }
   }
@@ -315,9 +315,13 @@ async function updateAuctionData() {
 
   if (upcomingAuctionsCount === 0) {
     $("#upcoming-list").append(noAuctionsElement);
-  } else if (ongoingAuctionsCount === 0) {
+  }
+
+  if (ongoingAuctionsCount === 0) {
     $("#ongoing-list").append(noAuctionsElement);
-  } else if (completedAuctionsCount === 0) {
+  }
+
+  if (completedAuctionsCount === 0) {
     $("#completed-list").append(noAuctionsElement);
   }
 }
