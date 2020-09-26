@@ -133,8 +133,19 @@ export function getEnglishAuctionTemplate(
     <h3 class="timeLeft">${timeLeft}</h3>
     `;
   } else {
-    // TODO:
-    if (userPubKey == buyer) {
+    if (auctionStatus == "executed" && userPubKey == seller) {
+      const shipStatus = localStorage.getItem("shipStatus" + id);
+      const btnType = shipStatus == "shipped" ? "Track" : "Ship";
+      button = `
+      <div class="btnBox">
+          <ul>
+            <li>
+              <a class="priceReserv btnbox" onclick="onClickConfigureShip('${id}')">${btnType}</a>
+            </li>
+          </ul>
+      </div>
+      `;
+    } else if (userPubKey == buyer) {
       button = `
       <div class="btnBox">
           <ul>
@@ -144,20 +155,6 @@ export function getEnglishAuctionTemplate(
           </ul>
       </div>
       `;
-    } else {
-      if (auctionStatus == "executed" && userPubKey == seller) {
-        const shipStatus = localStorage.getItem("shipStatus" + id);
-        const btnType = shipStatus == "shipped" ? "Track" : "Ship";
-        button = `
-        <div class="btnBox">
-            <ul>
-              <li>
-                <a class="priceReserv btnbox" onclick="onClickConfigureShip('${id}')">${btnType}</a>
-              </li>
-            </ul>
-        </div>
-        `;
-      }
     }
 
     maxBidElement = `
@@ -350,7 +347,19 @@ export function getDutchAuctionTemplate(
     <h3 class="timeLeft">${timeLeft}</h3>
     `;
   } else {
-    if (userPubKey == buyer) {
+    if (auctionStatus == "executed" && userPubKey == seller) {
+      const shipStatus = localStorage.getItem("shipStatus" + id);
+      const btnType = shipStatus == "shipped" ? "Track" : "Ship";
+      button = `
+      <div class="btnBox">
+          <ul>
+            <li>
+              <a class="priceReserv btnbox" onclick="onClickConfigureShip('${id}')">${btnType}</a>
+            </li>
+          </ul>
+      </div>
+      `;
+    } else if (userPubKey == buyer) {
       button = `
       <div class="btnBox">
           <ul>
@@ -360,20 +369,6 @@ export function getDutchAuctionTemplate(
           </ul>
       </div>
       `;
-    } else {
-      if (auctionStatus == "executed" && userPubKey == seller) {
-        const shipStatus = localStorage.getItem("shipStatus" + id);
-        const btnType = shipStatus == "shipped" ? "Track" : "Ship";
-        button = `
-        <div class="btnBox">
-            <ul>
-              <li>
-                <a class="priceReserv btnbox" onclick="onClickConfigureShip('${id}')">${btnType}</a>
-              </li>
-            </ul>
-        </div>
-        `;
-      }
     }
 
     currPriceElement = `
