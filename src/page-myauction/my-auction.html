@@ -81,9 +81,21 @@
               <span class="sw-rt">Seller</span>
               <div class="plate">
                 <i></i>
-                <a href="javascript:void(0)" id="buyr"></a>
-                <a href="javascript:void(0)" id="allFiltr"></a>
-                <a href="javascript:void(0)" id="sellr"></a>
+                <a
+                  href="javascript:void(0)"
+                  id="buyr"
+                  onclick="relookAuctions('buyer')"
+                ></a>
+                <a
+                  href="javascript:void(0)"
+                  id="allFiltr"
+                  onclick="relookAuctions('all')"
+                ></a>
+                <a
+                  href="javascript:void(0)"
+                  id="sellr"
+                  onclick="relookAuctions('seller')"
+                ></a>
               </div>
             </div>
           </div>
@@ -135,7 +147,7 @@
             src="script/Paperplane.json"
             background="transparent"
             speed="1"
-            style="width: 300px; height: 300px;"
+            style="width: 300px; height: 300px"
             loop
             autoplay
           ></lottie-player>
@@ -152,7 +164,7 @@
             src="script/Tick.json"
             background="transparent"
             speed="1"
-            style="width: 150px; height: 150px;"
+            style="width: 150px; height: 150px"
             loop
             autoplay
           ></lottie-player>
