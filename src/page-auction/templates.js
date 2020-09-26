@@ -145,7 +145,7 @@ export function getEnglishAuctionTemplate(
       </div>
       `;
     } else {
-      if (auctionStatus == "executed") {
+      if (auctionStatus == "executed" && userPubKey == seller) {
         const shipStatus = localStorage.getItem("shipStatus" + id);
         const btnType = shipStatus == "shipped" ? "Track" : "Ship";
         button = `
@@ -361,7 +361,7 @@ export function getDutchAuctionTemplate(
       </div>
       `;
     } else {
-      if (auctionStatus == "executed") {
+      if (auctionStatus == "executed" && userPubKey == seller) {
         const shipStatus = localStorage.getItem("shipStatus" + id);
         const btnType = shipStatus == "shipped" ? "Track" : "Ship";
         button = `
