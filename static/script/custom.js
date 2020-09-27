@@ -341,4 +341,3 @@ $(document).ready(function () {
     $(".switchBtn span.sw-lt").addClass("active");
   });
 });
-

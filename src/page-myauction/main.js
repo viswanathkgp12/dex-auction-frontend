@@ -197,9 +197,12 @@ window.onClickConfigureShip = function onClickConfigureShip(id) {
     $("body").addClass("tracking");
 
     if (trackStatus === undefined || trackStatus === null) {
+      $("lottie-player.sending2").hide();
       localStorage.setItem("trackStatus" + id, "inTransit");
     } else if (trackStatus === "inTransit" || trackStatus === "done") {
       $(".finisfTrack .sending").hide();
+      $("lottie-player.sending2").show();
+      $("#track-status").css({ height: "20px" });
       $("div.countDown").hide();
       $("body").addClass("nextOnTrack");
 
@@ -216,6 +219,7 @@ $(".trackDone").on("click", function () {
 });
 
 $(".trackClose").on("click", function () {
+  $(".finisfTrack.sending2").hide();
   $("body").removeClass("nextOnTrack tracking");
 });
 
